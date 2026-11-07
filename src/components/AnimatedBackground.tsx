@@ -14,8 +14,8 @@ export default function AnimatedBackground() {
     const isCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
 
     // Set initial centered coordinates
-    el.style.setProperty('--x', `${ Math.round(window.innerWidth * 0.5) }px`);
-    el.style.setProperty('--y', `${ Math.round(window.innerHeight * 0.38) }px`);
+    el.style.setProperty('--x', `${Math.round(window.innerWidth * 0.5)}px`);
+    el.style.setProperty('--y', `${Math.round(window.innerHeight * 0.38)}px`);
 
     if (prefersReducedMotion) {
       return;
@@ -78,12 +78,12 @@ export default function AnimatedBackground() {
       data-theme={theme}
       aria-hidden="true"
       className={`fixed inset-0 -z-10 pointer-events-none overflow-hidden transition-colors duration-500 ${
-        isDark ? 'bg-[#070709]' : 'bg-[#F6F4EF]'
+        isDark ? 'bg-[#070709]' : 'bg-[#F4F1EA]'
       }`}
       style={{
         backgroundImage: isDark
           ? 'radial-gradient(ellipse 80% 50% at 50% 0%, #0E0E12 0%, #070709 100%)'
-          : 'radial-gradient(ellipse 80% 50% at 50% 0%, #FAF8F4 0%, #F6F4EF 100%)',
+          : 'radial-gradient(ellipse 80% 50% at 50% 0%, #FAF8F3 0%, #F4F1EA 100%)',
       }}
     >
       {/* 1. Architectural 32px Dot Grid with Elliptical Top Mask */}
@@ -92,15 +92,15 @@ export default function AnimatedBackground() {
         style={{
           opacity: isDark ? 0.14 : 0.08,
           backgroundImage: isDark
-            ? 'radial-gradient(#D4AF37 1px, transparent 1px)'
-            : 'radial-gradient(#18181B 1px, transparent 1px)',
+            ? 'radial-gradient(#C5A059 1px, transparent 1px)'
+            : 'radial-gradient(#141413 1px, transparent 1px)',
           backgroundSize: '32px 32px',
           maskImage: 'radial-gradient(ellipse 85% 65% at 50% 0%, #000 65%, transparent 100%)',
           WebkitMaskImage: 'radial-gradient(ellipse 85% 65% at 50% 0%, #000 65%, transparent 100%)',
         }}
       />
 
-      {/* 2. 650px Interactive Metallic Barber Gold (#C5A059) Spotlight */}
+      {/* 2. 650px Interactive Champagne Brass (#C5A059) / Burnished Bronze (#9A7848) Spotlight */}
       <div
         className="absolute inset-0 transition-opacity duration-300"
         style={{

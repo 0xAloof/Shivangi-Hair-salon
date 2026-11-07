@@ -51,7 +51,7 @@ function AppRoutes({
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen bg-transparent text-[#141414] dark:text-[#F6F4EF] flex flex-col selection:bg-[#C5A059] selection:text-white">
+    <div className="min-h-screen bg-transparent text-[#141413] dark:text-[#F4F1EA] flex flex-col selection:bg-[#C5A059] selection:text-white">
       {/* Mounted ONCE right above <Routes> */}
       <AnimatedBackground />
 
@@ -110,7 +110,7 @@ function AppRoutes({
               }
             />
 
-            {/* Route 4: /salon (Studio Lookbook, Hygiene & Location Hub) */}
+            {/* Route 4: /salon (Salon Lookbook, Hygiene & Location Hub) */}
             <Route
               path="/salon"
               element={
@@ -149,7 +149,7 @@ export default function App() {
   };
 
   const handleOpenWhatsAppDirect = () => {
-    const defaultMsg = `Hello Shivangi Hair Salon, I would like to inquire about booking a chair at your Bhopal studio (Bhensakhedi Road). Could you please let me know current availability?`;
+    const defaultMsg = `Hello Shivangi Hair Salon, I would like to book a chair at your Bhopal salon (Bhensakhedi Road). Could you please let me know current availability?`;
     const url = createWhatsAppUrl(SALON_INFO.rawPhone, defaultMsg);
     openExternalUrl(url);
   };

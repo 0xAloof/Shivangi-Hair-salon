@@ -62,7 +62,7 @@ export default function TiltCard({
   if (isTouchOrReduced) {
     return (
       <div
-        className={`relative border border-[#C5A059]/30 transition-colors duration-300 ${className}`}
+        className={`relative border border-stone-900/10 dark:border-white/10 transition-colors duration-300 ${className}`}
       >
         {children}
       </div>
@@ -82,7 +82,7 @@ export default function TiltCard({
           transformStyle: 'preserve-3d',
           willChange: 'transform',
         }}
-        className={`group/tilt relative border border-[#C5A059]/30 hover:border-[#C5A059]/65 transition-[border-color,box-shadow] duration-300 ${className}`}
+        className={`group/tilt relative border border-stone-900/10 dark:border-white/10 hover:border-[#9A7848]/55 dark:hover:border-[#C5A059]/55 transition-[border-color,box-shadow] duration-300 ${className}`}
       >
         {/* Dynamic Metallic Barber Gold Specular Border & Surface Sheen */}
         {isHovered && (

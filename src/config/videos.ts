@@ -11,6 +11,8 @@ export interface MacroVideoAsset {
 
 export interface VideoSources {
   hero: string;
+  trust: string;
+  services: string;
   serviceMenu: string;
   trustStrip: string;
 }
@@ -82,6 +84,51 @@ export const MACRO_VIDEOS: Record<'hero' | 'trustStrip' | 'serviceMenu', MacroVi
 
 export const VIDEOS: VideoSources = {
   hero: MACRO_VIDEOS.hero.envUrl || MACRO_VIDEOS.hero.cdnFallback,
+  trust: MACRO_VIDEOS.trustStrip.envUrl || MACRO_VIDEOS.trustStrip.cdnFallback,
+  services: MACRO_VIDEOS.serviceMenu.envUrl || MACRO_VIDEOS.serviceMenu.cdnFallback,
   trustStrip: MACRO_VIDEOS.trustStrip.envUrl || MACRO_VIDEOS.trustStrip.cdnFallback,
   serviceMenu: MACRO_VIDEOS.serviceMenu.envUrl || MACRO_VIDEOS.serviceMenu.cdnFallback,
 };
+
+export interface HeroSlideConfig {
+  id: string;
+  asset: MacroVideoAsset;
+  videoUrl: string;
+  eyebrow: string;
+  headline: string;
+  subtext: string;
+  shortLabel: string;
+}
+
+export const HERO_CAROUSEL_SLIDES: HeroSlideConfig[] = [
+  {
+    id: 'slide-clipper',
+    asset: MACRO_VIDEOS.hero,
+    videoUrl: VIDEOS.hero,
+    eyebrow: "BHOPAL'S #1 MEN'S SALON · 4.9★ GOOGLE RATED (148+ REVIEWS)",
+    headline: 'Sirf Haircut Nahi, Aapka Pura Look Upgrade Karte Hain.',
+    subtext:
+      'Har baar naye barber se baal kharab hone ka darr khatam. Aapke face shape ke hisaab se perfect Skin Fade aur Haircut — taaki salon se nikalte hi log notice karein.',
+    shortLabel: '01 · Precision Haircut',
+  },
+  {
+    id: 'slide-razor',
+    asset: MACRO_VIDEOS.trustStrip,
+    videoUrl: VIDEOS.trust,
+    eyebrow: '100% FRESH BLADE GUARANTEE · ZERO SKIN IRRITATION',
+    headline: 'Sharpest Beard Line-Up. Har Customer Ke Liye Naya Blade.',
+    subtext:
+      'Jaldi-baazi wale cuts ko bhool jaiye. UV-sanitized tools aur fresh single-use blade ke saath paayein ekdum sharp jawline aur clean beard styling.',
+    shortLabel: '02 · Fresh Blade Beard Line-Up',
+  },
+  {
+    id: 'slide-towel',
+    asset: MACRO_VIDEOS.serviceMenu,
+    videoUrl: VIDEOS.services,
+    eyebrow: 'VIP CHAIR EXPERIENCE · WALK-IN OR BOOK ON WHATSAPP',
+    headline: '45 Minute Sukoon Ke. Thakan Mitao Aur Royal Look Paao.',
+    subtext:
+      'Garam towel steam, relaxing head massage aur premium grooming. Weekend par chairs jaldi full ho jaati hain — bina waiting ke abhi WhatsApp par apni chair book karein.',
+    shortLabel: '03 · Hot Towel & Head Massage',
+  },
+];

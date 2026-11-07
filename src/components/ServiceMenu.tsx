@@ -34,10 +34,10 @@ export default function ServiceMenu({}: ServiceMenuProps) {
   const handleBookSingleOnWhatsApp = (service: ServiceItem) => {
     const msg = [
       `*APPOINTMENT INQUIRY - SHIVANGI HAIR SALON*`,
-      `Hello Master Barber, I would like to book the following service at your Bhopal studio:`,
+      `Hello Master Barber, I would like to book the following service at your Bhopal salon:`,
       `Service: ${service.name} (${service.durationMinutes} Mins)`,
       `Pricing: Consultation Required`,
-      `Studio: Bhensakhedi Road, near The Fitness Planet`,
+      `Salon: Bhensakhedi Road, near The Fitness Planet`,
       `Please confirm current chair availability.`
     ].join('\n');
     const url = createWhatsAppUrl(SALON_INFO.rawPhone, msg);
@@ -54,12 +54,12 @@ export default function ServiceMenu({}: ServiceMenuProps) {
       .join('\n');
     const msg = [
       `*CUSTOM GROOMING PLAN - SHIVANGI HAIR SALON*`,
-      `Hello Master Barber, I configured my session:`,
+      `Hello Master Barber, I selected my salon services:`,
       itemsList,
       ``,
-      `Estimated Duration: ~${totalDuration} Mins`,
+      `Estimated Time: ~${totalDuration} Mins`,
       `Pricing: Consultation Required`,
-      `Studio: Bhensakhedi Road, Bhopal`,
+      `Salon: Bhensakhedi Road, Bhopal`,
       `Please confirm chair availability.`
     ].join('\n');
     const url = createWhatsAppUrl(SALON_INFO.rawPhone, msg);
@@ -69,13 +69,13 @@ export default function ServiceMenu({}: ServiceMenuProps) {
   return (
     <section 
       id="services" 
-      className="relative py-20 sm:py-28 bg-[#070709] border-b border-[#C5A059]/25 scroll-mt-20 overflow-hidden transition-colors duration-250"
+      className="relative py-20 sm:py-28 bg-[#070709] border-b border-white/10 scroll-mt-20 overflow-hidden transition-colors duration-250"
     >
       {/* Video 2: Macro Steaming Folded Black Hot Towel on dark wood grain */}
       <MacroVideo
         asset={MACRO_VIDEOS.serviceMenu}
         className="w-full h-full object-cover object-center opacity-30"
-        overlayClassName="bg-gradient-to-b from-[#070709]/90 via-[#070709]/80 to-[#070709]/92"
+        overlayClassName="bg-gradient-to-b from-[#070709]/92 via-[#070709]/82 to-[#070709]/94"
       />
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -89,25 +89,25 @@ export default function ServiceMenu({}: ServiceMenuProps) {
                 Service Menu
               </span>
             </div>
-            <h2 className="font-display text-3xl sm:text-5xl font-bold text-[#F6F4EF] tracking-tight">
-              Precision Services
+            <h2 className="font-display text-3xl sm:text-5xl font-bold text-[#F4F1EA] tracking-tight">
+              Haircut, Beard & Grooming Menu
             </h2>
             <p className="text-xs sm:text-sm text-[#C2BCB0] max-w-xl">
-              Dedicated chair appointments. Each session includes cranial analysis, single-use sterilized instruments, and hot-towel preparation.
+              No rushed cuts. Every appointment includes a face-shape style check, UV-cleaned tools, a fresh blade, and warm towel prep.
             </p>
           </div>
 
-          {/* Category Tabs */}
-          <div className="grid grid-cols-3 sm:flex p-1 gap-1 rounded-xl bg-[#111115]/90 border border-[#C5A059]/30 w-full md:w-auto shrink-0">
+          {/* Horizontal Scrollable Category Pills on Mobile (overflow-x-auto no-scrollbar, >=44px touch targets) */}
+          <div className="flex items-center gap-1.5 p-1.5 rounded-xl bg-[#121214]/90 border border-white/10 overflow-x-auto no-scrollbar max-w-full shrink-0">
             {categories.map((cat) => (
               <button
                 key={cat.id}
                 type="button"
                 onClick={() => setActiveCategory(cat.id)}
-                className={`px-2 sm:px-4 py-2 text-[10px] sm:text-xs font-bold uppercase tracking-wider rounded-lg transition-all cursor-pointer text-center truncate ${
+                className={`min-h-[44px] px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-lg transition-all cursor-pointer whitespace-nowrap shrink-0 ${
                   activeCategory === cat.id
-                    ? 'bg-[#F6F4EF] text-[#070709] shadow-sm'
-                    : 'text-[#A6A095] hover:text-[#F6F4EF]'
+                    ? 'bg-[#F4F1EA] text-[#070709] shadow-sm'
+                    : 'text-[#A6A095] hover:text-[#F4F1EA]'
                 }`}
               >
                 {cat.label}
@@ -119,11 +119,11 @@ export default function ServiceMenu({}: ServiceMenuProps) {
         {/* 3D Interactive Service Cards */}
         <div className="space-y-4">
           {/* Desktop Column Legend */}
-          <div className="hidden md:grid md:grid-cols-12 px-6 py-3 rounded-xl border border-[#C5A059]/25 text-[11px] font-bold uppercase tracking-[0.2em] text-[#D4AF37] bg-[#111115]/80 backdrop-blur-sm">
-            <div className="col-span-6">Service Specification</div>
-            <div className="col-span-2 text-center">Duration</div>
-            <div className="col-span-2 text-right">Assessment</div>
-            <div className="col-span-2 text-right">Reserve (WhatsApp)</div>
+          <div className="hidden md:grid md:grid-cols-12 px-6 py-3 rounded-xl border border-white/10 text-[11px] font-bold uppercase tracking-[0.2em] text-[#C5A059] bg-[#121214]/85 backdrop-blur-sm">
+            <div className="col-span-6">Service Details</div>
+            <div className="col-span-2 text-center">Time Needed</div>
+            <div className="col-span-2 text-right">Pricing</div>
+            <div className="col-span-2 text-right">Book (WhatsApp)</div>
           </div>
 
           {currentServices.map((service) => {
@@ -134,10 +134,10 @@ export default function ServiceMenu({}: ServiceMenuProps) {
               <TiltCard
                 key={service.id}
                 maxTilt={3}
-                className={`rounded-2xl p-5 sm:p-6 backdrop-blur-md transition-colors duration-200 ${
+                className={`rounded-2xl p-5 sm:p-6 backdrop-blur-md transition-colors duration-200 border ${
                   isSelected
-                    ? 'bg-[#131D17]/90 border-[#25D366]/50'
-                    : 'bg-[#111115]/85 hover:bg-[#16161C]/90'
+                    ? 'bg-[#171612]/95 border-[#C5A059]/60'
+                    : 'bg-[#121214]/90 border-white/10 hover:bg-[#161618]/95'
                 }`}
               >
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
@@ -150,8 +150,8 @@ export default function ServiceMenu({}: ServiceMenuProps) {
                         onClick={() => toggleSelect(service.id)}
                         className={`depth-layer-z w-5 h-5 rounded border flex items-center justify-center transition-colors cursor-pointer shrink-0 ${
                           isSelected
-                            ? 'bg-[#25D366] border-[#25D366] text-white'
-                            : 'border-[#555555] bg-transparent'
+                            ? 'bg-[#C5A059] border-[#C5A059] text-[#070709]'
+                            : 'border-white/25 bg-transparent'
                         }`}
                         aria-label={`Select ${service.name} for calculation`}
                         title="Select Service"
@@ -159,13 +159,13 @@ export default function ServiceMenu({}: ServiceMenuProps) {
                         {isSelected && <Check className="w-3.5 h-3.5 stroke-[3]" />}
                       </button>
 
-                      <h3 className="depth-layer-z font-display text-base sm:text-lg font-bold text-[#F6F4EF]">
+                      <h3 className="depth-layer-z font-display text-base sm:text-lg font-bold text-[#F4F1EA]">
                         {service.name}
                       </h3>
 
                       {service.popular && (
-                        <span className="depth-layer-z text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-amber-500/10 text-[#D4AF37] border border-[#C5A059]/40">
-                          Signature
+                        <span className="depth-layer-z text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-[#C5A059]/15 text-[#C5A059] border border-[#C5A059]/35">
+                          Popular
                         </span>
                       )}
                     </div>
@@ -178,18 +178,18 @@ export default function ServiceMenu({}: ServiceMenuProps) {
                     <button
                       type="button"
                       onClick={() => setExpandedDetailsId(isExpanded ? null : service.id)}
-                      className="text-[11px] font-semibold text-[#D4AF37] hover:underline pl-7 cursor-pointer inline-flex items-center gap-1 pt-1"
+                      className="text-[11px] font-semibold text-[#C5A059] hover:underline pl-7 cursor-pointer inline-flex items-center gap-1 pt-1"
                     >
-                      <span>{isExpanded ? 'Hide Details' : 'View Details'}</span>
+                      <span>{isExpanded ? 'Hide What’s Included' : 'See What’s Included'}</span>
                       {isExpanded ? <Minus className="w-3 h-3" /> : <Plus className="w-3 h-3" />}
                     </button>
 
                     {isExpanded && (
-                      <div className="mt-2.5 pl-7 pt-2 border-t border-[#C5A059]/20">
+                      <div className="mt-2.5 pl-7 pt-2 border-t border-white/10">
                         <ul className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 text-[11px] text-[#C2BCB0]">
                           {service.inclusions.map((inc, i) => (
                             <li key={i} className="flex items-start gap-1.5">
-                              <Check className="w-3.5 h-3.5 text-[#25D366] shrink-0 mt-0.5 stroke-[2.5]" />
+                              <Check className="w-3.5 h-3.5 text-[#C5A059] shrink-0 mt-0.5 stroke-[2]" />
                               <span>{inc}</span>
                             </li>
                           ))}
@@ -200,18 +200,18 @@ export default function ServiceMenu({}: ServiceMenuProps) {
 
                   {/* Col 2: Duration (2 cols) */}
                   <div className="md:col-span-2 flex md:justify-center items-center gap-1.5 text-xs text-[#C2BCB0] pl-7 md:pl-0">
-                    <Clock className="depth-layer-z w-3.5 h-3.5 text-[#D4AF37]" />
+                    <Clock className="depth-layer-z w-3.5 h-3.5 text-[#C5A059] stroke-[1.5]" />
                     <span className="font-mono font-medium">{service.durationMinutes} Mins</span>
                   </div>
 
                   {/* Col 3: Price Purged - Consultation Required (2 cols) */}
                   <div className="md:col-span-2 flex md:justify-end items-center pl-7 md:pl-0">
-                    <span className="depth-layer-z text-[11px] sm:text-xs uppercase tracking-wider font-semibold text-[#D4AF37]">
+                    <span className="depth-layer-z text-[11px] sm:text-xs uppercase tracking-wider font-semibold text-[#C5A059]">
                       Consultation Required
                     </span>
                   </div>
 
-                  {/* Col 4: Scaled-down Circular Green WhatsApp Action (44px) */}
+                  {/* Col 4: Scaled-down Circular Green WhatsApp Action (44px - Kept 100% Intact) */}
                   <div className="md:col-span-2 flex justify-end items-center pl-7 md:pl-0">
                     <button
                       type="button"
@@ -231,25 +231,25 @@ export default function ServiceMenu({}: ServiceMenuProps) {
         </div>
 
         {/* Minimalist Session Planner Strip */}
-        <div className="mt-8 rounded-2xl bg-[#111115]/90 backdrop-blur-md border border-[#C5A059]/30 p-5 sm:p-6 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-sm">
+        <div className="mt-8 rounded-2xl bg-[#121214]/90 backdrop-blur-md border border-white/10 p-5 sm:p-6 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-sm">
           <div className="space-y-1 text-center sm:text-left">
-            <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#D4AF37]">
-              Session Selection
+            <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#C5A059]">
+              Your Selected Services
             </span>
-            <p className="font-display text-sm sm:text-base font-bold text-[#F6F4EF]">
+            <p className="font-display text-sm sm:text-base font-bold text-[#F4F1EA]">
               {selectedItems.length} Service{selectedItems.length === 1 ? '' : 's'} Selected
             </p>
             <p className="text-[11px] text-[#B8B2A6] max-w-md">
-              {selectedItems.map((s) => s.name).join(' + ') || 'Select services above to bundle your chair session.'}
+              {selectedItems.map((s) => s.name).join(' + ') || 'Select one or more services above to book together.'}
             </p>
           </div>
 
           <div className="flex items-center gap-6 shrink-0">
             <div className="text-right">
               <span className="text-[10px] text-[#A6A095] uppercase tracking-wider block font-semibold">
-                Est. Duration
+                Total Time
               </span>
-              <span className="font-mono text-sm sm:text-base font-bold text-[#F6F4EF]">
+              <span className="font-mono text-sm sm:text-base font-bold text-[#F4F1EA]">
                 ~{totalDuration} Mins
               </span>
             </div>
@@ -258,12 +258,12 @@ export default function ServiceMenu({}: ServiceMenuProps) {
               <span className="text-[10px] text-[#A6A095] uppercase tracking-wider block font-semibold">
                 Pricing
               </span>
-              <span className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#D4AF37]">
+              <span className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#C5A059]">
                 Consultation Required
               </span>
             </div>
 
-            {/* Circular Green WhatsApp CTA for selection (44px) */}
+            {/* Circular Green WhatsApp CTA for selection (44px - Kept 100% Intact) */}
             <div className="flex items-center gap-2">
               <button
                 type="button"
