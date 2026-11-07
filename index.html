@@ -3,6 +3,38 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      (function() {
+        // Fix: Browser extensions (such as Urban VPN proxy interceptors) execute `window.fetch = ...`
+        // In certain iframe and strict browser contexts, window.fetch has only a getter.
+        // We define both a getter and a setter so extension interceptors and monkey-patches execute without throwing.
+        try {
+          var currentFetch = window.fetch;
+          Object.defineProperty(window, 'fetch', {
+            get: function() {
+              return currentFetch;
+            },
+            set: function(val) {
+              currentFetch = val;
+            },
+            configurable: true,
+            enumerable: true
+          });
+        } catch (e) {}
+
+        // Isolate third-party browser extension content script errors from bubbling to app host
+        window.addEventListener('error', function(e) {
+          if (
+            e.filename &&
+            (e.filename.indexOf('chrome-extension://') !== -1 ||
+             e.filename.indexOf('moz-extension://') !== -1)
+          ) {
+            e.stopImmediatePropagation();
+            e.preventDefault();
+          }
+        }, true);
+      })();
+    </script>
     <title>Shivangi Hair Salon - Premier Men's Grooming Studio Bhopal</title>
     <meta name="description" content="Premier men's grooming & barber studio in Bhopal. Precision haircuts, beard detailing, razor shaping, and scalp therapy." />
     <meta property="og:title" content="Shivangi Hair Salon - Premier Men's Grooming Studio Bhopal" />
