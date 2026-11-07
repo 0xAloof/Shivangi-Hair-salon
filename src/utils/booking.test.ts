@@ -11,6 +11,7 @@ import {
   createWhatsAppUrl,
 } from './booking';
 import { ServiceItem } from '../types';
+import { VIDEOS } from '../config/videos';
 
 const mockServices: ServiceItem[] = [
   {
@@ -143,3 +144,14 @@ test('formatWhatsAppBookingMessage and createWhatsAppUrl format correctly', () =
   assert.ok(url.startsWith('https://wa.me/919575830421?text='));
   assert.ok(url.includes(encodeURIComponent('Aashif Khan')));
 });
+
+test('VIDEOS config uses external CDN URLs and zero local /assets/ paths', () => {
+  assert.equal(VIDEOS.hero, 'https://placeholder-url.webm');
+  assert.equal(VIDEOS.serviceMenu, 'https://placeholder-url.webm');
+  assert.equal(VIDEOS.trustStrip, 'https://placeholder-url.webm');
+  for (const url of Object.values(VIDEOS)) {
+    assert.ok(url.startsWith('https://'), `Expected external https URL, got ${url}`);
+    assert.ok(!url.includes('/assets/'), `Expected no local /assets/ path, got ${url}`);
+  }
+});
+

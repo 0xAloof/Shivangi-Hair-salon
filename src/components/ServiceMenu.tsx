@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Clock, Check, Plus, Minus } from 'lucide-react';
 import { WhatsAppIcon } from './BrandIcons';
 import { SERVICES, SALON_INFO } from '../data/salonData';
+import { VIDEOS } from '../config/videos';
 import { ServiceItem } from '../types';
 import { createWhatsAppUrl, openExternalUrl } from '../utils/booking';
 
@@ -66,29 +67,42 @@ export default function ServiceMenu({}: ServiceMenuProps) {
   return (
     <section 
       id="services" 
-      className="py-20 sm:py-28 bg-[#F5F1E8] dark:bg-[#121212] border-b border-[#E2DACB] dark:border-[#222222] scroll-mt-20 transition-colors duration-250"
+      className="relative py-20 sm:py-28 bg-[#121212] border-b border-[#222222] scroll-mt-20 overflow-hidden transition-colors duration-250"
     >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Background Video with solid #121212 fallback */}
+      <div className="absolute inset-0 w-full h-full bg-[#121212] pointer-events-none">
+        <video
+          src={VIDEOS.serviceMenu}
+          playsInline
+          muted
+          loop
+          autoPlay
+          className="w-full h-full object-cover object-center bg-[#121212] opacity-25"
+        />
+        <div className="absolute inset-0 bg-[#121212]/85" />
+      </div>
+
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
           <div className="space-y-3">
             <div className="flex items-center gap-3">
-              <span className="w-8 h-[1px] bg-[#B8973E] dark:bg-[#D4AF37]" />
-              <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#B8973E] dark:text-[#D4AF37]">
+              <span className="w-8 h-[1px] bg-[#D4AF37]" />
+              <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#D4AF37]">
                 Service Menu
               </span>
             </div>
-            <h2 className="font-display text-3xl sm:text-5xl font-bold text-[#141414] dark:text-[#F5F1E8] tracking-tight">
+            <h2 className="font-display text-3xl sm:text-5xl font-bold text-[#F5F1E8] tracking-tight">
               Precision Services
             </h2>
-            <p className="text-xs sm:text-sm text-[#4A4742] dark:text-[#A6A095] max-w-xl">
+            <p className="text-xs sm:text-sm text-[#A6A095] max-w-xl">
               Dedicated chair appointments. Each session includes cranial analysis, single-use sterilized instruments, and hot-towel preparation.
             </p>
           </div>
 
           {/* Category Tabs */}
-          <div className="flex p-1 rounded-xl bg-white/70 dark:bg-[#121212] border border-[#D5C9B3] dark:border-[#262626] shrink-0">
+          <div className="flex p-1 rounded-xl bg-[#161616] border border-[#262626] shrink-0">
             {categories.map((cat) => (
               <button
                 key={cat.id}
@@ -96,8 +110,8 @@ export default function ServiceMenu({}: ServiceMenuProps) {
                 onClick={() => setActiveCategory(cat.id)}
                 className={`px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-lg transition-all cursor-pointer whitespace-nowrap ${
                   activeCategory === cat.id
-                    ? 'bg-[#141414] dark:bg-white text-white dark:text-black shadow-sm'
-                    : 'text-[#635E54] dark:text-[#A6A095] hover:text-[#141414] dark:hover:text-[#F5F1E8]'
+                    ? 'bg-[#F5F1E8] text-[#121212] shadow-sm'
+                    : 'text-[#A6A095] hover:text-[#F5F1E8]'
                 }`}
               >
                 {cat.label}
@@ -107,10 +121,10 @@ export default function ServiceMenu({}: ServiceMenuProps) {
         </div>
 
         {/* Stark, Clean Table Layout */}
-        <div className="rounded-2xl border border-[#D5C9B3] dark:border-[#262626] bg-white/70 dark:bg-[#121212] overflow-hidden shadow-sm">
+        <div className="rounded-2xl border border-[#262626] bg-[#161616]/90 backdrop-blur-sm overflow-hidden shadow-sm">
           
           {/* Table Header Row (Desktop) */}
-          <div className="hidden md:grid md:grid-cols-12 px-6 py-4 border-b border-[#E2DACB] dark:border-[#262626] text-[11px] font-bold uppercase tracking-[0.2em] text-[#8C6D23] dark:text-[#D4AF37] bg-[#EDE6D8]/50 dark:bg-[#161616]">
+          <div className="hidden md:grid md:grid-cols-12 px-6 py-4 border-b border-[#262626] text-[11px] font-bold uppercase tracking-[0.2em] text-[#D4AF37] bg-[#1A1A1A]">
             <div className="col-span-6">Service Specification</div>
             <div className="col-span-2 text-center">Duration</div>
             <div className="col-span-2 text-right">Assessment</div>
@@ -118,7 +132,7 @@ export default function ServiceMenu({}: ServiceMenuProps) {
           </div>
 
           {/* Service Rows */}
-          <div className="divide-y divide-[#E2DACB] dark:divide-[#262626]">
+          <div className="divide-y divide-[#262626]">
             {currentServices.map((service) => {
               const isSelected = selectedIds.includes(service.id);
               const isExpanded = expandedDetailsId === service.id;
@@ -128,8 +142,8 @@ export default function ServiceMenu({}: ServiceMenuProps) {
                   key={service.id}
                   className={`p-5 sm:p-6 transition-colors duration-150 ${
                     isSelected
-                      ? 'bg-[#25D366]/5 dark:bg-[#25D366]/10'
-                      : 'hover:bg-white/90 dark:hover:bg-[#161616]'
+                      ? 'bg-[#25D366]/10'
+                      : 'hover:bg-[#1C1C1C]'
                   }`}
                 >
                   <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
@@ -143,7 +157,7 @@ export default function ServiceMenu({}: ServiceMenuProps) {
                           className={`w-5 h-5 rounded border flex items-center justify-center transition-colors cursor-pointer shrink-0 ${
                             isSelected
                               ? 'bg-[#25D366] border-[#25D366] text-white'
-                              : 'border-[#A39B8C] dark:border-[#444444] bg-transparent'
+                              : 'border-[#444444] bg-transparent'
                           }`}
                           aria-label={`Select ${service.name} for calculation`}
                           title="Select Service"
@@ -151,18 +165,18 @@ export default function ServiceMenu({}: ServiceMenuProps) {
                           {isSelected && <Check className="w-3.5 h-3.5 stroke-[3]" />}
                         </button>
 
-                        <h3 className="font-display text-base sm:text-lg font-bold text-[#141414] dark:text-[#F5F1E8]">
+                        <h3 className="font-display text-base sm:text-lg font-bold text-[#F5F1E8]">
                           {service.name}
                         </h3>
 
                         {service.popular && (
-                          <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-[#FAF4E6] dark:bg-amber-500/10 text-[#8C6D23] dark:text-[#D4AF37] border border-[#E0D2B4] dark:border-amber-500/30">
+                          <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-amber-500/10 text-[#D4AF37] border border-amber-500/30">
                             Signature
                           </span>
                         )}
                       </div>
 
-                      <p className="text-xs text-[#4A4742] dark:text-[#A6A095] leading-relaxed pl-7">
+                      <p className="text-xs text-[#A6A095] leading-relaxed pl-7">
                         {service.shortDesc}
                       </p>
 
@@ -170,15 +184,15 @@ export default function ServiceMenu({}: ServiceMenuProps) {
                       <button
                         type="button"
                         onClick={() => setExpandedDetailsId(isExpanded ? null : service.id)}
-                        className="text-[11px] font-semibold text-[#8C6D23] dark:text-[#D4AF37] hover:underline pl-7 cursor-pointer inline-flex items-center gap-1 pt-1"
+                        className="text-[11px] font-semibold text-[#D4AF37] hover:underline pl-7 cursor-pointer inline-flex items-center gap-1 pt-1"
                       >
                         <span>{isExpanded ? 'Hide Details' : 'View Details'}</span>
                         {isExpanded ? <Minus className="w-3 h-3" /> : <Plus className="w-3 h-3" />}
                       </button>
 
                       {isExpanded && (
-                        <div className="mt-2.5 pl-7 pt-2 border-t border-[#E2DACB]/60 dark:border-[#262626]">
-                          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 text-[11px] text-[#4A4742] dark:text-[#A6A095]">
+                        <div className="mt-2.5 pl-7 pt-2 border-t border-[#262626]">
+                          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 text-[11px] text-[#A6A095]">
                             {service.inclusions.map((inc, i) => (
                               <li key={i} className="flex items-start gap-1.5">
                                 <Check className="w-3.5 h-3.5 text-[#25D366] shrink-0 mt-0.5 stroke-[2.5]" />
@@ -191,14 +205,14 @@ export default function ServiceMenu({}: ServiceMenuProps) {
                     </div>
 
                     {/* Col 2: Duration (2 cols) */}
-                    <div className="md:col-span-2 flex md:justify-center items-center gap-1.5 text-xs text-[#635E54] dark:text-[#A6A095] pl-7 md:pl-0">
-                      <Clock className="w-3.5 h-3.5 text-[#B8973E] dark:text-[#D4AF37]" />
+                    <div className="md:col-span-2 flex md:justify-center items-center gap-1.5 text-xs text-[#A6A095] pl-7 md:pl-0">
+                      <Clock className="w-3.5 h-3.5 text-[#D4AF37]" />
                       <span className="font-mono font-medium">{service.durationMinutes} Mins</span>
                     </div>
 
                     {/* Col 3: Price Purged - Consultation Required (2 cols) */}
                     <div className="md:col-span-2 flex md:justify-end items-center pl-7 md:pl-0">
-                      <span className="text-[11px] sm:text-xs uppercase tracking-wider font-semibold text-[#8C6D23] dark:text-[#D4AF37]">
+                      <span className="text-[11px] sm:text-xs uppercase tracking-wider font-semibold text-[#D4AF37]">
                         Consultation Required
                       </span>
                     </div>
@@ -224,35 +238,35 @@ export default function ServiceMenu({}: ServiceMenuProps) {
 
         </div>
 
-        {/* Minimalist Session Planner Strip (Price Purged) */}
-        <div className="mt-8 rounded-2xl bg-white/80 dark:bg-[#121212] border border-[#D5C9B3] dark:border-[#262626] p-5 sm:p-6 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-sm">
+        {/* Minimalist Session Planner Strip */}
+        <div className="mt-8 rounded-2xl bg-[#161616]/90 border border-[#262626] p-5 sm:p-6 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-sm">
           <div className="space-y-1 text-center sm:text-left">
-            <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#B8973E] dark:text-[#D4AF37]">
+            <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#D4AF37]">
               Session Selection
             </span>
-            <p className="font-display text-sm sm:text-base font-bold text-[#141414] dark:text-[#F5F1E8]">
+            <p className="font-display text-sm sm:text-base font-bold text-[#F5F1E8]">
               {selectedItems.length} Service{selectedItems.length === 1 ? '' : 's'} Selected
             </p>
-            <p className="text-[11px] text-[#635E54] dark:text-[#A6A095] max-w-md">
+            <p className="text-[11px] text-[#A6A095] max-w-md">
               {selectedItems.map((s) => s.name).join(' + ') || 'Select services above to bundle your chair session.'}
             </p>
           </div>
 
           <div className="flex items-center gap-6 shrink-0">
             <div className="text-right">
-              <span className="text-[10px] text-[#635E54] dark:text-[#A6A095] uppercase tracking-wider block font-semibold">
+              <span className="text-[10px] text-[#A6A095] uppercase tracking-wider block font-semibold">
                 Est. Duration
               </span>
-              <span className="font-mono text-sm sm:text-base font-bold text-[#141414] dark:text-[#F5F1E8]">
+              <span className="font-mono text-sm sm:text-base font-bold text-[#F5F1E8]">
                 ~{totalDuration} Mins
               </span>
             </div>
 
             <div className="text-right">
-              <span className="text-[10px] text-[#635E54] dark:text-[#A6A095] uppercase tracking-wider block font-semibold">
+              <span className="text-[10px] text-[#A6A095] uppercase tracking-wider block font-semibold">
                 Pricing
               </span>
-              <span className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#8C6D23] dark:text-[#D4AF37]">
+              <span className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#D4AF37]">
                 Consultation Required
               </span>
             </div>

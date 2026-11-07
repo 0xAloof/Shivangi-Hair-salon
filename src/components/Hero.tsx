@@ -1,22 +1,10 @@
-import { useState } from 'react';
-
-const HERO_VIDEOS = [
-  '/assets/aistudio/Hair_clippers_on_obsidian_surface_f7907cc2_2e4770c9.mp4',
-  '/assets/aistudio/Straight_razor_resting_on_slate_f56fc1c1_ff634a5e.mp4',
-  '/assets/aistudio/Steam_rising_from_black_towel_7c028be0_4d7db310.mp4',
-];
+import { VIDEOS } from '../config/videos';
 
 interface HeroProps {
   onOpenBooking?: () => void;
 }
 
 export default function Hero({}: HeroProps) {
-  const [videoIndex, setVideoIndex] = useState(0);
-
-  const handleVideoEnded = () => {
-    setVideoIndex((prev) => (prev + 1) % HERO_VIDEOS.length);
-  };
-
   return (
     <section 
       id="showcase"
@@ -24,28 +12,27 @@ export default function Hero({}: HeroProps) {
       aria-label="Cinematic Showcase"
     >
       {/* 100vw Full-Bleed Container */}
-      <div className="relative w-full h-[76vh] sm:h-[84vh] min-h-[500px] max-h-[900px] flex items-center justify-center">
+      <div className="relative w-full h-[76vh] sm:h-[84vh] min-h-[500px] max-h-[900px] flex items-center justify-center bg-[#121212]">
         
-        {/* Full-Bleed Background Video */}
+        {/* Full-Bleed Background Video with solid #121212 fallback */}
         <div className="absolute inset-0 w-full h-full overflow-hidden bg-[#121212]">
           <video
-            key={HERO_VIDEOS[videoIndex]}
-            src={HERO_VIDEOS[videoIndex]}
-            autoPlay
-            muted
+            src={VIDEOS.hero}
             playsInline
-            onEnded={handleVideoEnded}
-            className="w-full h-full object-cover object-center filter brightness-[0.62] contrast-[1.08] transition-opacity duration-1000"
+            muted
+            loop
+            autoPlay
+            className="w-full h-full object-cover object-center bg-[#121212] filter brightness-[0.62] contrast-[1.08] transition-opacity duration-1000"
           />
           {/* Subtle cinematic gradient scrim for contrast */}
           <div className="absolute inset-0 bg-gradient-to-t from-[#121212] via-[#121212]/40 to-[#121212]/50" />
         </div>
 
-        {/* Stark Editorial Typography (Zero Buttons, Zero Slop) */}
+        {/* Stark Editorial Typography */}
         <div className="relative z-20 flex flex-col items-center justify-center text-center px-4 sm:px-6 max-w-4xl mx-auto space-y-4">
           
           {/* Micro-Kicker */}
-          <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.35em] text-[#B8973E] dark:text-[#D4AF37]">
+          <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.35em] text-[#D4AF37]">
             Masculine Architectural Precision · Bhopal
           </span>
 

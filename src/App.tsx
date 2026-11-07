@@ -11,7 +11,6 @@ import Reviews from './components/Reviews';
 import LocationHub from './components/LocationHub';
 import Footer from './components/Footer';
 import BookingModal from './components/BookingModal';
-import StickyMobileBar from './components/StickyMobileBar';
 import FloatingSideCTA from './components/FloatingSideCTA';
 import { SALON_INFO } from './data/salonData';
 import { createWhatsAppUrl, openExternalUrl } from './utils/booking';
@@ -86,12 +85,7 @@ export default function App() {
           onOpenWhatsApp={handleOpenWhatsAppDirect} 
         />
 
-        {/* Sticky Mobile Bottom Bar: 4 Circular FABs */}
-        <StickyMobileBar 
-          onOpenWhatsApp={handleOpenWhatsAppDirect} 
-        />
-
-        {/* Floating Side CTA (Brocode Style - Mid/Bottom-Right Desktop) */}
+        {/* Floating Side CTA (Stacked Vertically on Mid-Right) */}
         <FloatingSideCTA 
           onOpenWhatsApp={handleOpenWhatsAppDirect} 
         />
