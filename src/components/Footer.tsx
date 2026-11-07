@@ -1,4 +1,5 @@
 import { Phone, MapPin, Star } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { WhatsAppIcon, FacebookIcon, InstagramIcon } from './BrandIcons';
 import { SALON_INFO } from '../data/salonData';
 
@@ -9,7 +10,7 @@ interface FooterProps {
 
 export default function Footer({ onOpenWhatsApp }: FooterProps) {
   return (
-    <footer className="bg-[#EDE6D8] dark:bg-[#121212] border-t border-[#D5C9B3] dark:border-[#262626] text-[#635E54] dark:text-[#A6A095] text-xs py-16 pb-28 md:pb-16 transition-colors duration-250">
+    <footer className="bg-transparent backdrop-blur-sm border-t border-[#C5A059]/25 text-[#635E54] dark:text-[#A6A095] text-xs py-16 transition-colors duration-250">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
@@ -17,7 +18,7 @@ export default function Footer({ onOpenWhatsApp }: FooterProps) {
           {/* Brand Col with Logo (5 cols) */}
           <div className="md:col-span-5 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl overflow-hidden border border-[#D5C9B3] dark:border-[#262626] bg-black shrink-0">
+              <div className="w-10 h-10 rounded-xl overflow-hidden border border-[#C5A059]/30 bg-black shrink-0">
                 <img 
                   src="/logo.jpg" 
                   alt="Shivangi Hair Salon Logo" 
@@ -26,7 +27,7 @@ export default function Footer({ onOpenWhatsApp }: FooterProps) {
                   referrerPolicy="no-referrer"
                 />
               </div>
-              <span className="font-display text-lg font-bold tracking-wider text-[#141414] dark:text-[#F5F1E8]">
+              <span className="font-display text-lg font-bold tracking-wider text-[#141414] dark:text-[#F6F4EF]">
                 SHIVANGI <span className="gold-gradient-text">HAIR SALON</span>
               </span>
             </div>
@@ -35,64 +36,54 @@ export default function Footer({ onOpenWhatsApp }: FooterProps) {
               Premier men's grooming & barber studio in Bhopal. Precision haircutting, beard detailing, and hot towel service.
             </p>
 
-            <div className="flex items-center gap-1.5 text-[#B8973E] dark:text-[#D4AF37]">
+            <div className="flex items-center gap-1.5 text-[#C5A059] dark:text-[#D4AF37]">
               <Star className="w-3.5 h-3.5 fill-current" />
-              <span className="text-[#141414] dark:text-[#F5F1E8] font-bold">4.9 / 5.0 Rated on Google</span>
+              <span className="text-[#141414] dark:text-[#F6F4EF] font-bold">4.9 / 5.0 Rated on Google</span>
               <span className="text-[#635E54] dark:text-[#A6A095]">· Over 140+ Bhopal clients</span>
             </div>
           </div>
 
           {/* Navigation Links (3 cols) */}
           <div className="md:col-span-3 space-y-3">
-            <p className="text-xs font-bold uppercase tracking-wider text-[#141414] dark:text-[#F5F1E8]">
+            <p className="text-xs font-bold uppercase tracking-wider text-[#141414] dark:text-[#F6F4EF]">
               Studio Navigation
             </p>
             <ul className="space-y-2 text-xs">
               <li>
-                <a href="#showcase" className="hover:text-[#141414] dark:hover:text-[#F5F1E8] transition-colors">
-                  Cinematic Showcase
-                </a>
+                <Link to="/" className="hover:text-[#141414] dark:hover:text-[#F6F4EF] transition-colors">
+                  Showcase
+                </Link>
               </li>
               <li>
-                <a href="#barber" className="hover:text-[#141414] dark:hover:text-[#F5F1E8] transition-colors">
-                  Master Barber
-                </a>
+                <Link to="/craftsman" className="hover:text-[#141414] dark:hover:text-[#F6F4EF] transition-colors">
+                  Craftsman
+                </Link>
               </li>
               <li>
-                <a href="#services" className="hover:text-[#141414] dark:hover:text-[#F5F1E8] transition-colors">
+                <Link to="/menu" className="hover:text-[#141414] dark:hover:text-[#F6F4EF] transition-colors">
                   Service Menu
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#gallery" className="hover:text-[#141414] dark:hover:text-[#F5F1E8] transition-colors">
-                  Authentic Gallery
-                </a>
-              </li>
-              <li>
-                <a href="#reviews" className="hover:text-[#141414] dark:hover:text-[#F5F1E8] transition-colors">
-                  Hygiene & Reviews
-                </a>
-              </li>
-              <li>
-                <a href="#location" className="hover:text-[#141414] dark:hover:text-[#F5F1E8] transition-colors">
-                  Location & Hours
-                </a>
+                <Link to="/salon" className="hover:text-[#141414] dark:hover:text-[#F6F4EF] transition-colors">
+                  Salon & Location
+                </Link>
               </li>
             </ul>
           </div>
 
           {/* Contact Details & Strict Circular CTAs (4 cols) */}
           <div className="md:col-span-4 space-y-3">
-            <p className="text-xs font-bold uppercase tracking-wider text-[#141414] dark:text-[#F5F1E8]">
+            <p className="text-xs font-bold uppercase tracking-wider text-[#141414] dark:text-[#F6F4EF]">
               Direct Studio Channels
             </p>
             <div className="space-y-2 text-xs text-[#4A4742] dark:text-[#A6A095]">
               <div className="flex items-start gap-2">
-                <MapPin className="w-4 h-4 text-[#B8973E] dark:text-[#D4AF37] shrink-0 mt-0.5" />
+                <MapPin className="w-4 h-4 text-[#C5A059] shrink-0 mt-0.5" />
                 <span>{SALON_INFO.address}</span>
               </div>
               <div className="flex items-center gap-2">
-                <Phone className="w-4 h-4 text-[#B8973E] dark:text-[#D4AF37] shrink-0" />
+                <Phone className="w-4 h-4 text-[#C5A059] shrink-0" />
                 <a href={`tel:${SALON_INFO.phone}`} className="hover:underline font-semibold font-mono">
                   {SALON_INFO.phone}
                 </a>
@@ -156,7 +147,7 @@ export default function Footer({ onOpenWhatsApp }: FooterProps) {
         </div>
 
         {/* Bottom copyright */}
-        <div className="pt-8 border-t border-[#D5C9B3] dark:border-[#262626] flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-[#635E54] dark:text-[#A6A095]">
+        <div className="pt-8 border-t border-[#C5A059]/20 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-[#635E54] dark:text-[#A6A095]">
           <p>© {new Date().getFullYear()} Shivangi Hair Salon. All rights reserved.</p>
           <p>7897+5X4, Bhensakhedi Road, near The Fitness Planet, Bhopal, MP 462030</p>
         </div>

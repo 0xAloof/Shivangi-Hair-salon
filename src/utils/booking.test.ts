@@ -11,7 +11,7 @@ import {
   createWhatsAppUrl,
 } from './booking';
 import { ServiceItem } from '../types';
-import { VIDEOS } from '../config/videos';
+import { VIDEOS, MACRO_VIDEOS } from '../config/videos';
 
 const mockServices: ServiceItem[] = [
   {
@@ -145,13 +145,18 @@ test('formatWhatsAppBookingMessage and createWhatsAppUrl format correctly', () =
   assert.ok(url.includes(encodeURIComponent('Aashif Khan')));
 });
 
-test('VIDEOS config uses external CDN URLs and zero local /assets/ paths', () => {
-  assert.equal(VIDEOS.hero, 'https://placeholder-url.webm');
-  assert.equal(VIDEOS.serviceMenu, 'https://placeholder-url.webm');
-  assert.equal(VIDEOS.trustStrip, 'https://placeholder-url.webm');
+test('MACRO_VIDEOS and VIDEOS configure 3D macro video fallback chains properly', () => {
+  assert.equal(MACRO_VIDEOS.hero.localPath, '/videos/clipper-3d.mp4');
+  assert.equal(MACRO_VIDEOS.trustStrip.localPath, '/videos/razor-3d.mp4');
+  assert.equal(MACRO_VIDEOS.serviceMenu.localPath, '/videos/towel-3d.mp4');
+
+  assert.ok(MACRO_VIDEOS.hero.sources.includes('/videos/clipper-3d.mp4'));
+  assert.ok(MACRO_VIDEOS.trustStrip.sources.includes('/videos/razor-3d.mp4'));
+  assert.ok(MACRO_VIDEOS.serviceMenu.sources.includes('/videos/towel-3d.mp4'));
+
   for (const url of Object.values(VIDEOS)) {
     assert.ok(url.startsWith('https://'), `Expected external https URL, got ${url}`);
-    assert.ok(!url.includes('/assets/'), `Expected no local /assets/ path, got ${url}`);
   }
 });
+
 

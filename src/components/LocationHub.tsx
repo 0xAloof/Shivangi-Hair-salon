@@ -11,7 +11,7 @@ export default function LocationHub({ onOpenWhatsApp }: LocationHubProps) {
   const isTuesdayToday = today.getDay() === 2;
 
   return (
-    <section id="location" className="py-20 sm:py-28 bg-[#F5F1E8] dark:bg-[#121212] border-b border-[#E2DACB] dark:border-neutral-900 scroll-mt-20 transition-colors duration-250">
+    <section id="location" className="py-20 sm:py-28 bg-transparent border-b border-[#C5A059]/20 scroll-mt-20 transition-colors duration-250">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}

@@ -39,7 +39,7 @@ export default function ConsultationQuiz() {
   };
 
   return (
-    <section id="consultation" className="py-16 sm:py-24 bg-[#EDE6D8] dark:bg-[#121212] border-b border-[#D5C9B3] dark:border-[#262626] scroll-mt-20 transition-colors duration-250">
+    <section id="consultation" className="py-16 sm:py-24 bg-transparent border-b border-[#C5A059]/20 scroll-mt-20 transition-colors duration-250">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
