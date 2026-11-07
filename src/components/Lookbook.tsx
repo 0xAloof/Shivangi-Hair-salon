@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Eye, ArrowRight } from 'lucide-react';
+import { Eye, ArrowRight, X } from 'lucide-react';
+import { FacebookIcon, InstagramIcon } from './BrandIcons';
 import { LOOKBOOK_ITEMS, SALON_INFO } from '../data/salonData';
 
 interface LookbookProps {
@@ -17,7 +18,7 @@ export default function Lookbook({ onSelectStyle }: LookbookProps) {
     : LOOKBOOK_ITEMS.filter(item => item.category === activeCategory);
 
   return (
-    <section id="gallery" className="py-20 sm:py-28 bg-[#EDE6D8] dark:bg-[#151518] border-b border-[#D5C9B3] dark:border-neutral-900 scroll-mt-20 transition-colors duration-250">
+    <section id="gallery" className="py-20 sm:py-28 bg-[#EDE6D8] dark:bg-[#121212] border-b border-[#D5C9B3] dark:border-[#262626] scroll-mt-20 transition-colors duration-250">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -29,16 +30,16 @@ export default function Lookbook({ onSelectStyle }: LookbookProps) {
                 Visual Proof & Gallery
               </span>
             </div>
-            <h2 className="font-display text-3xl sm:text-5xl font-bold text-[#141414] dark:text-white tracking-tight">
+            <h2 className="font-display text-3xl sm:text-5xl font-bold text-[#141414] dark:text-[#F5F1E8] tracking-tight">
               Precision Cuts & Razor Detailing
             </h2>
-            <p className="text-xs sm:text-sm text-[#4A4742] dark:text-neutral-300 max-w-xl">
+            <p className="text-xs sm:text-sm text-[#4A4742] dark:text-[#A6A095] max-w-xl">
               Authentic chair captures: low drop tapers, razor cheek lines, hot-towel skin prep, and hair architecture in Bhopal.
             </p>
           </div>
 
           {/* Filter Pills */}
-          <div className="flex flex-wrap gap-1.5 p-1.5 rounded-2xl bg-white/70 dark:bg-[#1C1C20] border border-[#D5C9B3] dark:border-neutral-800 shrink-0">
+          <div className="flex flex-wrap gap-1.5 p-1.5 rounded-2xl bg-white/70 dark:bg-[#161616] border border-[#D5C9B3] dark:border-[#262626] shrink-0">
             {categories.map((cat) => (
               <button
                 key={cat}
@@ -46,8 +47,8 @@ export default function Lookbook({ onSelectStyle }: LookbookProps) {
                 onClick={() => setActiveCategory(cat)}
                 className={`px-3.5 py-1.5 text-xs font-bold rounded-xl transition-all cursor-pointer whitespace-nowrap ${
                   activeCategory === cat
-                    ? 'bg-[#141414] dark:bg-neutral-800 text-white dark:text-amber-300 shadow-sm border border-neutral-700'
-                    : 'text-[#635E54] dark:text-neutral-400 hover:text-[#141414] dark:hover:text-white'
+                    ? 'bg-[#141414] dark:bg-[#262626] text-white dark:text-[#F5F1E8] shadow-sm border border-neutral-700'
+                    : 'text-[#635E54] dark:text-[#A6A095] hover:text-[#141414] dark:hover:text-[#F5F1E8]'
                 }`}
               >
                 {cat}
@@ -61,7 +62,7 @@ export default function Lookbook({ onSelectStyle }: LookbookProps) {
           {filteredItems.map((item) => (
             <div
               key={item.id}
-              className="group relative rounded-2xl overflow-hidden bg-white dark:bg-[#1A1A1E] border border-[#D5C9B3] dark:border-neutral-800 flex flex-col justify-between transition-all duration-300 shadow-sm hover:shadow-lg"
+              className="group relative rounded-2xl overflow-hidden bg-white dark:bg-[#161616] border border-[#D5C9B3] dark:border-[#262626] flex flex-col justify-between transition-all duration-300 shadow-sm hover:shadow-lg"
             >
               {/* Image Frame */}
               <div className="relative aspect-[4/3] sm:aspect-square overflow-hidden bg-neutral-900">
@@ -93,16 +94,16 @@ export default function Lookbook({ onSelectStyle }: LookbookProps) {
               {/* Text Info */}
               <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
                 <div>
-                  <h3 className="font-display text-lg font-bold text-[#141414] dark:text-white">
+                  <h3 className="font-display text-lg font-bold text-[#141414] dark:text-[#F5F1E8]">
                     {item.title}
                   </h3>
-                  <p className="mt-1.5 text-xs text-[#4A4742] dark:text-neutral-300 leading-relaxed">
+                  <p className="mt-1.5 text-xs text-[#4A4742] dark:text-[#A6A095] leading-relaxed">
                     {item.desc}
                   </p>
                 </div>
 
-                <div className="pt-3 border-t border-[#EAE3D4] dark:border-neutral-800 flex items-center justify-between">
-                  <span className="text-[11px] text-[#635E54] dark:text-neutral-400">Bhopal Studio</span>
+                <div className="pt-3 border-t border-[#EAE3D4] dark:border-[#262626] flex items-center justify-between">
+                  <span className="text-[11px] text-[#635E54] dark:text-[#A6A095]">Bhopal Studio</span>
                   <button
                     type="button"
                     onClick={() => onSelectStyle(item.title)}
@@ -117,34 +118,54 @@ export default function Lookbook({ onSelectStyle }: LookbookProps) {
           ))}
         </div>
 
-        {/* Facebook Channel Spotlight: Strict Perfect Circle Blue Button (#1877F2), Icon-Only */}
-        <div className="mt-14 p-8 sm:p-10 rounded-2xl bg-white/80 dark:bg-[#1A1A1E] border border-[#D5C9B3] dark:border-neutral-800 max-w-xl mx-auto flex flex-col items-center text-center space-y-4 shadow-sm">
+        {/* Social Spotlight: Official Facebook & Instagram 44px Circular Buttons */}
+        <div className="mt-14 p-8 sm:p-10 rounded-2xl bg-white/80 dark:bg-[#161616] border border-[#D5C9B3] dark:border-[#262626] max-w-xl mx-auto flex flex-col items-center text-center space-y-4 shadow-sm">
           <div className="space-y-1">
-            <h3 className="font-display text-xl sm:text-2xl font-bold text-[#141414] dark:text-white">
-              Weekly Studio Work on Facebook
+            <h3 className="font-display text-xl sm:text-2xl font-bold text-[#141414] dark:text-[#F5F1E8]">
+              Studio Portfolios & Daily Reels
             </h3>
-            <p className="text-xs sm:text-sm text-[#4A4742] dark:text-neutral-300 max-w-md">
-              Follow our daily haircut reels, straight razor beard shaping, and studio updates in Bhopal.
+            <p className="text-xs sm:text-sm text-[#4A4742] dark:text-[#A6A095] max-w-md">
+              Follow our daily haircut reels, straight razor beard detailing, and chair captures in Bhopal.
             </p>
           </div>
 
-          {/* Strict Circular Facebook Blue Button (#1877F2), Icon-Only inside the circle, zero text */}
-          <div className="pt-2 flex flex-col items-center gap-2">
-            <a
-              href={SALON_INFO.facebookUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="cta-circle w-14 h-14 bg-[#1877F2] hover:bg-[#166fe5] text-white shadow-xl flex items-center justify-center cursor-pointer focus:outline-none focus-visible:ring-4 focus-visible:ring-[#1877F2]/40"
-              aria-label="Follow Shivangi Hair Salon on Facebook"
-              title="Follow on Facebook"
-            >
-              <svg className="w-6 h-6 fill-current shrink-0" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-              </svg>
-            </a>
-            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#1877F2] dark:text-blue-400">
-              Facebook Studio Channel
-            </span>
+          {/* Strict Circular Brand Buttons, 44px, Icon-Only inside the circle */}
+          <div className="pt-2 flex items-center justify-center gap-6">
+            
+            {/* Facebook 44px CTA */}
+            <div className="flex flex-col items-center gap-2">
+              <a
+                href={SALON_INFO.facebookUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="cta-circle w-11 h-11 bg-[#1877F2] hover:bg-[#166fe5] text-white shadow-md flex items-center justify-center cursor-pointer focus:outline-none focus-visible:ring-4 focus-visible:ring-[#1877F2]/40"
+                aria-label="Follow Shivangi Hair Salon on Facebook"
+                title="Follow on Facebook"
+              >
+                <FacebookIcon className="w-5 h-5 text-white shrink-0" />
+              </a>
+              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#1877F2] dark:text-blue-400">
+                Facebook
+              </span>
+            </div>
+
+            {/* Instagram 44px CTA */}
+            <div className="flex flex-col items-center gap-2">
+              <a
+                href={SALON_INFO.instagramUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="cta-circle w-11 h-11 bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] hover:opacity-95 text-white shadow-md flex items-center justify-center cursor-pointer focus:outline-none focus-visible:ring-4 focus-visible:ring-rose-500/40"
+                aria-label="Follow Shivangi Hair Salon on Instagram"
+                title="Follow on Instagram @shivangihairsalon.in"
+              >
+                <InstagramIcon className="w-5 h-5 text-white shrink-0" />
+              </a>
+              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#dc2743] dark:text-rose-400">
+                Instagram
+              </span>
+            </div>
+
           </div>
         </div>
 
@@ -168,9 +189,10 @@ export default function Lookbook({ onSelectStyle }: LookbookProps) {
             <button
               type="button"
               onClick={() => setPreviewImage(null)}
-              className="absolute top-4 right-4 px-3 py-1.5 rounded-lg bg-black/80 text-white text-xs font-semibold hover:bg-black transition-colors cursor-pointer"
+              className="absolute top-4 right-4 flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-black/80 text-white text-xs font-semibold hover:bg-black transition-colors cursor-pointer"
             >
-              Close ✕
+              <X className="w-3.5 h-3.5" />
+              <span>Close</span>
             </button>
           </div>
         </div>

@@ -3,11 +3,14 @@ import { ServiceItem, FaceShapeGuide, ReviewItem } from '../types';
 export const SALON_INFO = {
   name: "Shivangi Hair Salon",
   headline: "Precision Grooming. Built for the Modern Gentleman.",
-  subHeadline: "Expert haircuts, beard sculpting, and premium grooming in Bhopal.",
+  subHeadline: "Haircuts, beard detailing, and grooming in Bhopal.",
   tagline: "The Art of Modern Precision",
   phone: "+91 9575830421",
   rawPhone: "919575830421",
-  facebookUrl: "https://www.facebook.com/shivangihairsalon",
+  whatsAppUrl: "https://wa.me/919575830421",
+  instagramHandle: "@shivangihairsalon.in",
+  instagramUrl: "https://www.instagram.com/shivangihairsalon.in/",
+  facebookUrl: "https://www.facebook.com/people/Shivangi-Hair-Salon/61594677009353/?rdid=rYcbsxiBq3xAj4fr&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1GM1K42WCV%2F%3Futm_source%3Dig%26utm_medium%3Dsocial%26utm_content%3Dlink_in_bio",
   address: "7897+5X4, Bhensakhedi Road, near The Fitness Planet, Bhopal, MP 462030",
   plusCode: "7897+5X4 Bhopal",
   googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=7897%2B5X4,+Bhensakhedi+Road,+near+The+Fitness+Planet,+Bhopal,+MP+462030",
@@ -22,7 +25,7 @@ export const SALON_INFO = {
 };
 
 export const TRUST_SIGNALS = [
-  { icon: 'star', label: '4.9★ Google Rating', sub: '148+ Verified Bhopal Reviews' },
+  { icon: 'star', label: '4.9 Google Rating', sub: '148+ Verified Bhopal Reviews' },
   { icon: 'uv', label: 'UV Sterilized Tools', sub: 'Hospital-grade autoclaves' },
   { icon: 'blade', label: 'Fresh Blades', sub: '100% single-use Japanese steel' },
   { icon: 'walkin', label: 'Walk-ins Welcome', sub: 'Pre-bookings prioritized' },
@@ -37,11 +40,11 @@ export const SERVICES: ServiceItem[] = [
     durationMinutes: 45,
     priceMin: 350,
     priceMax: 450,
-    shortDesc: "Face-structure guided scissor architecture, low or skin drop fade, invigorating scalp wash, and premium clay finish.",
+    shortDesc: "Face-structure guided scissor architecture, low or skin drop fade, scalp wash, and matte clay finish.",
     inclusions: [
-      "Bespoke face-shape consultation",
+      "Face-shape consultation",
       "Sterilized shear work & micro-clipper taper",
-      "Invigorating botanical scalp wash",
+      "Botanical scalp wash",
       "Blow-dry & matte texture wax styling"
     ],
     popular: true,
@@ -68,11 +71,11 @@ export const SERVICES: ServiceItem[] = [
     durationMinutes: 50,
     priceMin: 500,
     priceMax: 700,
-    shortDesc: "Geometric razor parting, neckline etching, hairline rejuvenation, and custom straight-blade hair art lines.",
+    shortDesc: "Geometric razor parting, neckline etching, hairline detail, and custom straight-blade hair art lines.",
     inclusions: [
       "Custom stencil / freehand geometry design",
       "High-precision straight razor carving",
-      "Surgical antiseptic skin mist",
+      "Antiseptic skin mist",
       "Full perimeter transition fade"
     ],
     popular: true,
@@ -81,7 +84,7 @@ export const SERVICES: ServiceItem[] = [
   // Beard Craft
   {
     id: "beard-detail",
-    name: "Beard Sculpting & Razor Detail",
+    name: "Beard Detailing & Razor Line",
     category: "beard",
     durationMinutes: 30,
     priceMin: 200,
@@ -135,7 +138,7 @@ export const SERVICES: ServiceItem[] = [
     durationMinutes: 25,
     priceMin: 300,
     priceMax: 400,
-    shortDesc: "Active bamboo charcoal scrub to extract pollution, blackheads, and dead skin cells, followed by a cool hydrating mist.",
+    shortDesc: "Active bamboo charcoal scrub to extract pollution and dead skin cells, followed by a cool hydrating mist.",
     inclusions: [
       "Herbal facial cleanse & warm steam",
       "Gentle ultrasonic exfoliation",
@@ -149,11 +152,11 @@ export const SERVICES: ServiceItem[] = [
     durationMinutes: 90,
     priceMin: 1200,
     priceMax: 1500,
-    shortDesc: "The complete studio ritual: Signature Cut, Razor Beard Sculpt, Scalp Spa Therapy, and Express Face Charcoal Glow.",
+    shortDesc: "The complete studio service: Signature Cut, Razor Beard Detail, Scalp Spa Therapy, and Express Face Charcoal Clean-up.",
     inclusions: [
-      "All 4 core rituals included",
+      "All 4 core services included",
       "Extended 25-minute neck & shoulder massage",
-      "Complimentary artisan beverage & hair care consultation",
+      "Complimentary beverage & hair care consultation",
       "Priority chair reservation"
     ],
     popular: true,
@@ -284,7 +287,7 @@ export const LOOKBOOK_ITEMS = [
     id: "look-1",
     title: "Precision Textured Crop & Drop Fade",
     category: "Skin Fade",
-    desc: "Sculpted French crop with matte micro-texture and skin-drop perimeter.",
+    desc: "Structured French crop with matte micro-texture and skin-drop perimeter.",
     image: "/crop_fade.jpg",
   },
   {
@@ -298,14 +301,14 @@ export const LOOKBOOK_ITEMS = [
     id: "look-3",
     title: "Hot Towel Straight Razor Detailing",
     category: "Hot Towel Shave",
-    desc: "Unhurried, microscopic detailing with balanced weight distribution.",
+    desc: "Precise straight razor detailing with balanced weight distribution.",
     image: "/razor_shave.jpg",
   },
   {
     id: "look-4",
     title: "Studio Sanctuary Interior",
-    category: "Sanctuary",
-    desc: "Dark charcoal matte sanctuary equipped with hospital-grade sanitizers.",
+    category: "Studio",
+    desc: "Matte obsidian studio equipped with autoclave sanitizers.",
     image: "/interior_luxury.jpg",
   }
 ];
@@ -364,12 +367,12 @@ export const SHOWCASE_SLIDES: ShowcaseSlide[] = [
     id: "slide-8",
     title: "Geometric Hair Art & Parting",
     tag: "Tattoo Razor Lines",
-    image: "https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=1600&q=80",
+    image: "/src/assets/images/hero_barber_craft_1794039371325.jpg",
   },
   {
     id: "slide-9",
     title: "Pure Shear Scissor Layering",
     tag: "Master Craft",
-    image: "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1600&q=80",
+    image: "/src/assets/images/barber_portrait_master_1794039371557.jpg",
   },
 ];

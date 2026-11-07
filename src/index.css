@@ -81,20 +81,22 @@
   background-color: #E5E5E5;
 }
 
-/* Perfect Circular Buttons - strictly icon-only, zero text inside */
+/* Perfect Circular Buttons - 44px refined scale, icon-only, zero text inside */
 .cta-circle {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   border-radius: 9999px;
+  width: 44px;
+  height: 44px;
   aspect-ratio: 1 / 1;
   flex-shrink: 0;
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, opacity 0.2s ease;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, opacity 0.2s ease;
   user-select: none;
 }
 .cta-circle:hover {
-  transform: scale(1.08);
+  transform: scale(1.06);
 }
 .cta-circle:active {
-  transform: scale(0.94);
+  transform: scale(0.95);
 }

@@ -12,6 +12,7 @@ import LocationHub from './components/LocationHub';
 import Footer from './components/Footer';
 import BookingModal from './components/BookingModal';
 import StickyMobileBar from './components/StickyMobileBar';
+import FloatingSideCTA from './components/FloatingSideCTA';
 import { SALON_INFO } from './data/salonData';
 import { createWhatsAppUrl, openExternalUrl } from './utils/booking';
 
@@ -38,23 +39,23 @@ export default function App() {
 
   return (
     <ThemeProvider>
-      <div className="min-h-screen bg-[#F5F1E8] dark:bg-[#121212] text-[#141414] dark:text-[#EAE5DC] flex flex-col selection:bg-[#B8973E] selection:text-white transition-colors duration-250">
+      <div className="min-h-screen bg-[#F5F1E8] dark:bg-[#121212] text-[#141414] dark:text-[#F5F1E8] flex flex-col selection:bg-[#B8973E] selection:text-white transition-colors duration-250">
         
-        {/* 1. Header & Navigation (Logo, Light/Dark Switch, Emoji Only) */}
+        {/* 1. Header & Navigation (Logo, Light/Dark Switch) */}
         <Navbar />
 
         <main className="flex-1">
-          {/* 2. Full-Bleed Cinematic Hero Showcase with Floating Circular Green WhatsApp CTA */}
+          {/* 2. Full-Bleed Cinematic Hero Showcase with Background Video */}
           <Hero 
             onOpenBooking={() => handleOpenBooking()} 
           />
 
-          {/* 3. The Trust Strip (4.9★, UV Sterilized, Fresh Blades, Walk-ins) */}
+          {/* 3. The Trust Strip (4.9 Rating, UV Sterilized, Fresh Blades, Walk-ins) */}
           <TrustStrip />
 
-          {/* 4. Master Barber Editorial Spotlight ("The hands behind the fade. 8+ years of structural hair architecture.") */}
+          {/* 4. Master Barber Editorial Spotlight */}
           <Craftsmanship 
-            onOpenBooking={() => handleOpenBooking('sig-cut', 'Bespoke Face-Shape Consultation')} 
+            onOpenBooking={() => handleOpenBooking('sig-cut', 'Face-Shape Consultation')} 
           />
 
           {/* 5. Transparent Service Menu (Stark Table Layout & Circular WhatsApp CTAs) */}
@@ -85,8 +86,13 @@ export default function App() {
           onOpenWhatsApp={handleOpenWhatsAppDirect} 
         />
 
-        {/* Sticky Mobile Bottom Bar: 3 Circular FABs - Call (Black), WhatsApp (Green), Facebook (Blue) */}
+        {/* Sticky Mobile Bottom Bar: 4 Circular FABs */}
         <StickyMobileBar 
+          onOpenWhatsApp={handleOpenWhatsAppDirect} 
+        />
+
+        {/* Floating Side CTA (Brocode Style - Mid/Bottom-Right Desktop) */}
+        <FloatingSideCTA 
           onOpenWhatsApp={handleOpenWhatsAppDirect} 
         />
 

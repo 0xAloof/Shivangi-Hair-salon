@@ -1,3 +1,4 @@
+import { Moon, Sun } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 
 export default function Navbar() {
@@ -23,43 +24,40 @@ export default function Navbar() {
             />
           </div>
           
-          <div className="flex flex-col">
-            <span className="font-display text-lg sm:text-2xl font-bold tracking-widest text-[#141414] dark:text-[#EAE5DC] leading-tight">
-              SHIVANGI
-            </span>
-            <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.22em] text-[#B8973E] dark:text-[#D4AF37]">
-              Bhopal · Studio
-            </span>
-          </div>
+          <span className="font-display text-base sm:text-lg font-bold tracking-wider text-[#141414] dark:text-[#F5F1E8]">
+            Shivangi Hair Salon
+          </span>
         </a>
 
         {/* Center: Minimalist Anchor Navigation (Editorial & Low Profile) */}
-        <nav className="hidden md:flex items-center gap-8 text-xs font-semibold uppercase tracking-[0.2em] text-[#635E54] dark:text-neutral-400">
-          <a href="#showcase" className="hover:text-[#141414] dark:hover:text-white transition-colors">
+        <nav className="hidden md:flex items-center gap-8 text-xs font-semibold uppercase tracking-[0.2em] text-[#635E54] dark:text-[#A6A095]">
+          <a href="#showcase" className="hover:text-[#141414] dark:hover:text-[#F5F1E8] transition-colors">
             Showcase
           </a>
-          <a href="#barber" className="hover:text-[#141414] dark:hover:text-white transition-colors">
+          <a href="#barber" className="hover:text-[#141414] dark:hover:text-[#F5F1E8] transition-colors">
             Craftsman
           </a>
-          <a href="#services" className="hover:text-[#141414] dark:hover:text-white transition-colors">
+          <a href="#services" className="hover:text-[#141414] dark:hover:text-[#F5F1E8] transition-colors">
             Menu
           </a>
-          <a href="#location" className="hover:text-[#141414] dark:hover:text-white transition-colors">
+          <a href="#location" className="hover:text-[#141414] dark:hover:text-[#F5F1E8] transition-colors">
             Studio
           </a>
         </nav>
 
-        {/* Right: Emoji-only Toggle (🌙 / ☀️) - STRICTLY NO text labels */}
+        {/* Right: Crisp Lucide SVG Icon Toggle (Moon / Sun) - Zero emojis */}
         <button
           type="button"
           onClick={toggleTheme}
-          className="w-11 h-11 sm:w-12 sm:h-12 rounded-full flex items-center justify-center text-xl sm:text-2xl hover:scale-110 active:scale-90 transition-all duration-200 cursor-pointer bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/15"
+          className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 cursor-pointer bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/15 text-[#141414] dark:text-[#F5F1E8]"
           aria-label={theme === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'}
           title={theme === 'light' ? 'Dark Mode' : 'Light Mode'}
         >
-          <span role="img" aria-hidden="true" className="select-none leading-none">
-            {theme === 'light' ? '🌙' : '☀️'}
-          </span>
+          {theme === 'light' ? (
+            <Moon className="w-4 h-4 stroke-[1.75]" />
+          ) : (
+            <Sun className="w-4 h-4 stroke-[1.75]" />
+          )}
         </button>
 
       </div>

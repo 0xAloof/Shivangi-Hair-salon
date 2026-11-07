@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { UserCheck, Sparkles, MessageSquare, Check, ArrowRight, RotateCcw } from 'lucide-react';
+import { UserCheck, Sparkles, Check, ArrowRight, RotateCcw } from 'lucide-react';
+import { WhatsAppIcon } from './BrandIcons';
 import { QUIZ_QUESTIONS, computeQuizRecommendation, SALON_INFO } from '../data/salonData';
 import { createWhatsAppUrl, openExternalUrl } from '../utils/booking';
 
@@ -17,16 +18,16 @@ export default function ConsultationQuiz() {
 
   const handleBookLookOnWhatsApp = () => {
     const msg = [
-      `*BESPOKE CONSULTATION BOOKING - SHIVANGI HAIR SALON*`,
-      `Hello Master Barber, I completed the 'Find Your Look' quiz:`,
-      `👤 *My Face Shape:* ${faceLabel}`,
-      `✂️ *My Hair Type:* ${hairLabel}`,
-      `✨ *Desired Vibe:* ${vibeLabel}`,
+      `*CONSULTATION BOOKING - SHIVANGI HAIR SALON*`,
+      `Hello Master Barber, I completed the 'Find Your Look' consultation:`,
+      `*Face Shape:* ${faceLabel}`,
+      `*Hair Type:* ${hairLabel}`,
+      `*Desired Vibe:* ${vibeLabel}`,
       ``,
-      `💈 *Recommended Cut:* ${recommendation.title}`,
-      `📐 *Fade Type:* ${recommendation.fadeType}`,
-      `📍 *Location:* Bhensakhedi Road, Bhopal`,
-      `I want to book an appointment to get this engineered look.`
+      `*Recommended Cut:* ${recommendation.title}`,
+      `*Fade Type:* ${recommendation.fadeType}`,
+      `*Studio Location:* Bhensakhedi Road, Bhopal`,
+      `I want to book an appointment for this haircut.`
     ].join('\n');
 
     const url = createWhatsAppUrl(SALON_INFO.rawPhone, msg);
@@ -38,7 +39,7 @@ export default function ConsultationQuiz() {
   };
 
   return (
-    <section id="consultation" className="py-16 sm:py-24 bg-[#EDE6D8] dark:bg-[#151518] border-b border-[#D5C9B3] dark:border-neutral-900 scroll-mt-20 transition-colors duration-250">
+    <section id="consultation" className="py-16 sm:py-24 bg-[#EDE6D8] dark:bg-[#121212] border-b border-[#D5C9B3] dark:border-[#262626] scroll-mt-20 transition-colors duration-250">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
@@ -47,11 +48,11 @@ export default function ConsultationQuiz() {
             <UserCheck className="w-4 h-4 text-[#B8973E] dark:text-[#D4AF37]" />
             <span>Interactive 3-Step Analysis</span>
           </div>
-          <h2 className="font-display text-3xl sm:text-4xl font-bold text-[#141414] dark:text-white tracking-tight">
+          <h2 className="font-display text-3xl sm:text-4xl font-bold text-[#141414] dark:text-[#F5F1E8] tracking-tight">
             "Find Your Look" Consultation
           </h2>
-          <p className="text-sm text-[#4A4742] dark:text-neutral-300">
-            Tell us about your facial structure, hair texture, and daily lifestyle. We engineer the ideal haircut and beard silhouette for you.
+          <p className="text-sm text-[#4A4742] dark:text-[#A6A095]">
+            Select your facial structure, hair texture, and style. We recommend the haircut and beard silhouette suited to you.
           </p>
         </div>
 
@@ -69,22 +70,22 @@ export default function ConsultationQuiz() {
                   ? 'bg-[#141414] dark:bg-[#D4AF37] text-white dark:text-black shadow-md'
                   : step > item.num
                   ? 'bg-[#25D366] text-white'
-                  : 'bg-[#D5C9B3] dark:bg-neutral-800 text-[#635E54] dark:text-neutral-400'
+                  : 'bg-[#D5C9B3] dark:bg-[#262626] text-[#635E54] dark:text-[#A6A095]'
               }`}>
                 {step > item.num ? <Check className="w-4 h-4 stroke-[3]" /> : item.num}
               </div>
-              <span className="hidden sm:inline text-xs font-semibold text-[#141414] dark:text-neutral-200">
+              <span className="hidden sm:inline text-xs font-semibold text-[#141414] dark:text-[#F5F1E8]">
                 {item.label}
               </span>
               {item.num < 4 && (
-                <div className="w-4 sm:w-8 h-[2px] bg-[#D5C9B3] dark:bg-neutral-800" />
+                <div className="w-4 sm:w-8 h-[2px] bg-[#D5C9B3] dark:border-[#262626] dark:bg-[#262626]" />
               )}
             </div>
           ))}
         </div>
 
         {/* Quiz Container Card */}
-        <div className="rounded-2xl bg-white dark:bg-[#1A1A1E] border border-[#D5C9B3] dark:border-neutral-800 p-6 sm:p-10 shadow-lg transition-all duration-300">
+        <div className="rounded-2xl bg-white dark:bg-[#161616] border border-[#D5C9B3] dark:border-[#262626] p-6 sm:p-10 shadow-lg transition-all duration-300">
           
           {/* Step 1: Face Shape */}
           {step === 1 && (
@@ -93,10 +94,10 @@ export default function ConsultationQuiz() {
                 <span className="text-xs font-bold uppercase tracking-wider text-[#B8973E] dark:text-[#D4AF37]">
                   Step 1 of 3
                 </span>
-                <h3 className="font-display text-2xl font-bold text-[#141414] dark:text-white mt-1">
+                <h3 className="font-display text-2xl font-bold text-[#141414] dark:text-[#F5F1E8] mt-1">
                   What is your primary face contour?
                 </h3>
-                <p className="text-xs sm:text-sm text-[#635E54] dark:text-neutral-400 mt-1">
+                <p className="text-xs sm:text-sm text-[#635E54] dark:text-[#A6A095] mt-1">
                   We balance facial proportions through strategically placed taper weight and cheek lines.
                 </p>
               </div>
@@ -109,12 +110,12 @@ export default function ConsultationQuiz() {
                     onClick={() => setSelectedFace(opt.id)}
                     className={`p-4 rounded-xl border text-left transition-all cursor-pointer ${
                       selectedFace === opt.id
-                        ? 'border-[#B8973E] dark:border-[#D4AF37] bg-[#F5F1E8] dark:bg-neutral-800/90 shadow-md ring-2 ring-[#B8973E]/20'
-                        : 'border-[#E2DACB] dark:border-neutral-800 hover:border-[#B8973E] dark:hover:border-neutral-700'
+                        ? 'border-[#B8973E] dark:border-[#D4AF37] bg-[#F5F1E8] dark:bg-[#262626] shadow-md ring-2 ring-[#B8973E]/20'
+                        : 'border-[#E2DACB] dark:border-[#262626] hover:border-[#B8973E] dark:hover:border-neutral-600'
                     }`}
                   >
                     <div className="flex items-center justify-between">
-                      <span className="font-bold text-sm text-[#141414] dark:text-white">
+                      <span className="font-bold text-sm text-[#141414] dark:text-[#F5F1E8]">
                         {opt.label}
                       </span>
                       <span className={`w-4 h-4 rounded-full border flex items-center justify-center ${
@@ -123,7 +124,7 @@ export default function ConsultationQuiz() {
                         {selectedFace === opt.id && <span className="w-1.5 h-1.5 rounded-full bg-white dark:bg-black" />}
                       </span>
                     </div>
-                    <p className="text-xs text-[#635E54] dark:text-neutral-400 mt-1.5 leading-relaxed">
+                    <p className="text-xs text-[#635E54] dark:text-[#A6A095] mt-1.5 leading-relaxed">
                       {opt.description}
                     </p>
                   </button>
@@ -134,7 +135,7 @@ export default function ConsultationQuiz() {
                 <button
                   type="button"
                   onClick={() => setStep(2)}
-                  className="flex items-center gap-2 px-6 py-3 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider bg-[#141414] dark:bg-white text-white dark:text-black hover:opacity-90 transition-all cursor-pointer shadow-md"
+                  className="flex items-center gap-2 px-6 py-3 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider bg-[#141414] dark:bg-[#F5F1E8] text-white dark:text-black hover:opacity-90 transition-all cursor-pointer shadow-md"
                 >
                   <span>Next: Hair Type</span>
                   <ArrowRight className="w-4 h-4" />
@@ -150,10 +151,10 @@ export default function ConsultationQuiz() {
                 <span className="text-xs font-bold uppercase tracking-wider text-[#B8973E] dark:text-[#D4AF37]">
                   Step 2 of 3
                 </span>
-                <h3 className="font-display text-2xl font-bold text-[#141414] dark:text-white mt-1">
+                <h3 className="font-display text-2xl font-bold text-[#141414] dark:text-[#F5F1E8] mt-1">
                   How does your hair naturally behave?
                 </h3>
-                <p className="text-xs sm:text-sm text-[#635E54] dark:text-neutral-400 mt-1">
+                <p className="text-xs sm:text-sm text-[#635E54] dark:text-[#A6A095] mt-1">
                   Your hair density and wave determine whether point-cutting, texturizing, or clipper fading looks sharpest.
                 </p>
               </div>
@@ -166,12 +167,12 @@ export default function ConsultationQuiz() {
                     onClick={() => setSelectedHair(opt.id)}
                     className={`p-4 rounded-xl border text-left transition-all cursor-pointer ${
                       selectedHair === opt.id
-                        ? 'border-[#B8973E] dark:border-[#D4AF37] bg-[#F5F1E8] dark:bg-neutral-800/90 shadow-md ring-2 ring-[#B8973E]/20'
-                        : 'border-[#E2DACB] dark:border-neutral-800 hover:border-[#B8973E] dark:hover:border-neutral-700'
+                        ? 'border-[#B8973E] dark:border-[#D4AF37] bg-[#F5F1E8] dark:bg-[#262626] shadow-md ring-2 ring-[#B8973E]/20'
+                        : 'border-[#E2DACB] dark:border-[#262626] hover:border-[#B8973E] dark:hover:border-neutral-600'
                     }`}
                   >
                     <div className="flex items-center justify-between">
-                      <span className="font-bold text-sm text-[#141414] dark:text-white">
+                      <span className="font-bold text-sm text-[#141414] dark:text-[#F5F1E8]">
                         {opt.label}
                       </span>
                       <span className={`w-4 h-4 rounded-full border flex items-center justify-center ${
@@ -180,7 +181,7 @@ export default function ConsultationQuiz() {
                         {selectedHair === opt.id && <span className="w-1.5 h-1.5 rounded-full bg-white dark:bg-black" />}
                       </span>
                     </div>
-                    <p className="text-xs text-[#635E54] dark:text-neutral-400 mt-1.5 leading-relaxed">
+                    <p className="text-xs text-[#635E54] dark:text-[#A6A095] mt-1.5 leading-relaxed">
                       {opt.description}
                     </p>
                   </button>
@@ -191,14 +192,14 @@ export default function ConsultationQuiz() {
                 <button
                   type="button"
                   onClick={() => setStep(1)}
-                  className="px-5 py-2.5 rounded-xl text-xs font-semibold text-[#635E54] dark:text-neutral-400 hover:text-[#141414] dark:hover:text-white cursor-pointer"
+                  className="px-5 py-2.5 rounded-xl text-xs font-semibold text-[#635E54] dark:text-[#A6A095] hover:text-[#141414] dark:hover:text-[#F5F1E8] cursor-pointer"
                 >
                   ← Back
                 </button>
                 <button
                   type="button"
                   onClick={() => setStep(3)}
-                  className="flex items-center gap-2 px-6 py-3 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider bg-[#141414] dark:bg-white text-white dark:text-black hover:opacity-90 transition-all cursor-pointer shadow-md"
+                  className="flex items-center gap-2 px-6 py-3 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider bg-[#141414] dark:bg-[#F5F1E8] text-white dark:text-black hover:opacity-90 transition-all cursor-pointer shadow-md"
                 >
                   <span>Next: Preferred Vibe</span>
                   <ArrowRight className="w-4 h-4" />
@@ -214,10 +215,10 @@ export default function ConsultationQuiz() {
                 <span className="text-xs font-bold uppercase tracking-wider text-[#B8973E] dark:text-[#D4AF37]">
                   Step 3 of 3
                 </span>
-                <h3 className="font-display text-2xl font-bold text-[#141414] dark:text-white mt-1">
+                <h3 className="font-display text-2xl font-bold text-[#141414] dark:text-[#F5F1E8] mt-1">
                   What is your daily vibe and aesthetic?
                 </h3>
-                <p className="text-xs sm:text-sm text-[#635E54] dark:text-neutral-400 mt-1">
+                <p className="text-xs sm:text-sm text-[#635E54] dark:text-[#A6A095] mt-1">
                   Whether you spend your days in corporate meetings, creative spaces, or outdoors.
                 </p>
               </div>
@@ -230,12 +231,12 @@ export default function ConsultationQuiz() {
                     onClick={() => setSelectedVibe(opt.id)}
                     className={`p-4 rounded-xl border text-left transition-all cursor-pointer ${
                       selectedVibe === opt.id
-                        ? 'border-[#B8973E] dark:border-[#D4AF37] bg-[#F5F1E8] dark:bg-neutral-800/90 shadow-md ring-2 ring-[#B8973E]/20'
-                        : 'border-[#E2DACB] dark:border-neutral-800 hover:border-[#B8973E] dark:hover:border-neutral-700'
+                        ? 'border-[#B8973E] dark:border-[#D4AF37] bg-[#F5F1E8] dark:bg-[#262626] shadow-md ring-2 ring-[#B8973E]/20'
+                        : 'border-[#E2DACB] dark:border-[#262626] hover:border-[#B8973E] dark:hover:border-neutral-600'
                     }`}
                   >
                     <div className="flex items-center justify-between">
-                      <span className="font-bold text-sm text-[#141414] dark:text-white">
+                      <span className="font-bold text-sm text-[#141414] dark:text-[#F5F1E8]">
                         {opt.label}
                       </span>
                       <span className={`w-4 h-4 rounded-full border flex items-center justify-center ${
@@ -244,7 +245,7 @@ export default function ConsultationQuiz() {
                         {selectedVibe === opt.id && <span className="w-1.5 h-1.5 rounded-full bg-white dark:bg-black" />}
                       </span>
                     </div>
-                    <p className="text-xs text-[#635E54] dark:text-neutral-400 mt-1.5 leading-relaxed">
+                    <p className="text-xs text-[#635E54] dark:text-[#A6A095] mt-1.5 leading-relaxed">
                       {opt.description}
                     </p>
                   </button>
@@ -255,17 +256,17 @@ export default function ConsultationQuiz() {
                 <button
                   type="button"
                   onClick={() => setStep(2)}
-                  className="px-5 py-2.5 rounded-xl text-xs font-semibold text-[#635E54] dark:text-neutral-400 hover:text-[#141414] dark:hover:text-white cursor-pointer"
+                  className="px-5 py-2.5 rounded-xl text-xs font-semibold text-[#635E54] dark:text-[#A6A095] hover:text-[#141414] dark:hover:text-[#F5F1E8] cursor-pointer"
                 >
                   ← Back
                 </button>
                 <button
                   type="button"
                   onClick={() => setStep(4)}
-                  className="flex items-center gap-2 px-6 py-3 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider bg-[#141414] dark:bg-white text-white dark:text-black hover:opacity-90 transition-all cursor-pointer shadow-md"
+                  className="flex items-center gap-2 px-6 py-3 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider bg-[#141414] dark:bg-[#F5F1E8] text-white dark:text-black hover:opacity-90 transition-all cursor-pointer shadow-md"
                 >
                   <Sparkles className="w-4 h-4 text-amber-400" />
-                  <span>Reveal My Engineered Cut</span>
+                  <span>Reveal Recommendation</span>
                 </button>
               </div>
             </div>
@@ -274,13 +275,13 @@ export default function ConsultationQuiz() {
           {/* Step 4: Tailored Output & "Book This Look" (Green #25D366) */}
           {step === 4 && (
             <div className="space-y-6 animate-in fade-in duration-300">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-[#E2DACB] dark:border-neutral-800">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-[#E2DACB] dark:border-[#262626]">
                 <div>
                   <span className="text-xs font-bold uppercase tracking-widest text-[#25D366] flex items-center gap-1.5">
                     <Sparkles className="w-3.5 h-3.5" />
                     <span>Your Recommended Architecture ({recommendation.matchScore})</span>
                   </span>
-                  <h3 className="font-display text-2xl sm:text-3xl font-bold text-[#141414] dark:text-white mt-1">
+                  <h3 className="font-display text-2xl sm:text-3xl font-bold text-[#141414] dark:text-[#F5F1E8] mt-1">
                     {recommendation.title}
                   </h3>
                 </div>
@@ -288,7 +289,7 @@ export default function ConsultationQuiz() {
                 <button
                   type="button"
                   onClick={handleReset}
-                  className="flex items-center gap-1.5 text-xs font-semibold text-[#635E54] dark:text-neutral-400 hover:text-[#141414] dark:hover:text-white cursor-pointer self-start sm:self-auto"
+                  className="flex items-center gap-1.5 text-xs font-semibold text-[#635E54] dark:text-[#A6A095] hover:text-[#141414] dark:hover:text-[#F5F1E8] cursor-pointer self-start sm:self-auto"
                 >
                   <RotateCcw className="w-3.5 h-3.5" />
                   <span>Retake Quiz</span>
@@ -296,7 +297,7 @@ export default function ConsultationQuiz() {
               </div>
 
               {/* Profile summary chips */}
-              <div className="flex flex-wrap gap-2 text-xs text-[#635E54] dark:text-neutral-400">
+              <div className="flex flex-wrap gap-2 text-xs text-[#635E54] dark:text-[#A6A095]">
                 <span>Profile: <strong>{faceLabel}</strong></span>
                 <span aria-hidden="true">·</span>
                 <span>Texture: <strong>{hairLabel}</strong></span>
@@ -307,53 +308,53 @@ export default function ConsultationQuiz() {
               {/* Recommendation Details Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 
-                <div className="p-4 rounded-xl bg-[#F5F1E8] dark:bg-black/40 border border-[#D5C9B3] dark:border-neutral-800 space-y-1">
+                <div className="p-4 rounded-xl bg-[#F5F1E8] dark:bg-[#121212] border border-[#D5C9B3] dark:border-[#262626] space-y-1">
                   <span className="text-[11px] font-bold uppercase tracking-wider text-[#B8973E] dark:text-[#D4AF37] block">
                     Recommended Fade Geometry
                   </span>
-                  <p className="text-sm font-semibold text-[#141414] dark:text-white">
+                  <p className="text-sm font-semibold text-[#141414] dark:text-[#F5F1E8]">
                     {recommendation.fadeType}
                   </p>
                 </div>
 
-                <div className="p-4 rounded-xl bg-[#F5F1E8] dark:bg-black/40 border border-[#D5C9B3] dark:border-neutral-800 space-y-1">
+                <div className="p-4 rounded-xl bg-[#F5F1E8] dark:bg-[#121212] border border-[#D5C9B3] dark:border-[#262626] space-y-1">
                   <span className="text-[11px] font-bold uppercase tracking-wider text-[#B8973E] dark:text-[#D4AF37] block">
                     Beard Contour Advice
                   </span>
-                  <p className="text-sm font-semibold text-[#141414] dark:text-white">
+                  <p className="text-sm font-semibold text-[#141414] dark:text-[#F5F1E8]">
                     {recommendation.beardAdvice}
                   </p>
                 </div>
 
-                <div className="sm:col-span-2 p-4 rounded-xl bg-[#F5F1E8] dark:bg-black/40 border border-[#D5C9B3] dark:border-neutral-800 space-y-1">
+                <div className="sm:col-span-2 p-4 rounded-xl bg-[#F5F1E8] dark:bg-[#121212] border border-[#D5C9B3] dark:border-[#262626] space-y-1">
                   <span className="text-[11px] font-bold uppercase tracking-wider text-[#B8973E] dark:text-[#D4AF37] block">
-                    Master Barber Styling Tip
+                    Barber Styling Tip
                   </span>
-                  <p className="text-xs sm:text-sm text-[#3D3A35] dark:text-neutral-300 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-[#3D3A35] dark:text-[#A6A095] leading-relaxed">
                     {recommendation.stylingTip}
                   </p>
                 </div>
 
               </div>
 
-              {/* Circular Green WhatsApp CTA: "Book This Look" */}
+              {/* Circular Green WhatsApp CTA: "Book This Look" (44px) */}
               <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div className="flex items-center gap-3">
                   <button
                     type="button"
                     onClick={handleBookLookOnWhatsApp}
-                    className="cta-circle w-14 h-14 bg-[#25D366] hover:bg-[#20BA59] text-white shadow-xl cursor-pointer focus:outline-none focus-visible:ring-4 focus-visible:ring-[#25D366]/40"
+                    className="cta-circle w-11 h-11 bg-[#25D366] hover:bg-[#20BA59] text-white shadow-md cursor-pointer flex items-center justify-center shrink-0 focus:outline-none focus-visible:ring-4 focus-visible:ring-[#25D366]/40"
                     aria-label="Book This Look on WhatsApp"
                     title="Book This Look on WhatsApp"
                   >
-                    <MessageSquare className="w-6 h-6 text-white fill-white/20" />
+                    <WhatsAppIcon className="w-5 h-5 text-white shrink-0" />
                   </button>
                   <div className="flex flex-col">
-                    <span className="text-xs font-bold uppercase tracking-wider text-[#141414] dark:text-white">
+                    <span className="text-xs font-bold uppercase tracking-wider text-[#141414] dark:text-[#F5F1E8]">
                       Book This Look
                     </span>
                     <span className="text-[11px] text-[#25D366] font-semibold">
-                      WhatsApp Pre-filled Blueprint
+                      WhatsApp Pre-filled
                     </span>
                   </div>
                 </div>
@@ -361,7 +362,7 @@ export default function ConsultationQuiz() {
                 <button
                   type="button"
                   onClick={handleReset}
-                  className="px-5 py-3 rounded-xl text-xs font-semibold text-[#635E54] dark:text-neutral-400 hover:text-[#141414] dark:hover:text-white border border-[#D5C9B3] dark:border-neutral-800 cursor-pointer"
+                  className="px-5 py-3 rounded-xl text-xs font-semibold text-[#635E54] dark:text-[#A6A095] hover:text-[#141414] dark:hover:text-[#F5F1E8] border border-[#D5C9B3] dark:border-[#262626] cursor-pointer"
                 >
                   Try Another Combination
                 </button>

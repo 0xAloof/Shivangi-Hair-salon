@@ -139,19 +139,19 @@ export function formatWhatsAppBookingMessage(
   return [
     `*APPOINTMENT RESERVATION - SHIVANGI HAIR SALON*`,
     `--------------------------------------`,
-    `👤 *Client Name:* ${data.fullName.trim()}`,
-    `📱 *Contact:* ${data.phone.trim()}`,
-    `📅 *Preferred Date:* ${data.date}`,
-    `⏰ *Preferred Time Slot:* ${data.timeSlot}`,
+    `*Client Name:* ${data.fullName.trim()}`,
+    `*Contact:* ${data.phone.trim()}`,
+    `*Preferred Date:* ${data.date}`,
+    `*Preferred Time Slot:* ${data.timeSlot}`,
     ``,
-    `💈 *Selected Services:*`,
+    `*Selected Services:*`,
     serviceNames || '• Consultation Required',
     ``,
-    `⏱️ *Estimated Duration:* ~${totalDurationMinutes} minutes`,
-    `💰 *Estimated Investment:* ${priceRange}`,
-    data.notes ? `📝 *Notes/Preferences:* ${data.notes.trim()}` : ``,
+    `*Estimated Duration:* ~${totalDurationMinutes} minutes`,
+    `*Pricing:* Consultation Required`,
+    data.notes ? `*Notes/Preferences:* ${data.notes.trim()}` : ``,
     ``,
-    `📍 *Location:* Near The Fitness Planet, Bhensakhedi Road, Bhopal`,
+    `*Studio Location:* Near The Fitness Planet, Bhensakhedi Road, Bhopal`,
     `Kindly confirm chair availability.`
   ].filter(line => line !== null && line !== undefined).join('\n');
 }
