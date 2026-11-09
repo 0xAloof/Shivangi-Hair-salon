@@ -14,6 +14,7 @@ export const SALON_INFO = {
   address: "7897+5X4, Bhensakhedi Road, near The Fitness Planet, Bhopal, MP 462030",
   plusCode: "7897+5X4 Bhopal",
   googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=7897%2B5X4,+Bhensakhedi+Road,+near+The+Fitness+Planet,+Bhopal,+MP+462030",
+  googleMapsEmbedUrl: "https://maps.google.com/maps?q=7897%2B5X4,+Bhensakhedi+Road,+near+The+Fitness+Planet,+Bhopal,+MP+462030&t=&z=16&ie=UTF8&iwloc=&output=embed",
   schedule: {
     days: "Mon, Wed – Sun (Tuesday Closed)",
     hours: "8:30 AM – 9:30 PM",
@@ -22,6 +23,11 @@ export const SALON_INFO = {
   rating: 4.9,
   reviewCount: 148,
   establishedYear: 2018,
+  developer: {
+    name: "Aashif Khan",
+    githubUrl: "https://github.com/0xAashif",
+    linkedinUrl: "https://www.linkedin.com/in/aashif-khan",
+  },
 };
 
 export const TRUST_SIGNALS = [
@@ -295,10 +301,10 @@ export interface LookbookItem {
 
 /**
  * 16 Gallery Items — Strictly 4 items per category (Skin Fade, Beard Detailing, Hot Towel Shave, Salon).
- * NEVER uses /barber.jpg or /logo.jpg.
+ * Every single item uses a 100% unique image file. NEVER uses /barber.jpg or /logo.jpg.
  */
 export const LOOKBOOK_ITEMS: LookbookItem[] = [
-  // 1. Skin Fade (4 items)
+  // 1. Skin Fade (4 unique images)
   {
     id: "fade-1",
     title: "Textured Crop & Skin Fade",
@@ -314,8 +320,8 @@ export const LOOKBOOK_ITEMS: LookbookItem[] = [
     category: "Skin Fade",
     desc: "Sharp temple fade blended smoothly with scissor work.",
     locationTag: "Bhopal Salon",
-    image: "/crop_fade.jpg",
-    imageClassName: "object-cover object-[35%_20%] scale-[1.14]",
+    image: "/gallery/fade_zero_taper.jpg",
+    imageClassName: "object-cover object-center",
   },
   {
     id: "fade-3",
@@ -323,8 +329,8 @@ export const LOOKBOOK_ITEMS: LookbookItem[] = [
     category: "Skin Fade",
     desc: "Smooth back-and-side fade shaped around your head.",
     locationTag: "Bhopal Salon",
-    image: "/crop_fade.jpg",
-    imageClassName: "object-cover object-[65%_25%] scale-[1.18]",
+    image: "/gallery/fade_low_drop.jpg",
+    imageClassName: "object-cover object-center",
   },
   {
     id: "fade-4",
@@ -332,11 +338,11 @@ export const LOOKBOOK_ITEMS: LookbookItem[] = [
     category: "Skin Fade",
     desc: "Smart everyday look with clean neck and sideburn edges.",
     locationTag: "Bhopal Salon",
-    image: "/crop_fade.jpg",
-    imageClassName: "object-cover object-[50%_15%] scale-[1.12]",
+    image: "/gallery/fade_classic_sidepart.jpg",
+    imageClassName: "object-cover object-center",
   },
 
-  // 2. Beard Detailing (4 items)
+  // 2. Beard Detailing (4 unique images)
   {
     id: "beard-1",
     title: "Sharp Razor Beard Line-Up",
@@ -352,8 +358,8 @@ export const LOOKBOOK_ITEMS: LookbookItem[] = [
     category: "Beard Detailing",
     desc: "Smooth blend from sideburns into a well-groomed beard.",
     locationTag: "Bhopal Salon",
-    image: "/beard_sculpt.jpg",
-    imageClassName: "object-cover object-[35%_30%] scale-[1.15]",
+    image: "/gallery/beard_full_fade.jpg",
+    imageClassName: "object-cover object-center",
   },
   {
     id: "beard-3",
@@ -361,8 +367,8 @@ export const LOOKBOOK_ITEMS: LookbookItem[] = [
     category: "Beard Detailing",
     desc: "Balanced beard length that makes your jawline look sharper.",
     locationTag: "Bhopal Salon",
-    image: "/beard_sculpt.jpg",
-    imageClassName: "object-cover object-[65%_35%] scale-[1.18]",
+    image: "/gallery/beard_jawline_trim.jpg",
+    imageClassName: "object-cover object-center",
   },
   {
     id: "beard-4",
@@ -370,11 +376,11 @@ export const LOOKBOOK_ITEMS: LookbookItem[] = [
     category: "Beard Detailing",
     desc: "Softening beard care followed by neat trimmer detailing.",
     locationTag: "Bhopal Salon",
-    image: "/beard_sculpt.jpg",
-    imageClassName: "object-cover object-[50%_20%] scale-[1.12]",
+    image: "/gallery/beard_oil_styling.jpg",
+    imageClassName: "object-cover object-center",
   },
 
-  // 3. Hot Towel Shave (4 items)
+  // 3. Hot Towel Shave (4 unique images)
   {
     id: "shave-1",
     title: "Hot Towel Straight Razor Shave",
@@ -390,8 +396,8 @@ export const LOOKBOOK_ITEMS: LookbookItem[] = [
     category: "Hot Towel Shave",
     desc: "Hot towel pore cleaning finished with a cool soothing towel.",
     locationTag: "Bhopal Salon",
-    image: "/razor_shave.jpg",
-    imageClassName: "object-cover object-[30%_25%] scale-[1.15]",
+    image: "/gallery/shave_double_towel.jpg",
+    imageClassName: "object-cover object-center",
   },
   {
     id: "shave-3",
@@ -399,8 +405,8 @@ export const LOOKBOOK_ITEMS: LookbookItem[] = [
     category: "Hot Towel Shave",
     desc: "Rich foam lather and a fresh Japanese blade for baby-smooth skin.",
     locationTag: "Bhopal Salon",
-    image: "/razor_shave.jpg",
-    imageClassName: "object-cover object-[70%_30%] scale-[1.18]",
+    image: "/gallery/shave_feather_blade.jpg",
+    imageClassName: "object-cover object-center",
   },
   {
     id: "shave-4",
@@ -408,19 +414,19 @@ export const LOOKBOOK_ITEMS: LookbookItem[] = [
     category: "Hot Towel Shave",
     desc: "Relaxing steam therapy with cooling post-shave balm.",
     locationTag: "Bhopal Salon",
-    image: "/razor_shave.jpg",
-    imageClassName: "object-cover object-[50%_18%] scale-[1.12]",
+    image: "/gallery/shave_face_steam.jpg",
+    imageClassName: "object-cover object-center",
   },
 
-  // 4. Salon (4 items - with watermark crop classes)
+  // 4. Salon (4 unique images)
   {
     id: "salon-1",
     title: "Main Salon Floor & Barber Chairs",
     category: "Salon",
     desc: "Comfortable black hydraulic grooming chairs at Shivangi Hair Salon.",
     locationTag: "Bhopal Salon",
-    image: "/interior_luxury.jpg",
-    imageClassName: "object-cover object-[center_15%] scale-[1.12]",
+    image: "/salon_chair.jpg",
+    imageClassName: "object-cover object-top",
     isSalonPhoto: true,
   },
   {
@@ -429,8 +435,8 @@ export const LOOKBOOK_ITEMS: LookbookItem[] = [
     category: "Salon",
     desc: "Bright mirror stations stocked with top hair and beard care products.",
     locationTag: "Bhopal Salon",
-    image: "/interior_luxury.jpg",
-    imageClassName: "object-cover object-[left_15%] scale-[1.15]",
+    image: "/salon_station.jpg",
+    imageClassName: "object-cover object-top",
     isSalonPhoto: true,
   },
   {
@@ -439,8 +445,8 @@ export const LOOKBOOK_ITEMS: LookbookItem[] = [
     category: "Salon",
     desc: "UV cabinet and cleaner used after every single customer.",
     locationTag: "Bhopal Salon",
-    image: "/interior_luxury.jpg",
-    imageClassName: "object-cover object-[right_15%] scale-[1.15]",
+    image: "/gallery/salon_uv_sanitizer.jpg",
+    imageClassName: "object-cover object-center",
     isSalonPhoto: true,
   },
   {
@@ -449,8 +455,8 @@ export const LOOKBOOK_ITEMS: LookbookItem[] = [
     category: "Salon",
     desc: "High-precision trimmers, scissors, and sealed single-use blades.",
     locationTag: "Bhopal Salon",
-    image: "/interior_luxury.jpg",
-    imageClassName: "object-cover object-[center_20%] scale-[1.16]",
+    image: "/gallery/salon_pro_tools.jpg",
+    imageClassName: "object-cover object-center",
     isSalonPhoto: true,
   },
 ];

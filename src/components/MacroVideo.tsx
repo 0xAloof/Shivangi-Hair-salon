@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { MacroVideoAsset } from '../config/videos';
 
 interface MacroVideoProps {
@@ -15,7 +15,24 @@ export default function MacroVideo({
   const videoRef = useRef<HTMLVideoElement>(null);
   const [sourceIndex, setSourceIndex] = useState(0);
 
-  const currentSrc = asset.sources[sourceIndex] || asset.cdnFallback;
+  useEffect(() => {
+    setSourceIndex(0);
+  }, [asset.id]);
+
+  const currentSrc = asset.sources[sourceIndex] || asset.localPath || asset.cdnFallback;
+
+  useEffect(() => {
+    const videoEl = videoRef.current;
+    if (!videoEl) return;
+    videoEl.muted = true;
+    videoEl.defaultMuted = true;
+    const playPromise = videoEl.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {
+        // Auto-play policy fallback: video stays muted with poster until ready
+      });
+    }
+  }, [currentSrc]);
 
   const handleVideoError = () => {
     if (sourceIndex < asset.sources.length - 1) {
@@ -34,15 +51,11 @@ export default function MacroVideo({
         muted
         loop
         autoPlay
-        preload="metadata"
+        preload="auto"
         onError={handleVideoError}
         aria-label={asset.description}
         className={`${className} bg-[#070709]`}
-      >
-        {asset.sources.map((src) => (
-          <source key={src} src={src} type="video/mp4" />
-        ))}
-      </video>
+      />
       {/* Rich Dark Obsidian Gradient Scrim for 100% Legibility in Light & Dark Modes */}
       <div className={`absolute inset-0 ${overlayClassName}`} />
     </div>

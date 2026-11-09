@@ -1,4 +1,4 @@
-import { MapPin, Clock, Phone, Navigation, AlertCircle } from 'lucide-react';
+import { MapPin, Clock, Phone, Navigation, AlertCircle, Car, Compass, CalendarCheck } from 'lucide-react';
 import { WhatsAppIcon, FacebookIcon, InstagramIcon } from './BrandIcons';
 import { SALON_INFO } from '../data/salonData';
 
@@ -41,7 +41,7 @@ export default function LocationHub({ onOpenWhatsApp }: LocationHubProps) {
             
             <div className="space-y-6">
               
-              {/* Tuesday Closed Prominent Warning & Live Status (No green on non-CTA status dot) */}
+              {/* Tuesday Closed Prominent Warning & Live Status */}
               <div className="p-4 rounded-xl bg-[#F4F1EA] dark:bg-[#0B0B0C] border border-stone-900/10 dark:border-white/10 space-y-2">
                 <div className="flex items-center gap-2">
                   <span className={`w-2.5 h-2.5 rounded-full ${isTuesdayToday ? 'bg-amber-600' : 'bg-[#9A7848] dark:bg-[#C5A059] animate-pulse'}`} />
@@ -186,73 +186,87 @@ export default function LocationHub({ onOpenWhatsApp }: LocationHubProps) {
 
           </div>
 
-          {/* Interactive Map & Cropped Salon Interior Frame (7 cols) */}
+          {/* Interactive Google Maps Embed Frame (7 cols) — Real Google Maps in Background */}
           <div className="lg:col-span-7 rounded-2xl bg-[#EBE6DC] dark:bg-[#121214] border border-stone-900/10 dark:border-white/10 p-6 sm:p-8 flex flex-col justify-between space-y-6">
             
             <div className="space-y-4">
               <div className="flex items-center justify-between flex-wrap gap-2">
                 <div>
-                  <span className="text-xs font-bold uppercase tracking-wider text-[#9A7848] dark:text-[#C5A059]">
-                    Directions & Salon Interior
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#9A7848] dark:text-[#C5A059] flex items-center gap-1.5">
+                    <Compass className="w-3.5 h-3.5" />
+                    <span>Live Google Maps Navigation</span>
                   </span>
                   <h3 className="font-display text-xl sm:text-2xl font-bold text-[#141413] dark:text-[#F4F1EA] mt-0.5">
                     Visit Shivangi Hair Salon
                   </h3>
                 </div>
-                <span className="text-xs font-semibold px-3 py-1 rounded-md bg-[#F4F1EA] dark:bg-[#0B0B0C] text-[#141413] dark:text-[#F4F1EA] border border-stone-900/10 dark:border-white/10">
-                  Free Front Parking
+                <span className="text-xs font-semibold px-3 py-1 rounded-md bg-[#F4F1EA] dark:bg-[#0B0B0C] text-[#141413] dark:text-[#F4F1EA] border border-stone-900/10 dark:border-white/10 flex items-center gap-1.5">
+                  <Car className="w-3.5 h-3.5 text-[#9A7848] dark:text-[#C5A059]" />
+                  <span>Free Front Parking</span>
                 </span>
               </div>
 
-              {/* Salon Interior & Navigation Banner (With watermark crop object-[center_15%] scale-[1.12] inside overflow-hidden) */}
-              <div className="relative rounded-xl overflow-hidden border border-stone-900/10 dark:border-white/10 bg-[#0B0B0C] aspect-[16/10] sm:aspect-[16/9] flex items-center justify-center p-6 text-center group">
-                <img
-                  src="/interior_luxury.jpg"
-                  alt="Shivangi Hair Salon AC Grooming Interior in Bhopal"
-                  className="absolute inset-0 w-full h-full object-cover object-[center_15%] scale-[1.12] opacity-40 group-hover:scale-[1.15] transition-transform duration-700"
-                  referrerPolicy="no-referrer"
+              {/* Real Google Maps Background Container */}
+              <div className="relative rounded-xl overflow-hidden border border-stone-900/10 dark:border-white/10 bg-[#0B0B0C] aspect-[16/10] sm:aspect-[16/9] shadow-inner">
+                <iframe
+                  title="Shivangi Hair Salon Google Maps Location"
+                  src={SALON_INFO.googleMapsEmbedUrl}
+                  className="absolute inset-0 w-full h-full border-0 filter dark:invert-[0.88] dark:hue-rotate-180 dark:contrast-[1.05]"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  allowFullScreen
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#070709]/95 via-[#070709]/70 to-[#070709]/50" />
-                
-                <div className="relative z-10 space-y-3 max-w-md">
-                  <div className="w-14 h-14 mx-auto rounded-full bg-[#121214]/90 border border-[#C5A059]/60 flex items-center justify-center shadow-xl">
-                    <MapPin className="w-6 h-6 text-[#C5A059]" />
+
+                {/* Bottom Floating Navigation Bar over the Map */}
+                <div className="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 z-10 p-3.5 sm:p-4 rounded-xl bg-[#F4F1EA]/95 dark:bg-[#0B0B0C]/95 backdrop-blur-md border border-stone-900/10 dark:border-white/15 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-lg">
+                  <div className="flex items-start gap-2.5">
+                    <div className="w-9 h-9 rounded-lg bg-[#9A7848]/15 dark:bg-[#C5A059]/15 border border-[#9A7848]/40 dark:border-[#C5A059]/40 flex items-center justify-center shrink-0 mt-0.5">
+                      <MapPin className="w-4 h-4 text-[#9A7848] dark:text-[#C5A059]" />
+                    </div>
+                    <div>
+                      <h4 className="font-display text-sm sm:text-base font-bold text-[#141413] dark:text-[#F4F1EA]">
+                        Shivangi Hair Salon · Bhopal
+                      </h4>
+                      <p className="text-[11px] sm:text-xs text-[#57534E] dark:text-[#A1A1AA]">
+                        7897+5X4, Bhensakhedi Road, near The Fitness Planet, MP 462030
+                      </p>
+                    </div>
                   </div>
 
-                  <h4 className="font-display text-xl sm:text-2xl font-bold text-[#F4F1EA]">
-                    Shivangi Hair Salon
-                  </h4>
-                  <p className="text-xs sm:text-sm text-[#D4D0C8]">
-                    7897+5X4, Bhensakhedi Road, near The Fitness Planet, Bhopal, MP 462030
-                  </p>
-
-                  <div className="pt-2">
-                    <a
-                      href={SALON_INFO.googleMapsUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="min-h-[44px] inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#F4F1EA] text-[#141413] text-xs font-bold uppercase tracking-wider hover:bg-white transition-colors shadow-md"
-                    >
-                      <Navigation className="w-4 h-4 text-[#9A7848]" />
-                      <span>Get Directions on Maps</span>
-                    </a>
-                  </div>
+                  <a
+                    href={SALON_INFO.googleMapsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="min-h-[40px] inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-[#141413] dark:bg-[#F4F1EA] text-[#F4F1EA] dark:text-[#0B0B0C] text-xs font-bold uppercase tracking-wider hover:opacity-90 transition-all shrink-0 shadow-sm"
+                  >
+                    <Navigation className="w-3.5 h-3.5 text-[#C5A059] dark:text-[#9A7848]" />
+                    <span>Get Directions on Maps</span>
+                  </a>
                 </div>
               </div>
             </div>
 
-            {/* 3 Simple Arrival Tips */}
+            {/* 3 Simple Arrival Tips with Lucide Icons */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 text-xs">
-              <div className="p-3.5 rounded-xl bg-[#F4F1EA] dark:bg-[#0B0B0C] border border-stone-900/10 dark:border-white/10 space-y-1">
-                <span className="font-bold text-[#141413] dark:text-[#F4F1EA] block">Bike & Car Parking</span>
+              <div className="p-3.5 rounded-xl bg-[#F4F1EA] dark:bg-[#0B0B0C] border border-stone-900/10 dark:border-white/10 space-y-1.5">
+                <div className="flex items-center gap-1.5 font-bold text-[#141413] dark:text-[#F4F1EA]">
+                  <Car className="w-3.5 h-3.5 text-[#9A7848] dark:text-[#C5A059] shrink-0" />
+                  <span>Bike & Car Parking</span>
+                </div>
                 <p className="text-[#57534E] dark:text-[#A1A1AA] text-[11px]">Easy, free street parking right outside the salon door.</p>
               </div>
-              <div className="p-3.5 rounded-xl bg-[#F4F1EA] dark:bg-[#0B0B0C] border border-stone-900/10 dark:border-white/10 space-y-1">
-                <span className="font-bold text-[#141413] dark:text-[#F4F1EA] block">Easy Landmark</span>
+              <div className="p-3.5 rounded-xl bg-[#F4F1EA] dark:bg-[#0B0B0C] border border-stone-900/10 dark:border-white/10 space-y-1.5">
+                <div className="flex items-center gap-1.5 font-bold text-[#141413] dark:text-[#F4F1EA]">
+                  <Compass className="w-3.5 h-3.5 text-[#9A7848] dark:text-[#C5A059] shrink-0" />
+                  <span>Easy Landmark</span>
+                </div>
                 <p className="text-[#57534E] dark:text-[#A1A1AA] text-[11px]">Right next to The Fitness Planet gym on Bhensakhedi Road.</p>
               </div>
-              <div className="p-3.5 rounded-xl bg-[#F4F1EA] dark:bg-[#0B0B0C] border border-stone-900/10 dark:border-white/10 space-y-1">
-                <span className="font-bold text-[#141413] dark:text-[#F4F1EA] block">Walk-In or Book</span>
+              <div className="p-3.5 rounded-xl bg-[#F4F1EA] dark:bg-[#0B0B0C] border border-stone-900/10 dark:border-white/10 space-y-1.5">
+                <div className="flex items-center gap-1.5 font-bold text-[#141413] dark:text-[#F4F1EA]">
+                  <CalendarCheck className="w-3.5 h-3.5 text-[#9A7848] dark:text-[#C5A059] shrink-0" />
+                  <span>Walk-In or Book</span>
+                </div>
                 <p className="text-[#57534E] dark:text-[#A1A1AA] text-[11px]">Walk-ins are welcome, or message on WhatsApp to skip waiting.</p>
               </div>
             </div>

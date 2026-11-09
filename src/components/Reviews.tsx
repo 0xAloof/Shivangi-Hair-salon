@@ -1,4 +1,4 @@
-import { Star, CheckCircle, Quote, ShieldCheck, Sparkles, Droplets } from 'lucide-react';
+import { Star, CheckCircle, Quote, ShieldCheck, Sparkles, Droplets, Award } from 'lucide-react';
 import { REVIEWS, SALON_INFO } from '../data/salonData';
 
 export default function Reviews() {
@@ -92,8 +92,8 @@ export default function Reviews() {
 
             {/* Google Rating Badge */}
             <div className="p-4 rounded-xl bg-[#EBE6DC] dark:bg-[#121214] border border-stone-900/10 dark:border-white/10 flex items-center gap-4 shrink-0">
-              <div className="w-10 h-10 rounded-lg bg-white border border-stone-900/10 flex items-center justify-center font-bold text-lg text-blue-600">
-                G
+              <div className="w-10 h-10 rounded-lg bg-[#F4F1EA] dark:bg-[#0B0B0C] border border-stone-900/10 dark:border-white/10 flex items-center justify-center text-[#9A7848] dark:text-[#C5A059]">
+                <Award className="w-5 h-5 stroke-[1.75]" />
               </div>
               <div>
                 <div className="flex items-center gap-2">

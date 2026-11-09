@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { UserCheck, Sparkles, Check, ArrowRight, RotateCcw } from 'lucide-react';
+import { UserCheck, Sparkles, Check, ArrowRight, ArrowLeft, RotateCcw } from 'lucide-react';
 import { WhatsAppIcon } from './BrandIcons';
 import { QUIZ_QUESTIONS, computeQuizRecommendation, SALON_INFO } from '../data/salonData';
 import { createWhatsAppUrl, openExternalUrl } from '../utils/booking';
@@ -192,9 +192,10 @@ export default function ConsultationQuiz() {
                 <button
                   type="button"
                   onClick={() => setStep(1)}
-                  className="min-h-[44px] px-5 py-2.5 rounded-xl text-xs font-semibold text-[#57534E] dark:text-[#A1A1AA] hover:text-[#141413] dark:hover:text-[#F4F1EA] cursor-pointer"
+                  className="min-h-[44px] inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl text-xs font-semibold text-[#57534E] dark:text-[#A1A1AA] hover:text-[#141413] dark:hover:text-[#F4F1EA] cursor-pointer"
                 >
-                  ← Back
+                  <ArrowLeft className="w-3.5 h-3.5" />
+                  <span>Back</span>
                 </button>
                 <button
                   type="button"
@@ -256,9 +257,10 @@ export default function ConsultationQuiz() {
                 <button
                   type="button"
                   onClick={() => setStep(2)}
-                  className="min-h-[44px] px-5 py-2.5 rounded-xl text-xs font-semibold text-[#57534E] dark:text-[#A1A1AA] hover:text-[#141413] dark:hover:text-[#F4F1EA] cursor-pointer"
+                  className="min-h-[44px] inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl text-xs font-semibold text-[#57534E] dark:text-[#A1A1AA] hover:text-[#141413] dark:hover:text-[#F4F1EA] cursor-pointer"
                 >
-                  ← Back
+                  <ArrowLeft className="w-3.5 h-3.5" />
+                  <span>Back</span>
                 </button>
                 <button
                   type="button"

@@ -12,7 +12,7 @@ import {
 } from './booking';
 import { ServiceItem } from '../types';
 import { VIDEOS, MACRO_VIDEOS, HERO_CAROUSEL_SLIDES } from '../config/videos';
-import { LOOKBOOK_ITEMS } from '../data/salonData';
+import { LOOKBOOK_ITEMS, SALON_INFO } from '../data/salonData';
 
 const mockServices: ServiceItem[] = [
   {
@@ -166,17 +166,21 @@ test('MACRO_VIDEOS and VIDEOS configure 3D macro video fallback chains and 3 Hin
   assert.equal(HERO_CAROUSEL_SLIDES[2].headline, '45 Minute Sukoon Ke. Thakan Mitao Aur Royal Look Paao.');
 });
 
-test('LOOKBOOK_ITEMS has 16 items (4 per category) and never reuses /barber.jpg or /logo.jpg', () => {
+test('LOOKBOOK_ITEMS has 16 items (4 per category) with 16 unique images and never reuses /barber.jpg or /logo.jpg', () => {
   assert.equal(LOOKBOOK_ITEMS.length, 16);
   const categories = ['Skin Fade', 'Beard Detailing', 'Hot Towel Shave', 'Salon'] as const;
   for (const cat of categories) {
     const count = LOOKBOOK_ITEMS.filter(item => item.category === cat).length;
     assert.equal(count, 4, `Expected 4 items for ${cat}, got ${count}`);
   }
+  const uniqueImages = new Set(LOOKBOOK_ITEMS.map(item => item.image));
+  assert.equal(uniqueImages.size, 16, 'Expected all 16 Lookbook items to have 16 distinct images');
   for (const item of LOOKBOOK_ITEMS) {
     assert.notEqual(item.image, '/barber.jpg');
     assert.notEqual(item.image, '/logo.jpg');
   }
+  assert.equal(SALON_INFO.developer.name, 'Aashif Khan');
+  assert.ok(SALON_INFO.googleMapsEmbedUrl.includes('output=embed'));
 });
 
 

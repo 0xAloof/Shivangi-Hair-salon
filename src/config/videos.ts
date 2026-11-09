@@ -17,9 +17,17 @@ export interface VideoSources {
   trustStrip: string;
 }
 
-const envHeroUrl = import.meta.env?.VITE_VIDEO_HERO_URL?.trim();
-const envTrustUrl = import.meta.env?.VITE_VIDEO_TRUST_URL?.trim();
-const envServicesUrl = import.meta.env?.VITE_VIDEO_SERVICES_URL?.trim();
+const hasMetaEnv = typeof import.meta !== 'undefined' && Boolean(import.meta.env);
+
+const envHeroUrl = hasMetaEnv
+  ? import.meta.env.VITE_VIDEO_HERO_URL?.trim()
+  : undefined;
+const envTrustUrl = hasMetaEnv
+  ? import.meta.env.VITE_VIDEO_TRUST_URL?.trim()
+  : undefined;
+const envServicesUrl = hasMetaEnv
+  ? import.meta.env.VITE_VIDEO_SERVICES_URL?.trim()
+  : undefined;
 
 function buildSourceChain(envUrl: string | undefined, localPath: string, cdnFallback: string): string[] {
   const list: string[] = [];
@@ -44,12 +52,12 @@ export const MACRO_VIDEOS: Record<'hero' | 'trustStrip' | 'serviceMenu', MacroVi
     description: '3D Macro Brushed-Steel Clipper rotating on dark reflective glass',
     envUrl: envHeroUrl,
     localPath: '/videos/clipper-3d.mp4',
-    cdnFallback: 'https://assets.mixkit.co/videos/preview/mixkit-barber-cutting-hair-with-clippers-43232-large.mp4',
-    poster: '/crop_fade.jpg',
+    cdnFallback: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
+    poster: '/videos/poster-clipper.jpg',
     sources: buildSourceChain(
       envHeroUrl,
       '/videos/clipper-3d.mp4',
-      'https://assets.mixkit.co/videos/preview/mixkit-barber-cutting-hair-with-clippers-43232-large.mp4'
+      'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4'
     ),
   },
   trustStrip: {
@@ -58,12 +66,12 @@ export const MACRO_VIDEOS: Record<'hero' | 'trustStrip' | 'serviceMenu', MacroVi
     description: 'Macro Black Japanese Straight Razor on dark slate with floating golden dust particles',
     envUrl: envTrustUrl,
     localPath: '/videos/razor-3d.mp4',
-    cdnFallback: 'https://assets.mixkit.co/videos/preview/mixkit-barber-shaving-a-bearded-man-with-a-razor-43235-large.mp4',
-    poster: '/razor_shave.jpg',
+    cdnFallback: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4',
+    poster: '/videos/poster-razor.jpg',
     sources: buildSourceChain(
       envTrustUrl,
       '/videos/razor-3d.mp4',
-      'https://assets.mixkit.co/videos/preview/mixkit-barber-shaving-a-bearded-man-with-a-razor-43235-large.mp4'
+      'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4'
     ),
   },
   serviceMenu: {
@@ -72,12 +80,12 @@ export const MACRO_VIDEOS: Record<'hero' | 'trustStrip' | 'serviceMenu', MacroVi
     description: 'Macro Steaming Folded Black Hot Towel on dark wood grain',
     envUrl: envServicesUrl,
     localPath: '/videos/towel-3d.mp4',
-    cdnFallback: 'https://assets.mixkit.co/videos/preview/mixkit-man-getting-his-beard-shaved-at-the-barbershop-43225-large.mp4',
-    poster: '/beard_sculpt.jpg',
+    cdnFallback: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4',
+    poster: '/videos/poster-towel.jpg',
     sources: buildSourceChain(
       envServicesUrl,
       '/videos/towel-3d.mp4',
-      'https://assets.mixkit.co/videos/preview/mixkit-man-getting-his-beard-shaved-at-the-barbershop-43225-large.mp4'
+      'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4'
     ),
   },
 };
@@ -105,7 +113,7 @@ export const HERO_CAROUSEL_SLIDES: HeroSlideConfig[] = [
     id: 'slide-clipper',
     asset: MACRO_VIDEOS.hero,
     videoUrl: VIDEOS.hero,
-    eyebrow: "BHOPAL'S #1 MEN'S SALON · 4.9★ GOOGLE RATED (148+ REVIEWS)",
+    eyebrow: "BHOPAL'S #1 MEN'S SALON · 4.9 / 5.0 GOOGLE RATED (148+ REVIEWS)",
     headline: 'Sirf Haircut Nahi, Aapka Pura Look Upgrade Karte Hain.',
     subtext:
       'Har baar naye barber se baal kharab hone ka darr khatam. Aapke face shape ke hisaab se perfect Skin Fade aur Haircut — taaki salon se nikalte hi log notice karein.',

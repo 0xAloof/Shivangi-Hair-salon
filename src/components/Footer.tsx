@@ -1,4 +1,14 @@
-import { Phone, MapPin, Star } from 'lucide-react';
+import {
+  Phone,
+  MapPin,
+  Star,
+  Sparkles,
+  UserCheck,
+  Scissors,
+  Github,
+  Linkedin,
+  Code2,
+} from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { WhatsAppIcon, FacebookIcon, InstagramIcon } from './BrandIcons';
 import { SALON_INFO } from '../data/salonData';
@@ -43,30 +53,46 @@ export default function Footer({ onOpenWhatsApp }: FooterProps) {
             </div>
           </div>
 
-          {/* Navigation Links (3 cols) */}
+          {/* Navigation Links with Lucide Icons Before Each Heading (3 cols) */}
           <div className="md:col-span-3 space-y-3">
             <p className="text-xs font-bold uppercase tracking-wider text-[#141413] dark:text-[#F4F1EA]">
               Salon Navigation
             </p>
-            <ul className="space-y-2 text-xs">
+            <ul className="space-y-2.5 text-xs">
               <li>
-                <Link to="/" className="hover:text-[#141413] dark:hover:text-[#F4F1EA] transition-colors">
-                  Showcase
+                <Link
+                  to="/"
+                  className="inline-flex items-center gap-2 hover:text-[#141413] dark:hover:text-[#F4F1EA] transition-colors"
+                >
+                  <Sparkles className="w-3.5 h-3.5 text-[#9A7848] dark:text-[#C5A059] shrink-0" />
+                  <span>Showcase</span>
                 </Link>
               </li>
               <li>
-                <Link to="/craftsman" className="hover:text-[#141413] dark:hover:text-[#F4F1EA] transition-colors">
-                  Craftsman
+                <Link
+                  to="/craftsman"
+                  className="inline-flex items-center gap-2 hover:text-[#141413] dark:hover:text-[#F4F1EA] transition-colors"
+                >
+                  <UserCheck className="w-3.5 h-3.5 text-[#9A7848] dark:text-[#C5A059] shrink-0" />
+                  <span>Craftsman</span>
                 </Link>
               </li>
               <li>
-                <Link to="/menu" className="hover:text-[#141413] dark:hover:text-[#F4F1EA] transition-colors">
-                  Service Menu
+                <Link
+                  to="/menu"
+                  className="inline-flex items-center gap-2 hover:text-[#141413] dark:hover:text-[#F4F1EA] transition-colors"
+                >
+                  <Scissors className="w-3.5 h-3.5 text-[#9A7848] dark:text-[#C5A059] shrink-0" />
+                  <span>Service Menu</span>
                 </Link>
               </li>
               <li>
-                <Link to="/salon" className="hover:text-[#141413] dark:hover:text-[#F4F1EA] transition-colors">
-                  Salon & Location
+                <Link
+                  to="/salon"
+                  className="inline-flex items-center gap-2 hover:text-[#141413] dark:hover:text-[#F4F1EA] transition-colors"
+                >
+                  <MapPin className="w-3.5 h-3.5 text-[#9A7848] dark:text-[#C5A059] shrink-0" />
+                  <span>Salon & Location</span>
                 </Link>
               </li>
             </ul>
@@ -146,10 +172,54 @@ export default function Footer({ onOpenWhatsApp }: FooterProps) {
 
         </div>
 
-        {/* Bottom copyright */}
-        <div className="pt-8 border-t border-stone-900/10 dark:border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-[#57534E] dark:text-[#A1A1AA]">
-          <p>© {new Date().getFullYear()} Shivangi Hair Salon. All rights reserved.</p>
-          <p>7897+5X4, Bhensakhedi Road, near The Fitness Planet, Bhopal, MP 462030</p>
+        {/* Bottom Bar: Left Copyright | Center "Developed by Aashif Khan" with GitHub & LinkedIn | Right Address */}
+        <div className="pt-8 border-t border-stone-900/10 dark:border-white/10 grid grid-cols-1 md:grid-cols-3 items-center gap-4 text-[11px] text-[#57534E] dark:text-[#A1A1AA]">
+          <p className="text-center md:text-left">
+            © {new Date().getFullYear()} Shivangi Hair Salon. All rights reserved.
+          </p>
+
+          {/* Center: Developed by Aashif Khan + GitHub & LinkedIn links */}
+          <div className="flex items-center justify-center gap-2 flex-wrap">
+            <span className="inline-flex items-center gap-1.5">
+              <Code2 className="w-3.5 h-3.5 text-[#9A7848] dark:text-[#C5A059] shrink-0" />
+              <span>Developed by</span>
+              <a
+                href={SALON_INFO.developer.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-bold text-[#141413] dark:text-[#F4F1EA] hover:text-[#9A7848] dark:hover:text-[#C5A059] underline underline-offset-4 transition-colors"
+                title="Aashif Khan on GitHub"
+              >
+                {SALON_INFO.developer.name}
+              </a>
+            </span>
+            <span className="inline-flex items-center gap-1.5 pl-1 border-l border-stone-900/15 dark:border-white/15">
+              <a
+                href={SALON_INFO.developer.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Aashif Khan GitHub Profile"
+                title="GitHub (@0xAashif)"
+                className="p-1.5 rounded-md hover:bg-stone-900/5 dark:hover:bg-white/10 text-[#141413] dark:text-[#F4F1EA] hover:text-[#9A7848] dark:hover:text-[#C5A059] transition-colors"
+              >
+                <Github className="w-3.5 h-3.5" />
+              </a>
+              <a
+                href={SALON_INFO.developer.linkedinUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Aashif Khan LinkedIn Profile"
+                title="LinkedIn (Aashif Khan)"
+                className="p-1.5 rounded-md hover:bg-stone-900/5 dark:hover:bg-white/10 text-[#141413] dark:text-[#F4F1EA] hover:text-[#9A7848] dark:hover:text-[#C5A059] transition-colors"
+              >
+                <Linkedin className="w-3.5 h-3.5" />
+              </a>
+            </span>
+          </div>
+
+          <p className="text-center md:text-right">
+            7897+5X4, Bhensakhedi Road, near The Fitness Planet, Bhopal, MP 462030
+          </p>
         </div>
 
       </div>

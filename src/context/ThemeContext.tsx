@@ -10,16 +10,18 @@ interface ThemeContextType {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
+const STORAGE_KEY = 'shivangi_theme_v2';
+
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  // Default is 'light' as requested: Warm Ivory #F5F1E8
+  // Default is 'dark' (Deep Obsidian #070709)
   const [theme, setThemeState] = useState<Theme>(() => {
     if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('shivangi_theme') as Theme | null;
+      const saved = localStorage.getItem(STORAGE_KEY) as Theme | null;
       if (saved === 'dark' || saved === 'light') {
         return saved;
       }
     }
-    return 'light';
+    return 'dark';
   });
 
   useEffect(() => {
@@ -29,7 +31,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     } else {
       root.classList.remove('dark');
     }
-    localStorage.setItem('shivangi_theme', theme);
+    localStorage.setItem(STORAGE_KEY, theme);
   }, [theme]);
 
   const toggleTheme = () => {

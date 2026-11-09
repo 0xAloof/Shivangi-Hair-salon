@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Sparkles } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import { HERO_CAROUSEL_SLIDES } from '../config/videos';
 import MacroVideo from './MacroVideo';
@@ -44,8 +45,8 @@ export default function Hero({}: HeroProps) {
             >
               <MacroVideo
                 asset={activeSlide.asset}
-                className="w-full h-full object-cover object-center filter brightness-[0.65] contrast-[1.08]"
-                overlayClassName="bg-gradient-to-t from-[#070709] via-[#070709]/60 to-[#070709]/70"
+                className="w-full h-full object-cover object-center filter brightness-[0.68] contrast-[1.08]"
+                overlayClassName="bg-gradient-to-t from-[#070709] via-[#070709]/55 to-[#070709]/65"
               />
             </motion.div>
           </AnimatePresence>
@@ -65,10 +66,11 @@ export default function Hero({}: HeroProps) {
               transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
               className="space-y-4 sm:space-y-5"
             >
-              {/* Eyebrow */}
-              <span className="inline-block text-[10px] sm:text-xs font-bold uppercase tracking-[0.28em] text-[#C5A059]">
-                {activeSlide.eyebrow}
-              </span>
+              {/* Eyebrow with Lucide Icon */}
+              <div className="inline-flex items-center justify-center gap-2 text-[10px] sm:text-xs font-bold uppercase tracking-[0.28em] text-[#C5A059]">
+                <Sparkles className="w-3.5 h-3.5 text-[#C5A059] shrink-0" />
+                <span>{activeSlide.eyebrow}</span>
+              </div>
 
               {/* Psychological Hinglish Headline */}
               <h1 className="font-display text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-[#F4F1EA] leading-[1.1] drop-shadow-lg max-w-3xl mx-auto">
