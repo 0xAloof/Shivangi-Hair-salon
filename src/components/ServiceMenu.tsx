@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Clock, Check, Plus, Minus, IndianRupee } from 'lucide-react';
+import { Clock, Check, Plus, Minus } from 'lucide-react';
 import { WhatsAppIcon } from './BrandIcons';
 import { SERVICES, SALON_INFO } from '../data/salonData';
 import { MACRO_VIDEOS } from '../config/videos';
@@ -31,19 +31,12 @@ export default function ServiceMenu({}: ServiceMenuProps) {
     );
   };
 
-  const formatServicePrice = (service: ServiceItem) => {
-    return service.priceMin === service.priceMax
-      ? `₹${service.priceMin}`
-      : `₹${service.priceMin} – ₹${service.priceMax}`;
-  };
-
   const handleBookSingleOnWhatsApp = (service: ServiceItem) => {
-    const priceLabel = formatServicePrice(service);
     const msg = [
       `*APPOINTMENT INQUIRY - SHIVANGI HAIR SALON*`,
       `Hello Master Barber, I would like to book the following service at your Bhopal salon:`,
       `Service: ${service.name} (${service.durationMinutes} Mins)`,
-      `Price: ${priceLabel}`,
+      `Pricing: Starts from ₹100 · Negotiable`,
       `Salon: Bhensakhedi Road, near The Fitness Planet`,
       `Please confirm current chair availability.`
     ].join('\n');
@@ -53,12 +46,11 @@ export default function ServiceMenu({}: ServiceMenuProps) {
 
   const selectedItems = SERVICES.filter((s) => selectedIds.includes(s.id));
   const totalDuration = selectedItems.reduce((acc, s) => acc + s.durationMinutes, 0);
-  const totalPrice = selectedItems.reduce((acc, s) => acc + s.priceMin, 0);
 
   const handleBookSelectionOnWhatsApp = () => {
     if (selectedItems.length === 0) return;
     const itemsList = selectedItems
-      .map((s) => `• ${s.name} (${s.durationMinutes} mins — ₹${s.priceMin})`)
+      .map((s) => `• ${s.name} (${s.durationMinutes} mins — Starts from ₹100 · Negotiable)`)
       .join('\n');
     const msg = [
       `*CUSTOM GROOMING PLAN - SHIVANGI HAIR SALON*`,
@@ -66,7 +58,7 @@ export default function ServiceMenu({}: ServiceMenuProps) {
       itemsList,
       ``,
       `Estimated Time: ~${totalDuration} Mins`,
-      `Total Price: ₹${totalPrice}`,
+      `Pricing: Starts from ₹100 · Negotiable based on style & hair length`,
       `Salon: Bhensakhedi Road, Bhopal`,
       `Please confirm chair availability.`
     ].join('\n');
@@ -77,11 +69,12 @@ export default function ServiceMenu({}: ServiceMenuProps) {
   return (
     <section 
       id="services" 
-      className="relative py-20 sm:py-28 bg-[#070709] border-b border-white/10 scroll-mt-20 overflow-hidden transition-colors duration-250"
+      className="relative py-20 sm:py-28 bg-[#070709] border-b border-white/10 scroll-mt-20 overflow-hidden"
     >
-      {/* Video 2: Macro Steaming Folded Black Hot Towel on dark wood grain */}
+      {/* Video 2: Macro Steaming Folded Black Hot Towel on dark wood grain (Lazy loaded via IntersectionObserver) */}
       <MacroVideo
         asset={MACRO_VIDEOS.serviceMenu}
+        lazy={true}
         className="w-full h-full object-cover object-center opacity-30"
         overlayClassName="bg-gradient-to-b from-[#070709]/92 via-[#070709]/82 to-[#070709]/94"
       />
@@ -101,18 +94,18 @@ export default function ServiceMenu({}: ServiceMenuProps) {
               Haircut, Beard & Grooming Menu
             </h2>
             <p className="text-xs sm:text-sm text-[#C2BCB0] max-w-xl">
-              Transparent Bhopal pricing with zero hidden charges. Every appointment includes a face-shape style check, UV-cleaned tools, a fresh blade, and warm towel prep.
+              <strong className="text-[#C5A059]">Starts from ₹100 · Negotiable based on style &amp; hair length.</strong> Every appointment includes a face-shape style check, UV-cleaned tools, a 100% fresh sealed blade, and warm towel prep.
             </p>
           </div>
 
-          {/* Horizontal Scrollable Category Pills on Mobile (overflow-x-auto no-scrollbar, >=44px touch targets) */}
+          {/* Horizontal Scrollable Category Pills on Mobile */}
           <div className="flex items-center gap-1.5 p-1.5 rounded-xl bg-[#121214]/90 border border-white/10 overflow-x-auto no-scrollbar max-w-full shrink-0">
             {categories.map((cat) => (
               <button
                 key={cat.id}
                 type="button"
                 onClick={() => setActiveCategory(cat.id)}
-                className={`min-h-[44px] px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-lg transition-all cursor-pointer whitespace-nowrap shrink-0 ${
+                className={`min-h-[44px] px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-lg transition-transform duration-300 cursor-pointer whitespace-nowrap shrink-0 ${
                   activeCategory === cat.id
                     ? 'bg-[#F4F1EA] text-[#070709] shadow-sm'
                     : 'text-[#A6A095] hover:text-[#F4F1EA]'
@@ -128,9 +121,9 @@ export default function ServiceMenu({}: ServiceMenuProps) {
         <div className="space-y-4">
           {/* Desktop Column Legend */}
           <div className="hidden md:grid md:grid-cols-12 px-6 py-3 rounded-xl border border-white/10 text-[11px] font-bold uppercase tracking-[0.2em] text-[#C5A059] bg-[#121214]/85 backdrop-blur-sm">
-            <div className="col-span-6">Service Details</div>
+            <div className="col-span-5">Service Details</div>
             <div className="col-span-2 text-center">Time Needed</div>
-            <div className="col-span-2 text-right">Price</div>
+            <div className="col-span-3 text-right">Pricing</div>
             <div className="col-span-2 text-right">Book (WhatsApp)</div>
           </div>
 
@@ -142,21 +135,21 @@ export default function ServiceMenu({}: ServiceMenuProps) {
               <TiltCard
                 key={service.id}
                 maxTilt={3}
-                className={`rounded-2xl p-5 sm:p-6 backdrop-blur-md transition-colors duration-200 border ${
+                className={`rounded-2xl p-5 sm:p-6 backdrop-blur-md transition-transform duration-300 border ${
                   isSelected
                     ? 'bg-[#171612]/95 border-[#C5A059]/60'
-                    : 'bg-[#121214]/90 border-white/10 hover:bg-[#161618]/95'
+                    : 'bg-[#121214]/90 border-white/10'
                 }`}
               >
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
                   
-                  {/* Col 1: Service Name & Description (6 cols) */}
-                  <div className="md:col-span-6 space-y-1.5">
+                  {/* Col 1: Service Name & Description (5 cols) */}
+                  <div className="md:col-span-5 space-y-1.5">
                     <div className="flex items-center gap-2.5 flex-wrap">
                       <button
                         type="button"
                         onClick={() => toggleSelect(service.id)}
-                        className={`depth-layer-z w-5 h-5 rounded border flex items-center justify-center transition-colors cursor-pointer shrink-0 ${
+                        className={`depth-layer-z w-5 h-5 rounded border flex items-center justify-center transition-transform duration-200 cursor-pointer shrink-0 ${
                           isSelected
                             ? 'bg-[#C5A059] border-[#C5A059] text-[#070709]'
                             : 'border-white/25 bg-transparent'
@@ -206,21 +199,20 @@ export default function ServiceMenu({}: ServiceMenuProps) {
                     )}
                   </div>
 
-                  {/* Col 2: Duration (2 cols) */}
+                  {/* Col 2: Duration Badge (2 cols) */}
                   <div className="md:col-span-2 flex md:justify-center items-center gap-1.5 text-xs text-[#C2BCB0] pl-7 md:pl-0">
                     <Clock className="depth-layer-z w-3.5 h-3.5 text-[#C5A059] stroke-[1.5]" />
                     <span className="font-mono font-medium">{service.durationMinutes} Mins</span>
                   </div>
 
-                  {/* Col 3: Transparent Real Bhopal Price (2 cols) */}
-                  <div className="md:col-span-2 flex md:justify-end items-center gap-1 pl-7 md:pl-0">
-                    <IndianRupee className="depth-layer-z w-3.5 h-3.5 text-[#C5A059] stroke-[2]" />
-                    <span className="depth-layer-z font-mono text-base sm:text-lg font-bold text-[#F4F1EA] tabular-nums">
-                      {service.priceMin}
+                  {/* Col 3: Starts from ₹100 · Negotiable (3 cols) */}
+                  <div className="md:col-span-3 flex md:justify-end items-center pl-7 md:pl-0">
+                    <span className="depth-layer-z inline-flex items-center px-3 py-1 rounded-lg bg-[#C5A059]/15 border border-[#C5A059]/40 font-mono text-xs sm:text-sm font-bold text-[#F4F1EA]">
+                      Starts from ₹100 · Negotiable
                     </span>
                   </div>
 
-                  {/* Col 4: Scaled-down Circular Green WhatsApp Action (44px - Kept 100% Intact) */}
+                  {/* Col 4: Scaled-down Circular Green WhatsApp Action (2 cols) */}
                   <div className="md:col-span-2 flex justify-end items-center pl-7 md:pl-0">
                     <button
                       type="button"
@@ -239,17 +231,17 @@ export default function ServiceMenu({}: ServiceMenuProps) {
           })}
         </div>
 
-        {/* Minimalist Session Planner Strip with Dynamic Total Price Calculation */}
+        {/* Minimalist Session Planner Strip with "Starts from ₹100 · Negotiable based on style & hair length" */}
         <div className="mt-8 rounded-2xl bg-[#121214]/90 backdrop-blur-md border border-white/10 p-5 sm:p-6 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-sm">
           <div className="space-y-1 text-center sm:text-left">
             <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#C5A059]">
               Your Selected Services
             </span>
             <p className="font-display text-sm sm:text-base font-bold text-[#F4F1EA]">
-              {selectedItems.length} Service{selectedItems.length === 1 ? '' : 's'} Selected
+              {selectedItems.length} Service{selectedItems.length === 1 ? '' : 's'} Selected · Starts from ₹100 · Negotiable based on style &amp; hair length
             </p>
-            <p className="text-[11px] text-[#B8B2A6] max-w-md">
-              {selectedItems.map((s) => `${s.name} (₹${s.priceMin})`).join(' + ') || 'Select one or more services above to calculate your total.'}
+            <p className="text-[11px] text-[#B8B2A6] max-w-xl">
+              {selectedItems.map((s) => `${s.name} (Starts from ₹100 · Negotiable)`).join(' + ') || 'Select one or more services above to plan your session.'}
             </p>
           </div>
 
@@ -265,14 +257,14 @@ export default function ServiceMenu({}: ServiceMenuProps) {
 
             <div className="text-right">
               <span className="text-[10px] text-[#A6A095] uppercase tracking-wider block font-semibold">
-                Total Price
+                Pricing
               </span>
-              <span className="font-mono text-base sm:text-xl font-bold text-[#C5A059] tabular-nums">
-                ₹{totalPrice}
+              <span className="font-mono text-xs sm:text-sm font-bold text-[#C5A059]">
+                Starts from ₹100 · Negotiable
               </span>
             </div>
 
-            {/* Circular Green WhatsApp CTA for selection (44px - Kept 100% Intact) */}
+            {/* Circular Green WhatsApp CTA for selection */}
             <div className="flex items-center gap-2">
               <button
                 type="button"

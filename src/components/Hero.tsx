@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { AnimatePresence, motion } from 'motion/react';
+import { motion } from 'motion/react';
 import { Star, ShieldCheck, Sparkles } from 'lucide-react';
 import { HERO_CAROUSEL_SLIDES } from '../config/videos';
 import MacroVideo from './MacroVideo';
@@ -32,109 +32,107 @@ export default function Hero({}: HeroProps) {
   return (
     <section
       id="showcase"
-      className="relative w-screen max-w-none left-1/2 -translate-x-1/2 m-0 p-0 overflow-hidden select-none bg-[#070709]"
+      className="relative w-screen max-w-none left-1/2 -translate-x-1/2 m-0 p-0 overflow-hidden select-none bg-[#070709] text-[#F4F1EA]"
       aria-label="Cinematic Showcase"
     >
-      {/* 100vw Full-Bleed Container */}
-      <div className="relative w-full h-[78vh] sm:h-[85vh] min-h-[520px] max-h-[920px] flex flex-col justify-between bg-[#070709]">
+      {/* 100vw Full-Bleed Container with pt-24 md:pt-28 so fixed Navbar never clips top text */}
+      <div className="relative w-full min-h-[560px] h-[82vh] sm:h-[85vh] max-h-[920px] pt-24 md:pt-28 flex flex-col justify-between bg-[#070709] text-[#F4F1EA]">
         
-        {/* 3-Video Background Crossfade Stream (VIDEOS.hero, VIDEOS.trust, VIDEOS.services) */}
-        <div className="absolute inset-0 w-full h-full overflow-hidden bg-[#070709]">
-          <AnimatePresence mode="sync">
-            <motion.div
-              key={activeSlide.id}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-              className="absolute inset-0 w-full h-full"
-            >
-              <MacroVideo
-                asset={activeSlide.asset}
-                className="w-full h-full object-cover object-center filter brightness-[0.65] contrast-[1.08]"
-                overlayClassName="bg-gradient-to-t from-[#070709] via-[#070709]/60 to-[#070709]/70"
-              />
-            </motion.div>
-          </AnimatePresence>
+        {/* Single Active Video Mounted at a Time with preload="metadata" */}
+        <div className="absolute inset-0 w-full h-full overflow-hidden bg-gradient-to-br from-[#0E0E12] via-[#070709] to-[#121214]">
+          <MacroVideo
+            key={activeSlide.id}
+            asset={activeSlide.asset}
+            lazy={false}
+            className="w-full h-full object-cover object-center filter brightness-[0.52] contrast-[1.12]"
+            overlayClassName="bg-gradient-to-t from-[#070709] via-[#070709]/72 to-[#070709]/80"
+          />
         </div>
 
-        {/* Top Spacer */}
-        <div aria-hidden="true" className="h-8 sm:h-12" />
-
-        {/* Center: Hinglish Psychological Copywriting */}
+        {/* Center: Pure Editorial Text Only (Zero Capsule Buttons, Zero Pill Borders, Instant LCP Render) */}
         <div className="relative z-20 flex flex-col items-center justify-center text-center px-4 sm:px-6 max-w-4xl mx-auto my-auto">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeSlide.id}
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-              className="space-y-4 sm:space-y-5"
+          <div key={activeSlide.id} className="space-y-4 sm:space-y-5">
+            {/* Plain Uppercase Tracking Eyebrow Text — Zero Pill/Capsule Border */}
+            <div
+              style={{ textShadow: '0 2px 16px rgba(0,0,0,0.95)' }}
+              className="inline-flex items-center justify-center gap-2 text-[10px] sm:text-xs font-bold uppercase tracking-[0.28em] text-[#C5A059]"
             >
-              {/* Eyebrow with Lucide Icon (Zero generic emojis) */}
-              <div className="inline-flex items-center justify-center gap-2 text-[10px] sm:text-xs font-bold uppercase tracking-[0.28em] text-[#C5A059]">
-                {renderEyebrowIcon(activeIndex)}
-                <span>{activeSlide.eyebrow}</span>
-              </div>
+              {renderEyebrowIcon(activeIndex)}
+              <span>{activeSlide.eyebrow}</span>
+            </div>
 
-              {/* Psychological Hinglish Headline */}
-              <h1 className="font-display text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-[#F4F1EA] leading-[1.1] drop-shadow-lg max-w-3xl mx-auto">
-                {activeSlide.headline}
-              </h1>
+            {/* Large Serif Headline — Instant Render for Fast Mobile LCP */}
+            <h1
+              style={{
+                color: '#F4F1EA',
+                textShadow: '0 4px 28px rgba(0,0,0,0.98), 0 2px 10px rgba(0,0,0,0.9)',
+              }}
+              className="font-display text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight !text-[#F4F1EA] leading-[1.1] max-w-3xl mx-auto"
+            >
+              {activeSlide.headline}
+            </h1>
 
-              {/* Relatable Hinglish Subtext */}
-              <p className="text-xs sm:text-base text-[#F4F1EA]/85 font-normal tracking-wide max-w-2xl mx-auto leading-relaxed">
-                {activeSlide.subtext}
-              </p>
-            </motion.div>
-          </AnimatePresence>
+            {/* Clean Subtext */}
+            <p
+              style={{
+                color: '#F4F1EA',
+                textShadow: '0 2px 18px rgba(0,0,0,0.98), 0 1px 6px rgba(0,0,0,0.9)',
+              }}
+              className="text-xs sm:text-base !text-[#F4F1EA] font-medium tracking-wide max-w-2xl mx-auto leading-relaxed"
+            >
+              {activeSlide.subtext}
+            </p>
+          </div>
         </div>
 
-        {/* Bottom: Clickable Slide Progress Bars (Short non-truncating labels, >=44px touch target height) */}
-        <div
-          className="relative z-20 w-full max-w-2xl mx-auto px-4 sm:px-6 pb-5 sm:pb-7"
-          role="tablist"
-          aria-label="Hero video slides"
-        >
-          <div className="grid grid-cols-3 gap-2.5 sm:gap-4">
-            {HERO_CAROUSEL_SLIDES.map((slide, idx) => {
-              const isActive = idx === activeIndex;
-              return (
-                <button
-                  key={slide.id}
-                  type="button"
-                  role="tab"
-                  aria-selected={isActive}
-                  aria-label={`Slide ${idx + 1}: ${slide.shortLabel}`}
-                  onClick={() => setActiveIndex(idx)}
-                  className="group min-h-[44px] flex flex-col justify-end pb-2 text-left cursor-pointer focus:outline-none"
-                >
-                  <span
-                    className={`text-[9px] sm:text-[11px] font-mono uppercase tracking-wider mb-2 block whitespace-nowrap transition-colors ${
-                      isActive
-                        ? 'text-[#C5A059] font-semibold'
-                        : 'text-[#F4F1EA]/55 group-hover:text-[#F4F1EA]/85'
-                    }`}
+        {/* Bottom: Minimal Text Progress Bars (01, 02, 03) Constrained on Left so Floating CTA Never Overlaps */}
+        <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24 sm:pb-8 md:pr-48">
+          <div
+            className="w-full max-w-2xl"
+            role="tablist"
+            aria-label="Hero video slides"
+          >
+            <div className="grid grid-cols-3 gap-2.5 sm:gap-4">
+              {HERO_CAROUSEL_SLIDES.map((slide, idx) => {
+                const isActive = idx === activeIndex;
+                return (
+                  <button
+                    key={slide.id}
+                    type="button"
+                    role="tab"
+                    aria-selected={isActive}
+                    aria-label={`Slide ${idx + 1}: ${slide.shortLabel}`}
+                    onClick={() => setActiveIndex(idx)}
+                    className="group min-h-[44px] flex flex-col justify-end pb-2 text-left cursor-pointer focus:outline-none"
                   >
-                    {slide.shortLabel}
-                  </span>
-                  <div className="w-full h-[2px] bg-white/20 overflow-hidden">
-                    {isActive ? (
-                      <motion.div
-                        key={`progress-${activeIndex}`}
-                        initial={{ width: '0%' }}
-                        animate={{ width: '100%' }}
-                        transition={{ duration: SLIDE_INTERVAL_MS / 1000, ease: 'linear' }}
-                        className="h-full bg-[#C5A059]"
-                      />
-                    ) : (
-                      <div className="w-0 h-full bg-[#C5A059]" />
-                    )}
-                  </div>
-                </button>
-              );
-            })}
+                    <span
+                      style={{ textShadow: '0 2px 10px rgba(0,0,0,0.95)' }}
+                      className={`text-[9px] sm:text-[11px] font-mono uppercase tracking-wider mb-2 block whitespace-nowrap transition-opacity duration-300 ${
+                        isActive
+                          ? 'text-[#C5A059] font-bold opacity-100'
+                          : 'text-[#F4F1EA] opacity-75 group-hover:opacity-100'
+                      }`}
+                    >
+                      {slide.shortLabel}
+                    </span>
+                    <div className="w-full h-[2px] bg-white/25 overflow-hidden">
+                      {isActive ? (
+                        <motion.div
+                          key={`progress-${activeIndex}`}
+                          initial={{ scaleX: 0 }}
+                          animate={{ scaleX: 1 }}
+                          transition={{ duration: SLIDE_INTERVAL_MS / 1000, ease: 'linear' }}
+                          style={{ transformOrigin: 'left' }}
+                          className="w-full h-full bg-[#C5A059]"
+                        />
+                      ) : (
+                        <div className="w-0 h-full bg-[#C5A059]" />
+                      )}
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </div>
 

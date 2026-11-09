@@ -6,9 +6,9 @@ export default function TrustStrip() {
   return (
     <section 
       aria-label="Salon Trust Signals"
-      className="relative py-5 bg-[#070709] border-y border-white/10 overflow-hidden transition-colors duration-250"
+      className="relative py-5 bg-[#070709] border-y border-white/10 overflow-hidden"
     >
-      {/* Video 3: Macro Black Japanese Straight Razor on dark slate with floating golden dust particles */}
+      {/* Video 3: Macro 100% Fresh Sealed Blade on dark slate with floating golden dust particles */}
       <MacroVideo
         asset={MACRO_VIDEOS.trustStrip}
         className="w-full h-full object-cover object-center opacity-35"
@@ -18,20 +18,20 @@ export default function TrustStrip() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
           
-          {/* Signal 1: 4.9 Google Rating */}
+          {/* Signal 1: 150+ Verified Bhopal Customers */}
           <div className="flex items-center justify-center gap-2.5 py-1">
             <Star className="w-4 h-4 fill-[#C5A059] text-[#C5A059] shrink-0 stroke-[1.5]" />
             <div className="text-left">
               <span className="font-bold text-xs sm:text-sm text-[#F4F1EA] block">
-                4.9 / 5.0 Google Rating
+                150+ Verified Bhopal Customers
               </span>
               <span className="text-[10px] text-[#A6A095] block">
-                148+ Happy Bhopal Customers
+                Verified Salon Regular · Bhopal
               </span>
             </div>
           </div>
 
-          {/* Signal 2: UV Cleaned Tools (Champagne Brass #C5A059 instead of green) */}
+          {/* Signal 2: UV Cleaned Tools */}
           <div className="flex items-center justify-center gap-2.5 py-1">
             <ShieldCheck className="w-4 h-4 text-[#C5A059] shrink-0 stroke-[1.5]" />
             <div className="text-left">

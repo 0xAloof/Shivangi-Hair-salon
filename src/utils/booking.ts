@@ -177,19 +177,19 @@ export function getSalonStatusIST(now: Date = new Date()): {
 }
 
 /**
- * Formats a clean, professional booking message for WhatsApp with real Bhopal INR pricing.
+ * Formats a clean, professional booking message for WhatsApp with Starts from ₹100 · Negotiable pricing.
  */
 export function formatWhatsAppBookingMessage(
   data: BookingFormData,
   allServices: ServiceItem[]
 ): string {
-  const { selectedItems, totalDurationMinutes, minPrice } = calculateBookingTotal(
+  const { selectedItems, totalDurationMinutes } = calculateBookingTotal(
     data.selectedServices,
     allServices
   );
 
   const serviceNames = selectedItems
-    .map(s => `• ${s.name} (~${s.durationMinutes}m) — ₹${s.priceMin}`)
+    .map(s => `• ${s.name} (~${s.durationMinutes}m) — Starts from ₹100 · Negotiable`)
     .join('\n');
 
   return [
@@ -201,10 +201,10 @@ export function formatWhatsAppBookingMessage(
     `*Preferred Time Slot:* ${data.timeSlot}`,
     ``,
     `*Selected Services:*`,
-    serviceNames || '• Haircut & Grooming (₹150)',
+    serviceNames || '• Haircut & Grooming (Starts from ₹100 · Negotiable)',
     ``,
     `*Estimated Duration:* ~${totalDurationMinutes} minutes`,
-    `*Total Price:* ₹${minPrice}`,
+    `*Pricing:* Starts from ₹100 · Negotiable based on style & hair length`,
     data.notes ? `*Notes/Preferences:* ${data.notes.trim()}` : ``,
     ``,
     `*Salon Location:* Near The Fitness Planet, Bhensakhedi Road, Bhopal`,

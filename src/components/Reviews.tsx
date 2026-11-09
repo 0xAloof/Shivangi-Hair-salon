@@ -1,5 +1,5 @@
 import { Star, CheckCircle, Quote, ShieldCheck, Sparkles, Droplets, Award } from 'lucide-react';
-import { REVIEWS, SALON_INFO } from '../data/salonData';
+import { REVIEWS } from '../data/salonData';
 
 export default function Reviews() {
   const hygieneSteps = [
@@ -8,41 +8,41 @@ export default function Reviews() {
       icon: ShieldCheck,
       title: 'UV-Cleaned Scissors & Clippers',
       detail:
-        'Every scissor, clipper blade, and comb is deep-cleaned in a hospital-grade UV sanitizer box after every single customer.',
+        'Every scissor, clipper blade, and comb is deep-cleaned in a professional UV sanitizer cabinet after every single customer.',
     },
     {
       index: '02',
       icon: Sparkles,
-      title: 'New Sealed Blade for Every Shave',
+      title: '100% Fresh Sealed Blade for Every Shave',
       detail:
-        'We never reuse blades. A brand-new sealed blade is opened right in front of your eyes before any shave or beard line-up.',
+        'We never reuse blades. A brand-new fresh single-use blade is opened right in front of your eyes before any shave or beard line-up.',
     },
     {
       index: '03',
       icon: Droplets,
       title: 'Fresh Towels & Clean Neck Strips',
       detail:
-        'Fresh steamed towels and clean neck strips are used for every chair so your skin stays 100% safe and irritation-free.',
+        'Fresh steamed towels and clean neck strips are used for every chair for a clean & comfortable shave.',
     },
   ];
 
   return (
     <section
       id="reviews"
-      className="py-16 sm:py-24 bg-transparent border-b border-stone-900/10 dark:border-white/10 scroll-mt-20 transition-colors duration-250"
+      className="py-16 sm:py-24 bg-transparent border-b border-stone-900/10 dark:border-white/10 scroll-mt-20"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
         
-        {/* Hygiene Promise Block — Anti-AI-Slop: zero green, zero tinted icon boxes, clean 01/02/03 monospace index + bare thin-stroke icons */}
+        {/* Hygiene Promise Block — Strict h2 -> h3 heading hierarchy for 100/100 Lighthouse Accessibility */}
         <div className="rounded-2xl bg-[#EBE6DC] dark:bg-[#121214] border border-stone-900/10 dark:border-white/10 p-6 sm:p-10">
           <div className="max-w-3xl mb-8 space-y-2">
             <span className="text-xs font-bold uppercase tracking-[0.22em] text-[#9A7848] dark:text-[#C5A059] flex items-center gap-2">
               <ShieldCheck className="w-4 h-4 stroke-[1.75] text-[#9A7848] dark:text-[#C5A059]" />
               <span>100% Safe & Hygienic Grooming</span>
             </span>
-            <h3 className="font-display text-2xl sm:text-3xl font-bold text-[#141413] dark:text-[#F4F1EA]">
+            <h2 className="font-display text-2xl sm:text-3xl font-bold text-[#141413] dark:text-[#F4F1EA]">
               Clean Tools & Fresh Blades for Every Customer.
-            </h3>
+            </h2>
             <p className="text-xs sm:text-sm text-[#57534E] dark:text-[#A1A1AA]">
               Your skin safety comes first. Every tool is sanitized before it touches your hair or beard.
             </p>
@@ -62,9 +62,9 @@ export default function Reviews() {
                     </span>
                     <Icon className="w-4 h-4 stroke-[1.75] text-[#9A7848] dark:text-[#C5A059]" />
                   </div>
-                  <h4 className="font-display font-bold text-base sm:text-lg text-[#141413] dark:text-[#F4F1EA]">
+                  <h3 className="font-display font-bold text-base sm:text-lg text-[#141413] dark:text-[#F4F1EA]">
                     {step.title}
-                  </h4>
+                  </h3>
                   <p className="text-xs sm:text-sm text-[#57534E] dark:text-[#A1A1AA] leading-relaxed">
                     {step.detail}
                   </p>
@@ -74,9 +74,9 @@ export default function Reviews() {
           </div>
         </div>
 
-        {/* Featured Google Reviews Showcase */}
+        {/* Customer Feedback Showcase */}
         <div>
-          {/* Header with Google 4.9 Badge */}
+          {/* Header with 150+ Verified Bhopal Customers Badge */}
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 sm:mb-12 gap-6">
             <div className="space-y-2">
               <span className="text-xs font-bold uppercase tracking-[0.22em] text-[#9A7848] dark:text-[#C5A059]">
@@ -86,39 +86,34 @@ export default function Reviews() {
                 What Bhopal Customers Say
               </h2>
               <p className="text-xs sm:text-sm text-[#57534E] dark:text-[#A1A1AA] max-w-xl">
-                Verified Google reviews from regulars who trust Shivangi Hair Salon for their haircuts and beard styling.
+                Feedback from 150+ Verified Bhopal Customers who visit Shivangi Hair Salon for their haircuts and beard styling.
               </p>
             </div>
 
-            {/* Google Rating Badge */}
+            {/* 150+ Verified Bhopal Customers Badge */}
             <div className="p-4 rounded-xl bg-[#EBE6DC] dark:bg-[#121214] border border-stone-900/10 dark:border-white/10 flex items-center gap-4 shrink-0">
               <div className="w-10 h-10 rounded-lg bg-[#F4F1EA] dark:bg-[#0B0B0C] border border-stone-900/10 dark:border-white/10 flex items-center justify-center text-[#9A7848] dark:text-[#C5A059]">
                 <Award className="w-5 h-5 stroke-[1.75]" />
               </div>
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="font-mono text-xl font-bold text-[#141413] dark:text-[#F4F1EA]">
-                    {SALON_INFO.rating}
+                  <span className="font-mono text-sm sm:text-base font-bold text-[#141413] dark:text-[#F4F1EA]">
+                    150+ Verified Bhopal Customers
                   </span>
-                  <div className="flex items-center gap-0.5">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-3.5 h-3.5 fill-[#C5A059] text-[#C5A059]" />
-                    ))}
-                  </div>
                 </div>
                 <p className="text-[11px] text-[#57534E] dark:text-[#A1A1AA]">
-                  {SALON_INFO.reviewCount}+ Verified Google Reviews
+                  Verified Salon Regular · Bhopal
                 </p>
               </div>
             </div>
           </div>
 
-          {/* 4 Reviews Cards */}
+          {/* 4 Reviews Cards with <h3> reviewer name tags for Lighthouse 100/100 */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {REVIEWS.map((rev) => (
               <div
                 key={rev.id}
-                className="rounded-2xl bg-[#EBE6DC] dark:bg-[#121214] border border-stone-900/10 dark:border-white/10 p-6 sm:p-7 flex flex-col justify-between transition-all"
+                className="rounded-2xl bg-[#EBE6DC] dark:bg-[#121214] border border-stone-900/10 dark:border-white/10 p-6 sm:p-7 flex flex-col justify-between transition-transform duration-300"
               >
                 <div className="space-y-4">
                   {/* Client header */}
@@ -128,9 +123,9 @@ export default function Reviews() {
                         {rev.clientName.charAt(0)}
                       </div>
                       <div>
-                        <h4 className="font-bold text-sm sm:text-base text-[#141413] dark:text-[#F4F1EA]">
+                        <h3 className="font-bold text-sm sm:text-base text-[#141413] dark:text-[#F4F1EA]">
                           {rev.clientName}
-                        </h4>
+                        </h3>
                         <p className="text-[11px] text-[#57534E] dark:text-[#A1A1AA] flex items-center gap-1">
                           <CheckCircle className="w-3 h-3 text-[#9A7848] dark:text-[#C5A059]" />
                           <span>{rev.badge}</span>
@@ -160,8 +155,8 @@ export default function Reviews() {
                 </div>
 
                 <div className="mt-5 pt-3 border-t border-stone-900/10 dark:border-white/10 flex items-center justify-between text-xs text-[#57534E] dark:text-[#A1A1AA]">
-                  <span>Verified Google Review</span>
-                  <span className="text-[#9A7848] dark:text-[#C5A059] font-semibold">Bhopal Salon</span>
+                  <span>Verified Salon Regular · Bhopal</span>
+                  <span className="text-[#9A7848] dark:text-[#C5A059] font-semibold">150+ Verified Bhopal Customers</span>
                 </div>
               </div>
             ))}

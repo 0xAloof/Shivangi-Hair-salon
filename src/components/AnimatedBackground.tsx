@@ -17,32 +17,12 @@ export default function AnimatedBackground() {
     el.style.setProperty('--x', `${Math.round(window.innerWidth * 0.5)}px`);
     el.style.setProperty('--y', `${Math.round(window.innerHeight * 0.38)}px`);
 
-    if (prefersReducedMotion) {
+    // Completely disable cursor listeners and RAF loop on mobile/touch viewports or reduced motion
+    if (prefersReducedMotion || isCoarsePointer) {
       return;
     }
 
     let rafId = 0;
-
-    // Mobile / Touch optimization: slow autonomous ambient drift animation
-    if (isCoarsePointer) {
-      const startTime = performance.now();
-      const animateDrift = (now: number) => {
-        const elapsed = (now - startTime) * 0.00045;
-        const w = window.innerWidth;
-        const h = window.innerHeight;
-        const x = w * (0.5 + 0.28 * Math.sin(elapsed));
-        const y = h * (0.42 + 0.22 * Math.cos(elapsed * 0.78));
-        el.style.setProperty('--x', `${x.toFixed(1)}px`);
-        el.style.setProperty('--y', `${y.toFixed(1)}px`);
-        rafId = window.requestAnimationFrame(animateDrift);
-      };
-      rafId = window.requestAnimationFrame(animateDrift);
-      return () => {
-        window.cancelAnimationFrame(rafId);
-      };
-    }
-
-    // Desktop cursor-following spotlight with zero React re-renders
     let targetX = window.innerWidth * 0.5;
     let targetY = window.innerHeight * 0.38;
     let ticking = false;
@@ -77,7 +57,7 @@ export default function AnimatedBackground() {
       data-testid="animated-background"
       data-theme={theme}
       aria-hidden="true"
-      className={`fixed inset-0 -z-10 pointer-events-none overflow-hidden transition-colors duration-500 ${
+      className={`fixed inset-0 -z-10 pointer-events-none overflow-hidden ${
         isDark ? 'bg-[#070709]' : 'bg-[#F4F1EA]'
       }`}
       style={{
@@ -88,7 +68,7 @@ export default function AnimatedBackground() {
     >
       {/* 1. Architectural 32px Dot Grid with Elliptical Top Mask */}
       <div
-        className="absolute inset-0 transition-opacity duration-500"
+        className="absolute inset-0 transition-opacity duration-300"
         style={{
           opacity: isDark ? 0.14 : 0.08,
           backgroundImage: isDark
@@ -108,7 +88,6 @@ export default function AnimatedBackground() {
             ? 'radial-gradient(650px circle at var(--x, 50vw) var(--y, 38vh), rgba(197, 160, 89, 0.14), transparent 45%)'
             : 'radial-gradient(650px circle at var(--x, 50vw) var(--y, 38vh), rgba(197, 160, 89, 0.18), transparent 45%)',
           mixBlendMode: isDark ? 'screen' : 'multiply',
-          willChange: 'background',
         }}
       />
     </div>

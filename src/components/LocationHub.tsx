@@ -3,6 +3,7 @@ import { MapPin, Clock, Phone, Navigation, AlertCircle, Car, Compass, CalendarCh
 import { WhatsAppIcon, FacebookIcon, InstagramIcon } from './BrandIcons';
 import { SALON_INFO } from '../data/salonData';
 import { getSalonStatusIST } from '../utils/booking';
+import TiltCard from './TiltCard';
 
 interface LocationHubProps {
   onOpenWhatsApp: () => void;
@@ -210,7 +211,7 @@ export default function LocationHub({ onOpenWhatsApp }: LocationHubProps) {
 
           </div>
 
-          {/* Interactive Google Maps Embed Frame (7 cols) — Real Google Maps in Background */}
+          {/* Interactive 3D Satellite Google Maps Embed Frame (7 cols) */}
           <div className="lg:col-span-7 rounded-2xl bg-[#EBE6DC] dark:bg-[#121214] border border-stone-900/10 dark:border-white/10 p-6 sm:p-8 flex flex-col justify-between space-y-6">
             
             <div className="space-y-4">
@@ -218,7 +219,7 @@ export default function LocationHub({ onOpenWhatsApp }: LocationHubProps) {
                 <div>
                   <span className="text-xs font-bold uppercase tracking-wider text-[#9A7848] dark:text-[#C5A059] flex items-center gap-1.5">
                     <Compass className="w-3.5 h-3.5" />
-                    <span>Live Google Maps Navigation</span>
+                    <span>3D Satellite Aerial Map · Bhensakhedi Road</span>
                   </span>
                   <h3 className="font-display text-xl sm:text-2xl font-bold text-[#141413] dark:text-[#F4F1EA] mt-0.5">
                     Visit Shivangi Hair Salon
@@ -230,19 +231,34 @@ export default function LocationHub({ onOpenWhatsApp }: LocationHubProps) {
                 </span>
               </div>
 
-              {/* Real Google Maps Background Container */}
-              <div className="relative rounded-xl overflow-hidden border border-stone-900/10 dark:border-white/10 bg-[#0B0B0C] aspect-[16/10] sm:aspect-[16/9] shadow-inner">
+              {/* Interactive 3D Perspective Tilt Frame with High-Zoom 3D Satellite/Hybrid Map & Floating 3D Pin Badge */}
+              <TiltCard
+                maxTilt={4}
+                className="relative rounded-xl overflow-hidden border border-stone-900/15 dark:border-[#C5A059]/30 bg-[#0B0B0C] aspect-[16/10] sm:aspect-[16/9] shadow-[0_20px_50px_rgba(0,0,0,0.45)]"
+              >
+                {/* Floating 3D Location Pin Badge (Top-Left) */}
+                <div className="depth-layer-z absolute top-3 left-3 sm:top-4 sm:left-4 z-20 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#070709]/90 backdrop-blur-md border border-[#C5A059]/50 text-[#F4F1EA] shadow-[0_10px_25px_rgba(0,0,0,0.65)] pointer-events-none">
+                  <span className="relative flex h-2.5 w-2.5">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#C5A059] opacity-75" />
+                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#C5A059]" />
+                  </span>
+                  <MapPin className="w-3.5 h-3.5 text-[#C5A059] shrink-0" />
+                  <span className="text-[10px] sm:text-[11px] font-mono font-bold uppercase tracking-wider text-[#F4F1EA]">
+                    3D SATELLITE PIN · 7897+5X4 BHOPAL
+                  </span>
+                </div>
+
                 <iframe
-                  title="Shivangi Hair Salon Google Maps Location"
+                  title="Shivangi Hair Salon 3D Satellite Google Maps Location"
                   src={SALON_INFO.googleMapsEmbedUrl}
-                  className="absolute inset-0 w-full h-full border-0 filter dark:invert-[0.88] dark:hue-rotate-180 dark:contrast-[1.05]"
+                  className="absolute inset-0 w-full h-full border-0"
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
                   allowFullScreen
                 />
 
-                {/* Bottom Floating Navigation Bar over the Map */}
-                <div className="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 z-10 p-3.5 sm:p-4 rounded-xl bg-[#F4F1EA]/95 dark:bg-[#0B0B0C]/95 backdrop-blur-md border border-stone-900/10 dark:border-white/15 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-lg">
+                {/* Bottom Floating Navigation Bar over the 3D Satellite Map */}
+                <div className="depth-layer-z absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 z-20 p-3.5 sm:p-4 rounded-xl bg-[#F4F1EA]/95 dark:bg-[#0B0B0C]/95 backdrop-blur-md border border-stone-900/10 dark:border-white/15 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-lg">
                   <div className="flex items-start gap-2.5">
                     <div className="w-9 h-9 rounded-lg bg-[#9A7848]/15 dark:bg-[#C5A059]/15 border border-[#9A7848]/40 dark:border-[#C5A059]/40 flex items-center justify-center shrink-0 mt-0.5">
                       <MapPin className="w-4 h-4 text-[#9A7848] dark:text-[#C5A059]" />
@@ -267,7 +283,7 @@ export default function LocationHub({ onOpenWhatsApp }: LocationHubProps) {
                     <span>Get Directions on Maps</span>
                   </a>
                 </div>
-              </div>
+              </TiltCard>
             </div>
 
             {/* 3 Simple Arrival Tips with Lucide Icons */}

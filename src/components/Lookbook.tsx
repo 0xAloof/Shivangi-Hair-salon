@@ -19,7 +19,7 @@ export default function Lookbook({ onSelectStyle }: LookbookProps) {
     : LOOKBOOK_ITEMS.filter(item => item.category === activeCategory);
 
   return (
-    <section id="gallery" className="py-16 sm:py-24 bg-transparent border-b border-stone-900/10 dark:border-white/10 scroll-mt-20 transition-colors duration-250">
+    <section id="gallery" className="py-16 sm:py-24 bg-transparent border-b border-stone-900/10 dark:border-white/10 scroll-mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -46,7 +46,7 @@ export default function Lookbook({ onSelectStyle }: LookbookProps) {
                 key={cat}
                 type="button"
                 onClick={() => setActiveCategory(cat)}
-                className={`min-h-[44px] px-4 py-2 text-xs font-bold rounded-lg transition-all cursor-pointer whitespace-nowrap shrink-0 ${
+                className={`min-h-[44px] px-4 py-2 text-xs font-bold rounded-lg transition-transform duration-200 cursor-pointer whitespace-nowrap shrink-0 ${
                   activeCategory === cat
                     ? 'bg-[#141413] dark:bg-[#F4F1EA] text-[#F4F1EA] dark:text-[#0B0B0C] shadow-sm'
                     : 'text-[#57534E] dark:text-[#A1A1AA] hover:text-[#141413] dark:hover:text-[#F4F1EA]'
@@ -70,11 +70,13 @@ export default function Lookbook({ onSelectStyle }: LookbookProps) {
                 <img
                   src={item.image}
                   alt={item.title}
+                  loading="lazy"
+                  decoding="async"
                   className={`w-full h-full ${item.imageClassName || 'object-cover object-center'} group-hover:scale-[1.15] transition-transform duration-500`}
                   referrerPolicy="no-referrer"
                 />
                 
-                <div className="absolute inset-0 bg-gradient-to-t from-[#070709]/85 via-[#070709]/20 to-transparent opacity-75 group-hover:opacity-90 transition-opacity" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#070709]/85 via-[#070709]/20 to-transparent opacity-75 group-hover:opacity-90 transition-opacity duration-300" />
                 
                 {/* Category tag */}
                 <div className="depth-layer-z absolute top-3 left-3 text-[11px] font-bold text-[#F4F1EA] bg-[#0B0B0C]/80 backdrop-blur-md px-2.5 py-1 rounded-md border border-white/15">
@@ -85,7 +87,7 @@ export default function Lookbook({ onSelectStyle }: LookbookProps) {
                 <button
                   type="button"
                   onClick={() => setPreviewImage(item.image)}
-                  className="depth-layer-z absolute top-3 right-3 w-9 h-9 rounded-lg bg-[#0B0B0C]/80 backdrop-blur-md text-white hover:bg-black transition-colors opacity-0 group-hover:opacity-100 flex items-center justify-center cursor-pointer"
+                  className="depth-layer-z absolute top-3 right-3 w-9 h-9 rounded-lg bg-[#0B0B0C]/80 backdrop-blur-md text-white hover:bg-black transition-opacity duration-300 opacity-0 group-hover:opacity-100 flex items-center justify-center cursor-pointer"
                   aria-label={`Preview ${item.title}`}
                 >
                   <Eye className="w-4 h-4" />

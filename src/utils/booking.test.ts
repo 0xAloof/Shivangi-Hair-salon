@@ -12,7 +12,7 @@ import {
 } from './booking';
 import { ServiceItem } from '../types';
 import { VIDEOS, MACRO_VIDEOS, HERO_CAROUSEL_SLIDES } from '../config/videos';
-import { LOOKBOOK_ITEMS, SALON_INFO, SERVICES, REVIEWS } from '../data/salonData';
+import { LOOKBOOK_ITEMS, SALON_INFO, SERVICES, REVIEWS, TRUST_SIGNALS } from '../data/salonData';
 
 const mockServices: ServiceItem[] = [
   {
@@ -20,9 +20,9 @@ const mockServices: ServiceItem[] = [
     name: 'Signature Haircut',
     category: 'hair',
     durationMinutes: 40,
-    priceMin: 150,
-    priceMax: 150,
-    shortDesc: 'Precision scissor cut',
+    priceMin: 100,
+    priceMax: 100,
+    shortDesc: 'Precision scissor cut. Starts from ₹100 · Negotiable.',
     inclusions: ['Wash', 'Style']
   },
   {
@@ -30,9 +30,9 @@ const mockServices: ServiceItem[] = [
     name: 'Beard Shaping',
     category: 'beard',
     durationMinutes: 25,
-    priceMin: 120,
-    priceMax: 120,
-    shortDesc: 'Razor styling',
+    priceMin: 100,
+    priceMax: 100,
+    shortDesc: 'Razor styling. Starts from ₹100 · Negotiable.',
     inclusions: ['Hot towel']
   }
 ];
@@ -45,21 +45,18 @@ test('isTuesday correctly identifies Tuesdays and other days', () => {
 });
 
 test('getSalonStatusIST evaluates Tuesday, open hours, and closed hours in Asia/Kolkata', () => {
-  // Tuesday 2026-11-10 at 12:00 IST (06:30 UTC)
   const tueDate = new Date('2026-11-10T06:30:00.000Z');
   const tueStatus = getSalonStatusIST(tueDate);
   assert.equal(tueStatus.isTuesday, true);
   assert.equal(tueStatus.isOpen, false);
   assert.equal(tueStatus.label, 'CLOSED TODAY · WEEKLY OFF');
 
-  // Wednesday 2026-11-11 at 14:00 IST (08:30 UTC) -> Open
   const openDate = new Date('2026-11-11T08:30:00.000Z');
   const openStatus = getSalonStatusIST(openDate);
   assert.equal(openStatus.isTuesday, false);
   assert.equal(openStatus.isOpen, true);
   assert.equal(openStatus.label, 'OPEN NOW · UNTIL 9:30 PM');
 
-  // Wednesday 2026-11-11 at 22:30 IST (17:00 UTC) -> Closed outside hours
   const closedDate = new Date('2026-11-11T17:00:00.000Z');
   const closedStatus = getSalonStatusIST(closedDate);
   assert.equal(closedStatus.isTuesday, false);
@@ -76,16 +73,15 @@ test('generateTimeSlots produces valid range from 8:30 AM to 9:00 PM', () => {
   assert.equal(slots[slots.length - 1], '9:00 PM');
 });
 
-test('calculateBookingTotal computes correct sum of minutes and Bhopal INR prices', () => {
+test('calculateBookingTotal computes correct sum of minutes and Starts from ₹100 pricing', () => {
   const total = calculateBookingTotal(['sig-cut', 'beard-detail'], mockServices);
   assert.equal(total.totalDurationMinutes, 65);
-  assert.equal(total.minPrice, 270);
-  assert.equal(total.maxPrice, 270);
+  assert.equal(total.minPrice, 200);
+  assert.equal(total.maxPrice, 200);
   assert.equal(total.selectedItems.length, 2);
 
-  // Real SERVICES from salonData
   const realTotal = calculateBookingTotal(['sig-cut', 'beard-detail'], SERVICES);
-  assert.equal(realTotal.minPrice, 250); // ₹150 + ₹100
+  assert.equal(realTotal.minPrice, 200);
 });
 
 test('isValidPhone correctly validates Indian mobile numbers', () => {
@@ -113,7 +109,7 @@ test('validateBookingForm detects missing or invalid fields and Tuesday closure'
     fullName: 'Rohit Sharma',
     phone: '9575830421',
     selectedServices: ['sig-cut'],
-    date: '2026-11-10', // Tuesday
+    date: '2026-11-10',
     timeSlot: '11:00 AM',
     notes: 'Low taper fade',
   });
@@ -132,7 +128,7 @@ test('validateBookingForm detects missing or invalid fields and Tuesday closure'
   assert.deepEqual(validRes.errors, {});
 });
 
-test('formatWhatsAppBookingMessage includes real INR pricing and zero Consultation Required strings', () => {
+test('formatWhatsAppBookingMessage includes Starts from ₹100 · Negotiable based on style & hair length', () => {
   const msg = formatWhatsAppBookingMessage(
     {
       fullName: 'Rohit Sharma',
@@ -147,15 +143,15 @@ test('formatWhatsAppBookingMessage includes real INR pricing and zero Consultati
 
   assert.ok(msg.includes('Rohit Sharma'));
   assert.ok(msg.includes('Signature Haircut'));
-  assert.ok(msg.includes('₹150'));
-  assert.ok(msg.includes('*Total Price:* ₹270'));
+  assert.ok(msg.includes('Starts from ₹100 · Negotiable'));
+  assert.ok(msg.includes('*Pricing:* Starts from ₹100 · Negotiable based on style & hair length'));
   assert.ok(!msg.includes('Consultation Required'));
 
   const url = createWhatsAppUrl('919575830421', msg);
   assert.ok(url.startsWith('https://wa.me/919575830421?text='));
 });
 
-test('MACRO_VIDEOS hardcodes Supabase URLs directly without local /videos/*.mp4 paths and uses short labels', () => {
+test('MACRO_VIDEOS and HERO_CAROUSEL_SLIDES use Supabase URLs, 150+ Verified Bhopal Customers, and zero heavy posters', () => {
   assert.equal(
     MACRO_VIDEOS.hero.src,
     'https://tsufahvimyzdlkdhqvnk.supabase.co/storage/v1/object/public/Videos/clipper-3d.mp4'
@@ -170,22 +166,34 @@ test('MACRO_VIDEOS hardcodes Supabase URLs directly without local /videos/*.mp4 
   );
 
   for (const url of Object.values(VIDEOS)) {
-    assert.ok(url.startsWith('https://tsufahvimyzdlkdhqvnk.supabase.co/'), `Expected Supabase URL, got ${url}`);
+    assert.ok(url.startsWith('https://tsufahvimyzdlkdhqvnk.supabase.co/'));
   }
 
   assert.equal(HERO_CAROUSEL_SLIDES.length, 3);
+  assert.equal(
+    HERO_CAROUSEL_SLIDES[0].eyebrow,
+    "BHOPAL'S BEST MEN'S SALON · 150+ VERIFIED BHOPAL CUSTOMERS"
+  );
+  assert.equal(
+    HERO_CAROUSEL_SLIDES[1].eyebrow,
+    '100% FRESH BLADE GUARANTEE · CLEAN & COMFORTABLE SHAVE'
+  );
   assert.equal(HERO_CAROUSEL_SLIDES[0].shortLabel, '01 · PRECISION CUT');
   assert.equal(HERO_CAROUSEL_SLIDES[1].shortLabel, '02 · FRESH BLADE BEARD');
   assert.equal(HERO_CAROUSEL_SLIDES[2].shortLabel, '03 · HOT TOWEL SPA');
 });
 
-test('LOOKBOOK_ITEMS has 16 distinct images, REVIEWS has Rohit Sharma, and developer LinkedIn URL is set', () => {
+test('LOOKBOOK_ITEMS, TRUST_SIGNALS, and REVIEWS use 150+ Verified Bhopal Customers and Verified Salon Regular · Bhopal', () => {
   assert.equal(LOOKBOOK_ITEMS.length, 16);
   const uniqueImages = new Set(LOOKBOOK_ITEMS.map(item => item.image));
   assert.equal(uniqueImages.size, 16);
+  assert.equal(TRUST_SIGNALS[0].label, '150+ Verified Bhopal Customers');
+  assert.equal(TRUST_SIGNALS[0].sub, 'Verified Salon Regular · Bhopal');
   assert.equal(REVIEWS[0].clientName, 'Rohit Sharma');
-  assert.equal(SALON_INFO.developer.name, 'Aashif Khan');
-  assert.equal(SALON_INFO.developer.githubUrl, 'https://github.com/0xAashif');
-  assert.equal(SALON_INFO.developer.linkedinUrl, 'https://www.linkedin.com/in/aashif-khan/');
+  for (const rev of REVIEWS) {
+    assert.equal(rev.badge, 'Verified Salon Regular · Bhopal');
+  }
+  assert.equal(SALON_INFO.googleMapsUrl, 'https://maps.app.goo.gl/e9NTifGQm489fwpp8');
+  assert.ok(SALON_INFO.googleMapsEmbedUrl.includes('&t=h&z=19'));
   assert.ok(SALON_INFO.googleMapsEmbedUrl.includes('output=embed'));
 });

@@ -201,7 +201,7 @@ export default function BookingModal({
                   <span>1. Select Grooming Services</span>
                 </label>
                 <span className="text-xs text-[#57534E] dark:text-[#A1A1AA]">
-                  Duration: <strong className="text-[#141413] dark:text-[#F4F1EA] font-mono">~{totalDurationMinutes} mins</strong> · Total: <strong className="text-[#9A7848] dark:text-[#C5A059] font-mono">₹{minPrice}</strong>
+                  Duration: <strong className="text-[#141413] dark:text-[#F4F1EA] font-mono">~{totalDurationMinutes} mins</strong> · <strong className="text-[#9A7848] dark:text-[#C5A059] font-mono">Starts from ₹100 · Negotiable</strong>
                 </span>
               </div>
 
@@ -233,7 +233,7 @@ export default function BookingModal({
                           {s.name}
                         </p>
                         <p className="text-[11px] text-[#57534E] dark:text-[#A1A1AA] font-mono">
-                          {s.durationMinutes} mins · <strong className="text-[#9A7848] dark:text-[#C5A059]">₹{s.priceMin}</strong>
+                          {s.durationMinutes} mins · <strong className="text-[#9A7848] dark:text-[#C5A059]">Starts from ₹100 · Negotiable</strong>
                         </p>
                       </div>
                       <div className={`w-4 h-4 rounded border flex items-center justify-center shrink-0 mt-0.5 ${

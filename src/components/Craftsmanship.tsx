@@ -32,7 +32,7 @@ export default function Craftsmanship({}: CraftsmanshipProps) {
       index: '02',
       icon: Compass,
       title: 'Cut According to Your Face Shape',
-      desc: 'We check your face cut and hair growth before touching the clipper so the style suits you 100%.',
+      desc: 'We check your face cut and hair growth before touching the clipper so the style naturally suits your face shape.',
     },
     {
       index: '03',
@@ -45,7 +45,7 @@ export default function Craftsmanship({}: CraftsmanshipProps) {
   return (
     <section 
       id="barber" 
-      className="py-20 sm:py-28 bg-transparent border-b border-stone-900/10 dark:border-white/10 scroll-mt-20 transition-colors duration-250 overflow-hidden"
+      className="py-20 sm:py-28 bg-transparent border-b border-stone-900/10 dark:border-white/10 scroll-mt-20 overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
@@ -67,6 +67,8 @@ export default function Craftsmanship({}: CraftsmanshipProps) {
                 <img
                   src="/barber.jpg"
                   alt="Master Barber at Shivangi Hair Salon Bhopal"
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover object-top"
                   referrerPolicy="no-referrer"
                 />
@@ -139,7 +141,7 @@ export default function Craftsmanship({}: CraftsmanshipProps) {
               })}
             </div>
 
-            {/* Video 3 Showcase Strip: Macro Black Japanese Straight Razor on Dark Slate */}
+            {/* Video 3 Showcase Strip: Macro 100% Fresh Sealed Blade on Dark Slate */}
             <div className="relative rounded-2xl overflow-hidden border border-stone-900/10 dark:border-white/10 bg-[#070709] p-5 sm:p-6 shadow-md">
               <MacroVideo
                 asset={MACRO_VIDEOS.trustStrip}
@@ -149,7 +151,7 @@ export default function Craftsmanship({}: CraftsmanshipProps) {
               <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div className="space-y-1">
                   <span className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#C5A059] block">
-                    Fresh Japanese Blade · Zero Reuse
+                    100% Fresh Sealed Blade · Zero Reuse
                   </span>
                   <h3 className="font-display text-base sm:text-lg font-bold text-[#F4F1EA]">
                     Sharp Beard Line-Up & UV-Cleaned Tools

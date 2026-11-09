@@ -3,7 +3,6 @@ export interface MacroVideoAsset {
   title: string;
   description: string;
   src: string;
-  poster: string;
   sources: string[];
 }
 
@@ -32,15 +31,13 @@ export const MACRO_VIDEOS: Record<'hero' | 'trustStrip' | 'serviceMenu', MacroVi
     title: '3D Macro Brushed-Steel Clipper',
     description: '3D Macro Brushed-Steel Clipper rotating on dark reflective glass',
     src: SUPABASE_HERO_VIDEO,
-    poster: '/gallery/salon_pro_tools.jpg',
     sources: [SUPABASE_HERO_VIDEO],
   },
   trustStrip: {
     id: 'trustStrip',
-    title: 'Macro Black Japanese Straight Razor',
-    description: 'Macro Black Japanese Straight Razor on dark slate with floating golden dust particles',
+    title: 'Macro Fresh Single-Use Blade',
+    description: 'Macro 100% Fresh Sealed Blade on dark slate with floating golden dust particles',
     src: SUPABASE_TRUST_VIDEO,
-    poster: '/gallery/shave_feather_blade.jpg',
     sources: [SUPABASE_TRUST_VIDEO],
   },
   serviceMenu: {
@@ -48,7 +45,6 @@ export const MACRO_VIDEOS: Record<'hero' | 'trustStrip' | 'serviceMenu', MacroVi
     title: 'Macro Steaming Folded Black Hot Towel',
     description: 'Macro Steaming Folded Black Hot Towel on dark wood grain',
     src: SUPABASE_SERVICES_VIDEO,
-    poster: '/gallery/shave_double_towel.jpg',
     sources: [SUPABASE_SERVICES_VIDEO],
   },
 };
@@ -76,7 +72,7 @@ export const HERO_CAROUSEL_SLIDES: HeroSlideConfig[] = [
     id: 'slide-clipper',
     asset: MACRO_VIDEOS.hero,
     videoUrl: VIDEOS.hero,
-    eyebrow: "BHOPAL'S #1 MEN'S SALON · 4.9 / 5.0 GOOGLE RATED (148+ REVIEWS)",
+    eyebrow: "BHOPAL'S BEST MEN'S SALON · 150+ VERIFIED BHOPAL CUSTOMERS",
     headline: 'Sirf Haircut Nahi, Aapka Pura Look Upgrade Karte Hain.',
     subtext:
       'Har baar naye barber se baal kharab hone ka darr khatam. Aapke face shape ke hisaab se perfect Skin Fade aur Haircut — taaki salon se nikalte hi log notice karein.',
@@ -86,7 +82,7 @@ export const HERO_CAROUSEL_SLIDES: HeroSlideConfig[] = [
     id: 'slide-razor',
     asset: MACRO_VIDEOS.trustStrip,
     videoUrl: VIDEOS.trust,
-    eyebrow: '100% FRESH BLADE GUARANTEE · ZERO SKIN IRRITATION',
+    eyebrow: '100% FRESH BLADE GUARANTEE · CLEAN & COMFORTABLE SHAVE',
     headline: 'Sharpest Beard Line-Up. Har Customer Ke Liye Naya Blade.',
     subtext:
       'Jaldi-baazi wale cuts ko bhool jaiye. UV-sanitized tools aur fresh single-use blade ke saath paayein ekdum sharp jawline aur clean beard styling.',

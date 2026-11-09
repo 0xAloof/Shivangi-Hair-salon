@@ -13,7 +13,13 @@ export default function TiltCard({
   maxTilt = 4,
 }: TiltCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
-  const [isTouchOrReduced, setIsTouchOrReduced] = useState(false);
+  const [isTouchOrReduced, setIsTouchOrReduced] = useState(() => {
+    if (typeof window === 'undefined') return true;
+    return (
+      window.matchMedia('(pointer: coarse)').matches ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    );
+  });
   const [isHovered, setIsHovered] = useState(false);
 
   const rawRotateX = useMotionValue(0);
@@ -29,8 +35,18 @@ export default function TiltCard({
     setIsTouchOrReduced(coarse || reduced);
   }, []);
 
+  if (isTouchOrReduced) {
+    return (
+      <div
+        className={`relative border border-stone-900/10 dark:border-white/10 transition-transform duration-300 ${className}`}
+      >
+        {children}
+      </div>
+    );
+  }
+
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (isTouchOrReduced || !cardRef.current) return;
+    if (!cardRef.current) return;
     const rect = cardRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
@@ -48,9 +64,7 @@ export default function TiltCard({
   };
 
   const handleMouseEnter = () => {
-    if (!isTouchOrReduced) {
-      setIsHovered(true);
-    }
+    setIsHovered(true);
   };
 
   const handleMouseLeave = () => {
@@ -58,16 +72,6 @@ export default function TiltCard({
     rawRotateX.set(0);
     rawRotateY.set(0);
   };
-
-  if (isTouchOrReduced) {
-    return (
-      <div
-        className={`relative border border-stone-900/10 dark:border-white/10 transition-colors duration-300 ${className}`}
-      >
-        {children}
-      </div>
-    );
-  }
 
   return (
     <div style={{ perspective: '1200px' }} className="w-full h-full">
@@ -82,7 +86,7 @@ export default function TiltCard({
           transformStyle: 'preserve-3d',
           willChange: 'transform',
         }}
-        className={`group/tilt relative border border-stone-900/10 dark:border-white/10 hover:border-[#9A7848]/55 dark:hover:border-[#C5A059]/55 transition-[border-color,box-shadow] duration-300 ${className}`}
+        className={`group/tilt relative border border-stone-900/10 dark:border-white/10 transition-transform duration-300 ${className}`}
       >
         {/* Dynamic Metallic Barber Gold Specular Border & Surface Sheen */}
         {isHovered && (

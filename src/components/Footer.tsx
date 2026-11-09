@@ -48,8 +48,8 @@ export default function Footer({ onOpenWhatsApp }: FooterProps) {
 
             <div className="flex items-center gap-1.5 text-[#9A7848] dark:text-[#C5A059]">
               <Star className="w-3.5 h-3.5 fill-current" />
-              <span className="text-[#141413] dark:text-[#F4F1EA] font-bold">4.9 / 5.0 Rated on Google</span>
-              <span className="text-[#57534E] dark:text-[#A1A1AA]">· 148+ Bhopal customers</span>
+              <span className="text-[#141413] dark:text-[#F4F1EA] font-bold">150+ Verified Bhopal Customers</span>
+              <span className="text-[#57534E] dark:text-[#A1A1AA]">· Verified Salon Regular · Bhopal</span>
             </div>
           </div>
 
