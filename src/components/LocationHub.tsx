@@ -1,14 +1,22 @@
+import { useState, useEffect } from 'react';
 import { MapPin, Clock, Phone, Navigation, AlertCircle, Car, Compass, CalendarCheck } from 'lucide-react';
 import { WhatsAppIcon, FacebookIcon, InstagramIcon } from './BrandIcons';
 import { SALON_INFO } from '../data/salonData';
+import { getSalonStatusIST } from '../utils/booking';
 
 interface LocationHubProps {
   onOpenWhatsApp: () => void;
 }
 
 export default function LocationHub({ onOpenWhatsApp }: LocationHubProps) {
-  const today = new Date();
-  const isTuesdayToday = today.getDay() === 2;
+  const [salonStatus, setSalonStatus] = useState(() => getSalonStatusIST());
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setSalonStatus(getSalonStatusIST());
+    }, 30000);
+    return () => window.clearInterval(timer);
+  }, []);
 
   return (
     <section
@@ -41,19 +49,35 @@ export default function LocationHub({ onOpenWhatsApp }: LocationHubProps) {
             
             <div className="space-y-6">
               
-              {/* Tuesday Closed Prominent Warning & Live Status */}
+              {/* Live IST Open/Closed Status Badge & Tuesday Notice */}
               <div className="p-4 rounded-xl bg-[#F4F1EA] dark:bg-[#0B0B0C] border border-stone-900/10 dark:border-white/10 space-y-2">
                 <div className="flex items-center gap-2">
-                  <span className={`w-2.5 h-2.5 rounded-full ${isTuesdayToday ? 'bg-amber-600' : 'bg-[#9A7848] dark:bg-[#C5A059] animate-pulse'}`} />
-                  <span className="font-bold text-xs uppercase tracking-wider text-[#9A7848] dark:text-[#C5A059]">
-                    {isTuesdayToday ? 'Closed Today (Tuesday Weekly Off)' : 'Open Today (8:30 AM – 9:30 PM)'}
+                  <span
+                    className={`w-2.5 h-2.5 rounded-full ${
+                      salonStatus.isTuesday
+                        ? 'bg-red-500 animate-pulse'
+                        : salonStatus.isOpen
+                        ? 'bg-emerald-500 animate-pulse'
+                        : 'bg-amber-500'
+                    }`}
+                  />
+                  <span
+                    className={`font-bold text-xs uppercase tracking-wider ${
+                      salonStatus.isTuesday
+                        ? 'text-red-600 dark:text-amber-400'
+                        : salonStatus.isOpen
+                        ? 'text-[#9A7848] dark:text-[#C5A059]'
+                        : 'text-amber-700 dark:text-amber-400'
+                    }`}
+                  >
+                    {salonStatus.label}
                   </span>
                 </div>
                 
                 <div className="flex items-start gap-2 text-xs text-[#57534E] dark:text-[#A1A1AA]">
                   <AlertCircle className="w-4 h-4 text-[#9A7848] dark:text-[#C5A059] shrink-0 mt-0.5" />
                   <span>
-                    <strong className="text-[#141413] dark:text-[#F4F1EA]">Tuesday Closed Notice:</strong> The salon remains closed every Tuesday for deep cleaning and weekly rest. Open Wednesday to Monday.
+                    <strong className="text-[#141413] dark:text-[#F4F1EA]">Tuesday Closed Notice:</strong> The salon remains closed every Tuesday for deep cleaning and weekly rest. Open Wednesday to Monday (8:30 AM – 9:30 PM IST).
                   </span>
                 </div>
               </div>

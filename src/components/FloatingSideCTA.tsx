@@ -9,7 +9,7 @@ interface FloatingSideCTAProps {
 export default function FloatingSideCTA({ onOpenWhatsApp }: FloatingSideCTAProps) {
   return (
     <aside 
-      className="fixed right-4 sm:right-7 top-[66%] sm:top-1/2 -translate-y-1/2 z-40 flex flex-col items-end gap-4 sm:gap-5 pointer-events-none select-none"
+      className="fixed bottom-6 right-5 z-50 flex flex-col items-end gap-3.5 sm:gap-4 pointer-events-none select-none"
       aria-label="Direct salon contact"
     >
       {/* Top: Small Green WhatsApp Circle (44px) */}

@@ -122,19 +122,75 @@ export function validateBookingForm(data: BookingFormData): BookingValidationRes
 }
 
 /**
- * Formats a clean, professional booking message for WhatsApp.
+ * Real-time Asia/Kolkata (IST) salon open/closed status check.
+ * - Tuesday: "CLOSED TODAY · WEEKLY OFF"
+ * - Outside 8:30 AM – 9:30 PM IST: "CLOSED NOW · OPENS 8:30 AM"
+ * - Inside 8:30 AM – 9:30 PM IST (Wed–Mon): "OPEN NOW · UNTIL 9:30 PM"
+ */
+export function getSalonStatusIST(now: Date = new Date()): {
+  label: string;
+  isOpen: boolean;
+  isTuesday: boolean;
+} {
+  const formatter = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'Asia/Kolkata',
+    weekday: 'short',
+    hour: 'numeric',
+    minute: 'numeric',
+    hour12: false,
+  });
+
+  const parts = formatter.formatToParts(now);
+  const weekday = parts.find(p => p.type === 'weekday')?.value || '';
+  const hourStr = parts.find(p => p.type === 'hour')?.value || '0';
+  const minuteStr = parts.find(p => p.type === 'minute')?.value || '0';
+
+  const hour = Number(hourStr) % 24;
+  const minute = Number(minuteStr);
+  const totalMinutes = hour * 60 + minute;
+
+  // Open 8:30 AM (510 mins) to 9:30 PM (1290 mins)
+  const openMinutes = 8 * 60 + 30;
+  const closeMinutes = 21 * 60 + 30;
+
+  if (weekday === 'Tue') {
+    return {
+      label: 'CLOSED TODAY · WEEKLY OFF',
+      isOpen: false,
+      isTuesday: true,
+    };
+  }
+
+  if (totalMinutes < openMinutes || totalMinutes >= closeMinutes) {
+    return {
+      label: 'CLOSED NOW · OPENS 8:30 AM',
+      isOpen: false,
+      isTuesday: false,
+    };
+  }
+
+  return {
+    label: 'OPEN NOW · UNTIL 9:30 PM',
+    isOpen: true,
+    isTuesday: false,
+  };
+}
+
+/**
+ * Formats a clean, professional booking message for WhatsApp with real Bhopal INR pricing.
  */
 export function formatWhatsAppBookingMessage(
   data: BookingFormData,
   allServices: ServiceItem[]
 ): string {
-  const { selectedItems, totalDurationMinutes, minPrice, maxPrice } = calculateBookingTotal(
+  const { selectedItems, totalDurationMinutes, minPrice } = calculateBookingTotal(
     data.selectedServices,
     allServices
   );
 
-  const serviceNames = selectedItems.map(s => `• ${s.name} (~${s.durationMinutes}m)`).join('\n');
-  const priceRange = minPrice === maxPrice ? `₹${minPrice}` : `₹${minPrice} - ₹${maxPrice}`;
+  const serviceNames = selectedItems
+    .map(s => `• ${s.name} (~${s.durationMinutes}m) — ₹${s.priceMin}`)
+    .join('\n');
 
   return [
     `*APPOINTMENT RESERVATION - SHIVANGI HAIR SALON*`,
@@ -145,10 +201,10 @@ export function formatWhatsAppBookingMessage(
     `*Preferred Time Slot:* ${data.timeSlot}`,
     ``,
     `*Selected Services:*`,
-    serviceNames || '• Consultation Required',
+    serviceNames || '• Haircut & Grooming (₹150)',
     ``,
     `*Estimated Duration:* ~${totalDurationMinutes} minutes`,
-    `*Pricing:* Consultation Required`,
+    `*Total Price:* ₹${minPrice}`,
     data.notes ? `*Notes/Preferences:* ${data.notes.trim()}` : ``,
     ``,
     `*Salon Location:* Near The Fitness Planet, Bhensakhedi Road, Bhopal`,

@@ -26,7 +26,7 @@ export const SALON_INFO = {
   developer: {
     name: "Aashif Khan",
     githubUrl: "https://github.com/0xAashif",
-    linkedinUrl: "https://www.linkedin.com/in/aashif-khan",
+    linkedinUrl: "https://www.linkedin.com/in/aashif-khan/",
   },
 };
 
@@ -44,8 +44,8 @@ export const SERVICES: ServiceItem[] = [
     name: "Signature Haircut & Skin Fade",
     category: "hair",
     durationMinutes: 45,
-    priceMin: 350,
-    priceMax: 450,
+    priceMin: 150,
+    priceMax: 150,
     shortDesc: "Haircut styled for your face shape with a smooth skin or low fade, refreshing hair wash, and natural matte styling.",
     inclusions: [
       "Quick face-shape & hair growth check",
@@ -60,8 +60,8 @@ export const SERVICES: ServiceItem[] = [
     name: "Classic Scissor Cut & Taper",
     category: "hair",
     durationMinutes: 40,
-    priceMin: 300,
-    priceMax: 400,
+    priceMin: 120,
+    priceMax: 120,
     shortDesc: "Neat scissor haircut with clean sideburns, sharp neck line-up, and a smart everyday finish for office or daily wear.",
     inclusions: [
       "Style check according to your hair volume",
@@ -75,8 +75,8 @@ export const SERVICES: ServiceItem[] = [
     name: "Sharp Razor Line & Hair Design Cut",
     category: "hair",
     durationMinutes: 50,
-    priceMin: 500,
-    priceMax: 700,
+    priceMin: 200,
+    priceMax: 200,
     shortDesc: "Clean skin fade with a sharp razor side-part or custom hair line design using a fresh straight blade.",
     inclusions: [
       "Custom side-part or razor line design",
@@ -93,8 +93,8 @@ export const SERVICES: ServiceItem[] = [
     name: "Sharp Beard Trim & Razor Line-Up",
     category: "beard",
     durationMinutes: 30,
-    priceMin: 200,
-    priceMax: 300,
+    priceMin: 100,
+    priceMax: 100,
     shortDesc: "Crisp cheek and neck lines with a fresh blade, warm towel steam to soften hair, and nourishing beard oil.",
     inclusions: [
       "Warm steam towel to soften beard",
@@ -109,8 +109,8 @@ export const SERVICES: ServiceItem[] = [
     name: "Hot Towel Straight Razor Shave",
     category: "beard",
     durationMinutes: 35,
-    priceMin: 250,
-    priceMax: 350,
+    priceMin: 120,
+    priceMax: 120,
     shortDesc: "Relaxing warm towel steam, rich shaving foam, and a smooth zero-irritation shave with a brand-new blade.",
     inclusions: [
       "Pre-shave softening oil",
@@ -126,8 +126,8 @@ export const SERVICES: ServiceItem[] = [
     name: "Relaxing Head Massage & Hair Spa",
     category: "spa",
     durationMinutes: 40,
-    priceMin: 600,
-    priceMax: 800,
+    priceMin: 200,
+    priceMax: 200,
     shortDesc: "Deeply relaxing 20-minute head and shoulder massage, warm hair steam, and anti-dandruff scalp wash.",
     inclusions: [
       "Scalp dryness & dandruff check",
@@ -142,8 +142,8 @@ export const SERVICES: ServiceItem[] = [
     name: "Charcoal Face Clean-Up & Detan",
     category: "spa",
     durationMinutes: 25,
-    priceMin: 300,
-    priceMax: 400,
+    priceMin: 250,
+    priceMax: 250,
     shortDesc: "Removes dust, oil, and sun tan with an active charcoal scrub, warm steam, and a cooling aloe vera mask.",
     inclusions: [
       "Deep face wash & warm pore-opening steam",
@@ -156,8 +156,8 @@ export const SERVICES: ServiceItem[] = [
     name: "Full Grooming Combo (Haircut + Beard + Massage + Face Clean-Up)",
     category: "spa",
     durationMinutes: 90,
-    priceMin: 1200,
-    priceMax: 1500,
+    priceMin: 499,
+    priceMax: 499,
     shortDesc: "Complete 90-minute makeover: Signature Haircut, Sharp Beard Line-Up, Head Massage Spa, and Charcoal Face Clean-Up.",
     inclusions: [
       "All 4 popular salon services included",
@@ -252,7 +252,7 @@ export function computeQuizRecommendation(
 export const REVIEWS: ReviewItem[] = [
   {
     id: "rev-1",
-    clientName: "Aashif Khan",
+    clientName: "Rohit Sharma",
     rating: 5,
     reviewDate: "2 weeks ago",
     serviceDone: "Signature Haircut & Beard Shaping",
@@ -301,10 +301,10 @@ export interface LookbookItem {
 
 /**
  * 16 Gallery Items — Strictly 4 items per category (Skin Fade, Beard Detailing, Hot Towel Shave, Salon).
- * Every single item uses a 100% unique image file. NEVER uses /barber.jpg or /logo.jpg.
+ * Every single item has a 100% unique image. NEVER uses /barber.jpg or /logo.jpg.
  */
 export const LOOKBOOK_ITEMS: LookbookItem[] = [
-  // 1. Skin Fade (4 unique images)
+  // 1. Skin Fade (4 distinct images)
   {
     id: "fade-1",
     title: "Textured Crop & Skin Fade",
@@ -342,7 +342,7 @@ export const LOOKBOOK_ITEMS: LookbookItem[] = [
     imageClassName: "object-cover object-center",
   },
 
-  // 2. Beard Detailing (4 unique images)
+  // 2. Beard Detailing (4 distinct images)
   {
     id: "beard-1",
     title: "Sharp Razor Beard Line-Up",
@@ -380,7 +380,7 @@ export const LOOKBOOK_ITEMS: LookbookItem[] = [
     imageClassName: "object-cover object-center",
   },
 
-  // 3. Hot Towel Shave (4 unique images)
+  // 3. Hot Towel Shave (4 distinct images)
   {
     id: "shave-1",
     title: "Hot Towel Straight Razor Shave",
@@ -418,15 +418,15 @@ export const LOOKBOOK_ITEMS: LookbookItem[] = [
     imageClassName: "object-cover object-center",
   },
 
-  // 4. Salon (4 unique images)
+  // 4. Salon (4 distinct images)
   {
     id: "salon-1",
     title: "Main Salon Floor & Barber Chairs",
     category: "Salon",
     desc: "Comfortable black hydraulic grooming chairs at Shivangi Hair Salon.",
     locationTag: "Bhopal Salon",
-    image: "/salon_chair.jpg",
-    imageClassName: "object-cover object-top",
+    image: "/interior_luxury.jpg",
+    imageClassName: "object-cover object-[center_15%] scale-[1.12]",
     isSalonPhoto: true,
   },
   {
@@ -435,8 +435,8 @@ export const LOOKBOOK_ITEMS: LookbookItem[] = [
     category: "Salon",
     desc: "Bright mirror stations stocked with top hair and beard care products.",
     locationTag: "Bhopal Salon",
-    image: "/salon_station.jpg",
-    imageClassName: "object-cover object-top",
+    image: "/gallery/salon_mirror_stations.jpg",
+    imageClassName: "object-cover object-center",
     isSalonPhoto: true,
   },
   {

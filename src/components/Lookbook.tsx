@@ -9,10 +9,10 @@ interface LookbookProps {
 }
 
 export default function Lookbook({ onSelectStyle }: LookbookProps) {
-  const [activeCategory, setActiveCategory] = useState<string>('All');
+  const [activeCategory, setActiveCategory] = useState<string>('Skin Fade');
   const [previewImage, setPreviewImage] = useState<string | null>(null);
 
-  const categories = ['All', 'Skin Fade', 'Beard Detailing', 'Hot Towel Shave', 'Salon'];
+  const categories = ['Skin Fade', 'Beard Detailing', 'Hot Towel Shave', 'Salon', 'All'];
 
   const filteredItems = activeCategory === 'All'
     ? LOOKBOOK_ITEMS

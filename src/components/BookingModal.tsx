@@ -71,7 +71,7 @@ export default function BookingModal({
   if (!isOpen) return null;
 
   const timeSlots = generateTimeSlots();
-  const { totalDurationMinutes } = calculateBookingTotal(
+  const { totalDurationMinutes, minPrice } = calculateBookingTotal(
     formData.selectedServices,
     SERVICES
   );
@@ -201,7 +201,7 @@ export default function BookingModal({
                   <span>1. Select Grooming Services</span>
                 </label>
                 <span className="text-xs text-[#57534E] dark:text-[#A1A1AA]">
-                  Duration: <strong className="text-[#141413] dark:text-[#F4F1EA] font-mono">~{totalDurationMinutes} mins</strong>
+                  Duration: <strong className="text-[#141413] dark:text-[#F4F1EA] font-mono">~{totalDurationMinutes} mins</strong> · Total: <strong className="text-[#9A7848] dark:text-[#C5A059] font-mono">₹{minPrice}</strong>
                 </span>
               </div>
 
@@ -232,8 +232,8 @@ export default function BookingModal({
                         <p className={`text-xs font-bold ${isChecked ? 'text-[#141413] dark:text-[#F4F1EA]' : 'text-[#57534E] dark:text-[#A1A1AA]'}`}>
                           {s.name}
                         </p>
-                        <p className="text-[11px] text-[#57534E] dark:text-[#A1A1AA]">
-                          {s.durationMinutes} mins · Salon Consultation
+                        <p className="text-[11px] text-[#57534E] dark:text-[#A1A1AA] font-mono">
+                          {s.durationMinutes} mins · <strong className="text-[#9A7848] dark:text-[#C5A059]">₹{s.priceMin}</strong>
                         </p>
                       </div>
                       <div className={`w-4 h-4 rounded border flex items-center justify-center shrink-0 mt-0.5 ${
@@ -320,7 +320,7 @@ export default function BookingModal({
                 <input
                   id="client-name"
                   type="text"
-                  placeholder="e.g. Aashif Khan"
+                  placeholder="e.g. Rohit Sharma"
                   value={formData.fullName}
                   onChange={(e) => {
                     setFormData(prev => ({ ...prev, fullName: e.target.value }));

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Sparkles } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
+import { Star, ShieldCheck, Sparkles } from 'lucide-react';
 import { HERO_CAROUSEL_SLIDES } from '../config/videos';
 import MacroVideo from './MacroVideo';
 
@@ -22,6 +22,12 @@ export default function Hero({}: HeroProps) {
   }, [activeIndex]);
 
   const activeSlide = HERO_CAROUSEL_SLIDES[activeIndex];
+
+  const renderEyebrowIcon = (index: number) => {
+    if (index === 0) return <Star className="w-3.5 h-3.5 fill-[#C5A059] text-[#C5A059] shrink-0" />;
+    if (index === 1) return <ShieldCheck className="w-3.5 h-3.5 text-[#C5A059] shrink-0" />;
+    return <Sparkles className="w-3.5 h-3.5 text-[#C5A059] shrink-0" />;
+  };
 
   return (
     <section
@@ -45,8 +51,8 @@ export default function Hero({}: HeroProps) {
             >
               <MacroVideo
                 asset={activeSlide.asset}
-                className="w-full h-full object-cover object-center filter brightness-[0.68] contrast-[1.08]"
-                overlayClassName="bg-gradient-to-t from-[#070709] via-[#070709]/55 to-[#070709]/65"
+                className="w-full h-full object-cover object-center filter brightness-[0.65] contrast-[1.08]"
+                overlayClassName="bg-gradient-to-t from-[#070709] via-[#070709]/60 to-[#070709]/70"
               />
             </motion.div>
           </AnimatePresence>
@@ -66,9 +72,9 @@ export default function Hero({}: HeroProps) {
               transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
               className="space-y-4 sm:space-y-5"
             >
-              {/* Eyebrow with Lucide Icon */}
+              {/* Eyebrow with Lucide Icon (Zero generic emojis) */}
               <div className="inline-flex items-center justify-center gap-2 text-[10px] sm:text-xs font-bold uppercase tracking-[0.28em] text-[#C5A059]">
-                <Sparkles className="w-3.5 h-3.5 text-[#C5A059] shrink-0" />
+                {renderEyebrowIcon(activeIndex)}
                 <span>{activeSlide.eyebrow}</span>
               </div>
 
@@ -85,13 +91,13 @@ export default function Hero({}: HeroProps) {
           </AnimatePresence>
         </div>
 
-        {/* Bottom: Clickable Slide Progress Bars (>=44px touch target height) */}
+        {/* Bottom: Clickable Slide Progress Bars (Short non-truncating labels, >=44px touch target height) */}
         <div
           className="relative z-20 w-full max-w-2xl mx-auto px-4 sm:px-6 pb-5 sm:pb-7"
           role="tablist"
           aria-label="Hero video slides"
         >
-          <div className="grid grid-cols-3 gap-3 sm:gap-4">
+          <div className="grid grid-cols-3 gap-2.5 sm:gap-4">
             {HERO_CAROUSEL_SLIDES.map((slide, idx) => {
               const isActive = idx === activeIndex;
               return (
@@ -105,7 +111,7 @@ export default function Hero({}: HeroProps) {
                   className="group min-h-[44px] flex flex-col justify-end pb-2 text-left cursor-pointer focus:outline-none"
                 >
                   <span
-                    className={`text-[10px] sm:text-[11px] font-mono uppercase tracking-wider mb-2 block truncate transition-colors ${
+                    className={`text-[9px] sm:text-[11px] font-mono uppercase tracking-wider mb-2 block whitespace-nowrap transition-colors ${
                       isActive
                         ? 'text-[#C5A059] font-semibold'
                         : 'text-[#F4F1EA]/55 group-hover:text-[#F4F1EA]/85'

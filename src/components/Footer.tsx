@@ -3,8 +3,8 @@ import {
   MapPin,
   Star,
   Sparkles,
-  UserCheck,
   Scissors,
+  ClipboardList,
   Github,
   Linkedin,
   Code2,
@@ -73,7 +73,7 @@ export default function Footer({ onOpenWhatsApp }: FooterProps) {
                   to="/craftsman"
                   className="inline-flex items-center gap-2 hover:text-[#141413] dark:hover:text-[#F4F1EA] transition-colors"
                 >
-                  <UserCheck className="w-3.5 h-3.5 text-[#9A7848] dark:text-[#C5A059] shrink-0" />
+                  <Scissors className="w-3.5 h-3.5 text-[#9A7848] dark:text-[#C5A059] shrink-0" />
                   <span>Craftsman</span>
                 </Link>
               </li>
@@ -82,7 +82,7 @@ export default function Footer({ onOpenWhatsApp }: FooterProps) {
                   to="/menu"
                   className="inline-flex items-center gap-2 hover:text-[#141413] dark:hover:text-[#F4F1EA] transition-colors"
                 >
-                  <Scissors className="w-3.5 h-3.5 text-[#9A7848] dark:text-[#C5A059] shrink-0" />
+                  <ClipboardList className="w-3.5 h-3.5 text-[#9A7848] dark:text-[#C5A059] shrink-0" />
                   <span>Service Menu</span>
                 </Link>
               </li>
@@ -184,11 +184,11 @@ export default function Footer({ onOpenWhatsApp }: FooterProps) {
               <Code2 className="w-3.5 h-3.5 text-[#9A7848] dark:text-[#C5A059] shrink-0" />
               <span>Developed by</span>
               <a
-                href={SALON_INFO.developer.githubUrl}
+                href={SALON_INFO.developer.linkedinUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="font-bold text-[#141413] dark:text-[#F4F1EA] hover:text-[#9A7848] dark:hover:text-[#C5A059] underline underline-offset-4 transition-colors"
-                title="Aashif Khan on GitHub"
+                title="Aashif Khan on LinkedIn"
               >
                 {SALON_INFO.developer.name}
               </a>

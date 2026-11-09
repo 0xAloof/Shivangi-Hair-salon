@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Clock, Check, Plus, Minus } from 'lucide-react';
+import { Clock, Check, Plus, Minus, IndianRupee } from 'lucide-react';
 import { WhatsAppIcon } from './BrandIcons';
 import { SERVICES, SALON_INFO } from '../data/salonData';
 import { MACRO_VIDEOS } from '../config/videos';
@@ -31,12 +31,19 @@ export default function ServiceMenu({}: ServiceMenuProps) {
     );
   };
 
+  const formatServicePrice = (service: ServiceItem) => {
+    return service.priceMin === service.priceMax
+      ? `₹${service.priceMin}`
+      : `₹${service.priceMin} – ₹${service.priceMax}`;
+  };
+
   const handleBookSingleOnWhatsApp = (service: ServiceItem) => {
+    const priceLabel = formatServicePrice(service);
     const msg = [
       `*APPOINTMENT INQUIRY - SHIVANGI HAIR SALON*`,
       `Hello Master Barber, I would like to book the following service at your Bhopal salon:`,
       `Service: ${service.name} (${service.durationMinutes} Mins)`,
-      `Pricing: Consultation Required`,
+      `Price: ${priceLabel}`,
       `Salon: Bhensakhedi Road, near The Fitness Planet`,
       `Please confirm current chair availability.`
     ].join('\n');
@@ -46,11 +53,12 @@ export default function ServiceMenu({}: ServiceMenuProps) {
 
   const selectedItems = SERVICES.filter((s) => selectedIds.includes(s.id));
   const totalDuration = selectedItems.reduce((acc, s) => acc + s.durationMinutes, 0);
+  const totalPrice = selectedItems.reduce((acc, s) => acc + s.priceMin, 0);
 
   const handleBookSelectionOnWhatsApp = () => {
     if (selectedItems.length === 0) return;
     const itemsList = selectedItems
-      .map((s) => `• ${s.name} (${s.durationMinutes} mins)`)
+      .map((s) => `• ${s.name} (${s.durationMinutes} mins — ₹${s.priceMin})`)
       .join('\n');
     const msg = [
       `*CUSTOM GROOMING PLAN - SHIVANGI HAIR SALON*`,
@@ -58,7 +66,7 @@ export default function ServiceMenu({}: ServiceMenuProps) {
       itemsList,
       ``,
       `Estimated Time: ~${totalDuration} Mins`,
-      `Pricing: Consultation Required`,
+      `Total Price: ₹${totalPrice}`,
       `Salon: Bhensakhedi Road, Bhopal`,
       `Please confirm chair availability.`
     ].join('\n');
@@ -93,7 +101,7 @@ export default function ServiceMenu({}: ServiceMenuProps) {
               Haircut, Beard & Grooming Menu
             </h2>
             <p className="text-xs sm:text-sm text-[#C2BCB0] max-w-xl">
-              No rushed cuts. Every appointment includes a face-shape style check, UV-cleaned tools, a fresh blade, and warm towel prep.
+              Transparent Bhopal pricing with zero hidden charges. Every appointment includes a face-shape style check, UV-cleaned tools, a fresh blade, and warm towel prep.
             </p>
           </div>
 
@@ -122,7 +130,7 @@ export default function ServiceMenu({}: ServiceMenuProps) {
           <div className="hidden md:grid md:grid-cols-12 px-6 py-3 rounded-xl border border-white/10 text-[11px] font-bold uppercase tracking-[0.2em] text-[#C5A059] bg-[#121214]/85 backdrop-blur-sm">
             <div className="col-span-6">Service Details</div>
             <div className="col-span-2 text-center">Time Needed</div>
-            <div className="col-span-2 text-right">Pricing</div>
+            <div className="col-span-2 text-right">Price</div>
             <div className="col-span-2 text-right">Book (WhatsApp)</div>
           </div>
 
@@ -204,10 +212,11 @@ export default function ServiceMenu({}: ServiceMenuProps) {
                     <span className="font-mono font-medium">{service.durationMinutes} Mins</span>
                   </div>
 
-                  {/* Col 3: Price Purged - Consultation Required (2 cols) */}
-                  <div className="md:col-span-2 flex md:justify-end items-center pl-7 md:pl-0">
-                    <span className="depth-layer-z text-[11px] sm:text-xs uppercase tracking-wider font-semibold text-[#C5A059]">
-                      Consultation Required
+                  {/* Col 3: Transparent Real Bhopal Price (2 cols) */}
+                  <div className="md:col-span-2 flex md:justify-end items-center gap-1 pl-7 md:pl-0">
+                    <IndianRupee className="depth-layer-z w-3.5 h-3.5 text-[#C5A059] stroke-[2]" />
+                    <span className="depth-layer-z font-mono text-base sm:text-lg font-bold text-[#F4F1EA] tabular-nums">
+                      {service.priceMin}
                     </span>
                   </div>
 
@@ -230,7 +239,7 @@ export default function ServiceMenu({}: ServiceMenuProps) {
           })}
         </div>
 
-        {/* Minimalist Session Planner Strip */}
+        {/* Minimalist Session Planner Strip with Dynamic Total Price Calculation */}
         <div className="mt-8 rounded-2xl bg-[#121214]/90 backdrop-blur-md border border-white/10 p-5 sm:p-6 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-sm">
           <div className="space-y-1 text-center sm:text-left">
             <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#C5A059]">
@@ -240,7 +249,7 @@ export default function ServiceMenu({}: ServiceMenuProps) {
               {selectedItems.length} Service{selectedItems.length === 1 ? '' : 's'} Selected
             </p>
             <p className="text-[11px] text-[#B8B2A6] max-w-md">
-              {selectedItems.map((s) => s.name).join(' + ') || 'Select one or more services above to book together.'}
+              {selectedItems.map((s) => `${s.name} (₹${s.priceMin})`).join(' + ') || 'Select one or more services above to calculate your total.'}
             </p>
           </div>
 
@@ -249,17 +258,17 @@ export default function ServiceMenu({}: ServiceMenuProps) {
               <span className="text-[10px] text-[#A6A095] uppercase tracking-wider block font-semibold">
                 Total Time
               </span>
-              <span className="font-mono text-sm sm:text-base font-bold text-[#F4F1EA]">
+              <span className="font-mono text-sm sm:text-base font-bold text-[#F4F1EA] tabular-nums">
                 ~{totalDuration} Mins
               </span>
             </div>
 
             <div className="text-right">
               <span className="text-[10px] text-[#A6A095] uppercase tracking-wider block font-semibold">
-                Pricing
+                Total Price
               </span>
-              <span className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#C5A059]">
-                Consultation Required
+              <span className="font-mono text-base sm:text-xl font-bold text-[#C5A059] tabular-nums">
+                ₹{totalPrice}
               </span>
             </div>
 
@@ -271,7 +280,7 @@ export default function ServiceMenu({}: ServiceMenuProps) {
                 disabled={selectedItems.length === 0}
                 className="cta-circle w-11 h-11 bg-[#25D366] text-white shadow-lg hover:bg-[#20BA59] cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center shrink-0 focus:outline-none"
                 aria-label="Send selection to WhatsApp"
-                title="Inquire via WhatsApp"
+                title="Book selected services via WhatsApp"
               >
                 <WhatsAppIcon className="w-5 h-5 text-white shrink-0" />
               </button>
