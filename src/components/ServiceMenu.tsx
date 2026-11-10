@@ -4,7 +4,7 @@ import { WhatsAppIcon } from './BrandIcons';
 import { SERVICES, SALON_INFO } from '../data/salonData';
 import { MACRO_VIDEOS } from '../config/videos';
 import { ServiceItem } from '../types';
-import { createWhatsAppUrl, openExternalUrl } from '../utils/booking';
+import { buildHinglishWhatsAppMessage, createWhatsAppUrl, openExternalUrl } from '../utils/booking';
 import MacroVideo from './MacroVideo';
 import TiltCard from './TiltCard';
 
@@ -32,14 +32,7 @@ export default function ServiceMenu({}: ServiceMenuProps) {
   };
 
   const handleBookSingleOnWhatsApp = (service: ServiceItem) => {
-    const msg = [
-      `*APPOINTMENT INQUIRY - SHIVANGI HAIR SALON*`,
-      `Hello Master Barber, I would like to book the following service at your Bhopal salon:`,
-      `Service: ${service.name} (${service.durationMinutes} Mins)`,
-      `Pricing: Starts from ₹100 · Negotiable`,
-      `Salon: Bhensakhedi Road, near The Fitness Planet`,
-      `Please confirm current chair availability.`
-    ].join('\n');
+    const msg = buildHinglishWhatsAppMessage(service.name);
     const url = createWhatsAppUrl(SALON_INFO.rawPhone, msg);
     openExternalUrl(url);
   };
@@ -49,19 +42,8 @@ export default function ServiceMenu({}: ServiceMenuProps) {
 
   const handleBookSelectionOnWhatsApp = () => {
     if (selectedItems.length === 0) return;
-    const itemsList = selectedItems
-      .map((s) => `• ${s.name} (${s.durationMinutes} mins — Starts from ₹100 · Negotiable)`)
-      .join('\n');
-    const msg = [
-      `*CUSTOM GROOMING PLAN - SHIVANGI HAIR SALON*`,
-      `Hello Master Barber, I selected my salon services:`,
-      itemsList,
-      ``,
-      `Estimated Time: ~${totalDuration} Mins`,
-      `Pricing: Starts from ₹100 · Negotiable based on style & hair length`,
-      `Salon: Bhensakhedi Road, Bhopal`,
-      `Please confirm chair availability.`
-    ].join('\n');
+    const combinedNames = selectedItems.map((s) => s.name).join(' + ');
+    const msg = buildHinglishWhatsAppMessage(combinedNames);
     const url = createWhatsAppUrl(SALON_INFO.rawPhone, msg);
     openExternalUrl(url);
   };

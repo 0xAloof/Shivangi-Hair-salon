@@ -19,23 +19,38 @@ export default function Lookbook({ onSelectStyle }: LookbookProps) {
     : LOOKBOOK_ITEMS.filter(item => item.category === activeCategory);
 
   return (
-    <section id="gallery" className="py-16 sm:py-24 bg-transparent border-b border-stone-900/10 dark:border-white/10 scroll-mt-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section
+      id="gallery"
+      className="relative py-16 sm:py-24 bg-[#070709] border-b border-white/10 scroll-mt-20 overflow-hidden"
+    >
+      {/* Salon Original Interior Photo Background with Clean Dark Editorial Overlay */}
+      <div className="absolute inset-0 pointer-events-none select-none overflow-hidden" aria-hidden="true">
+        <img
+          src="/interior_luxury.jpg"
+          alt=""
+          loading="lazy"
+          decoding="async"
+          className="w-full h-full object-cover object-center filter brightness-[0.22] contrast-125"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#070709]/80 via-[#070709]/55 to-[#070709]/85" />
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 sm:mb-12 gap-6">
           <div className="space-y-3">
             <div className="flex items-center gap-3">
-              <span className="w-8 h-[1px] bg-[#9A7848] dark:bg-[#C5A059]" />
-              <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-[#9A7848] dark:text-[#C5A059]">
+              <span className="w-8 h-[1px] bg-[#C5A059]" />
+              <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-[#C5A059]">
                 Real Salon Work & Gallery
               </span>
             </div>
-            <h2 className="font-display text-3xl sm:text-5xl font-bold text-[#141413] dark:text-[#F4F1EA] tracking-tight">
+            <h2 className="font-display text-3xl sm:text-5xl font-bold text-[#F4F1EA] tracking-tight">
               Precision Cuts & Razor Detailing
             </h2>
-            <p className="text-xs sm:text-sm text-[#57534E] dark:text-[#A1A1AA] max-w-xl">
-              Explore our skin fades, sharp beard line-ups, relaxing hot towel shaves, and AC grooming chairs in Bhopal.
+            <p className="text-xs sm:text-sm text-[#C2BCB0] max-w-xl">
+              Explore our Kids School Fades, College Teen Textured Crops, Young Man Skin Fades & Beard Line-Ups, and Senior Classic Scissor Cuts in Bhopal.
             </p>
           </div>
 

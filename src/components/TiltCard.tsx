@@ -17,10 +17,10 @@ export default function TiltCard({
     if (typeof window === 'undefined') return true;
     return (
       window.matchMedia('(pointer: coarse)').matches ||
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+      window.innerWidth < 768
     );
   });
-  const [isHovered, setIsHovered] = useState(false);
 
   const rawRotateX = useMotionValue(0);
   const rawRotateY = useMotionValue(0);
@@ -30,9 +30,14 @@ export default function TiltCard({
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    const coarse = window.matchMedia('(pointer: coarse)').matches;
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    setIsTouchOrReduced(coarse || reduced);
+    const checkTouch = () => {
+      const coarse = window.matchMedia('(pointer: coarse)').matches;
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      setIsTouchOrReduced(coarse || reduced || window.innerWidth < 768);
+    };
+    checkTouch();
+    window.addEventListener('resize', checkTouch, { passive: true });
+    return () => window.removeEventListener('resize', checkTouch);
   }, []);
 
   if (isTouchOrReduced) {
@@ -58,17 +63,9 @@ export default function TiltCard({
 
     rawRotateX.set(Number(tiltX.toFixed(2)));
     rawRotateY.set(Number(tiltY.toFixed(2)));
-
-    cardRef.current.style.setProperty('--glow-x', `${Math.round(x)}px`);
-    cardRef.current.style.setProperty('--glow-y', `${Math.round(y)}px`);
-  };
-
-  const handleMouseEnter = () => {
-    setIsHovered(true);
   };
 
   const handleMouseLeave = () => {
-    setIsHovered(false);
     rawRotateX.set(0);
     rawRotateY.set(0);
   };
@@ -78,7 +75,6 @@ export default function TiltCard({
       <motion.div
         ref={cardRef}
         onMouseMove={handleMouseMove}
-        onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         style={{
           rotateX,
@@ -88,17 +84,6 @@ export default function TiltCard({
         }}
         className={`group/tilt relative border border-stone-900/10 dark:border-white/10 transition-transform duration-300 ${className}`}
       >
-        {/* Dynamic Metallic Barber Gold Specular Border & Surface Sheen */}
-        {isHovered && (
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0 rounded-[inherit] z-0 transition-opacity duration-300"
-            style={{
-              background:
-                'radial-gradient(320px circle at var(--glow-x, 50%) var(--glow-y, 50%), rgba(197, 160, 89, 0.14), transparent 65%)',
-            }}
-          />
-        )}
         <div
           className="relative z-10 w-full h-full"
           style={{ transformStyle: 'preserve-3d' }}

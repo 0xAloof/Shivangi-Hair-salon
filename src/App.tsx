@@ -16,7 +16,7 @@ import Footer from './components/Footer';
 import BookingModal from './components/BookingModal';
 import FloatingSideCTA from './components/FloatingSideCTA';
 import { SALON_INFO } from './data/salonData';
-import { createWhatsAppUrl, openExternalUrl } from './utils/booking';
+import { buildHinglishWhatsAppMessage, createWhatsAppUrl, openExternalUrl } from './utils/booking';
 
 function PageTransition({ children }: { children: ReactNode }) {
   return (
@@ -142,7 +142,7 @@ export default function App() {
   };
 
   const handleOpenWhatsAppDirect = () => {
-    const defaultMsg = `Hello Shivangi Hair Salon, I would like to book a chair at your Bhopal salon (Bhensakhedi Road). Could you please let me know current availability?`;
+    const defaultMsg = buildHinglishWhatsAppMessage('Signature Haircut & Skin Fade');
     const url = createWhatsAppUrl(SALON_INFO.rawPhone, defaultMsg);
     openExternalUrl(url);
   };

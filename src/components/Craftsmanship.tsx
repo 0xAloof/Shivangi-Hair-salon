@@ -2,7 +2,7 @@ import { Phone, Scissors, ShieldCheck, Compass } from 'lucide-react';
 import { WhatsAppIcon } from './BrandIcons';
 import { SALON_INFO } from '../data/salonData';
 import { MACRO_VIDEOS } from '../config/videos';
-import { createWhatsAppUrl, openExternalUrl } from '../utils/booking';
+import { buildHinglishWhatsAppMessage, createWhatsAppUrl, openExternalUrl } from '../utils/booking';
 import MacroVideo from './MacroVideo';
 import TiltCard from './TiltCard';
 
@@ -12,11 +12,7 @@ interface CraftsmanshipProps {
 
 export default function Craftsmanship({}: CraftsmanshipProps) {
   const handleWhatsAppClick = () => {
-    const msg = [
-      `*BARBER CHAIR INQUIRY - SHIVANGI HAIR SALON*`,
-      `Hello Master Barber, I would like to reserve a chair session with you at the Bhopal salon.`,
-      `Please let me know your earliest available slot.`
-    ].join('\n');
+    const msg = buildHinglishWhatsAppMessage('Signature Haircut & Skin Fade');
     const url = createWhatsAppUrl(SALON_INFO.rawPhone, msg);
     openExternalUrl(url);
   };

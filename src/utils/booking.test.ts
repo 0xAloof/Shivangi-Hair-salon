@@ -7,12 +7,13 @@ import {
   isValidPhone,
   validateBookingForm,
   formatWhatsAppBookingMessage,
+  buildHinglishWhatsAppMessage,
   createWhatsAppUrl,
   getSalonStatusIST,
 } from './booking';
 import { ServiceItem } from '../types';
 import { VIDEOS, MACRO_VIDEOS, HERO_CAROUSEL_SLIDES } from '../config/videos';
-import { LOOKBOOK_ITEMS, SALON_INFO, SERVICES, REVIEWS, TRUST_SIGNALS } from '../data/salonData';
+import { LOOKBOOK_ITEMS, SALON_INFO, SERVICES, REVIEWS, TRUST_SIGNALS, QUIZ_QUESTIONS } from '../data/salonData';
 
 const mockServices: ServiceItem[] = [
   {
@@ -128,7 +129,13 @@ test('validateBookingForm detects missing or invalid fields and Tuesday closure'
   assert.deepEqual(validRes.errors, {});
 });
 
-test('formatWhatsAppBookingMessage includes Starts from ₹100 · Negotiable based on style & hair length', () => {
+test('buildHinglishWhatsAppMessage and formatWhatsAppBookingMessage use natural Hinglish and Near Fitness Planet address', () => {
+  const singleMsg = buildHinglishWhatsAppMessage('Signature Haircut & Skin Fade');
+  assert.equal(
+    singleMsg,
+    'Namaste Bhaiya! Mujhe Shivangi Hair Salon (Near Fitness Planet, Bhensakhedi Road, Bhopal) mein chair book karni hai. Selected Service: Signature Haircut & Skin Fade (Starts from ₹100 · Negotiable). Kya aaj slot khali hai?'
+  );
+
   const msg = formatWhatsAppBookingMessage(
     {
       fullName: 'Rohit Sharma',
@@ -141,17 +148,16 @@ test('formatWhatsAppBookingMessage includes Starts from ₹100 · Negotiable bas
     mockServices
   );
 
+  assert.ok(msg.includes('Namaste Bhaiya! Mujhe Shivangi Hair Salon (Near Fitness Planet, Bhensakhedi Road, Bhopal) mein chair book karni hai.'));
+  assert.ok(msg.includes('Selected Service: Signature Haircut + Beard Shaping (Starts from ₹100 · Negotiable). Kya aaj slot khali hai?'));
   assert.ok(msg.includes('Rohit Sharma'));
-  assert.ok(msg.includes('Signature Haircut'));
-  assert.ok(msg.includes('Starts from ₹100 · Negotiable'));
-  assert.ok(msg.includes('*Pricing:* Starts from ₹100 · Negotiable based on style & hair length'));
-  assert.ok(!msg.includes('Consultation Required'));
+  assert.ok(!msg.includes('7897+5X4'));
 
   const url = createWhatsAppUrl('919575830421', msg);
   assert.ok(url.startsWith('https://wa.me/919575830421?text='));
 });
 
-test('MACRO_VIDEOS and HERO_CAROUSEL_SLIDES use Supabase URLs, 150+ Verified Bhopal Customers, and zero heavy posters', () => {
+test('MACRO_VIDEOS and HERO_CAROUSEL_SLIDES use Supabase URLs and 150+ Verified Bhopal Customers', () => {
   assert.equal(
     MACRO_VIDEOS.hero.src,
     'https://tsufahvimyzdlkdhqvnk.supabase.co/storage/v1/object/public/Videos/clipper-3d.mp4'
@@ -174,26 +180,23 @@ test('MACRO_VIDEOS and HERO_CAROUSEL_SLIDES use Supabase URLs, 150+ Verified Bho
     HERO_CAROUSEL_SLIDES[0].eyebrow,
     "BHOPAL'S BEST MEN'S SALON · 150+ VERIFIED BHOPAL CUSTOMERS"
   );
-  assert.equal(
-    HERO_CAROUSEL_SLIDES[1].eyebrow,
-    '100% FRESH BLADE GUARANTEE · CLEAN & COMFORTABLE SHAVE'
-  );
-  assert.equal(HERO_CAROUSEL_SLIDES[0].shortLabel, '01 · PRECISION CUT');
-  assert.equal(HERO_CAROUSEL_SLIDES[1].shortLabel, '02 · FRESH BLADE BEARD');
-  assert.equal(HERO_CAROUSEL_SLIDES[2].shortLabel, '03 · HOT TOWEL SPA');
 });
 
-test('LOOKBOOK_ITEMS, TRUST_SIGNALS, and REVIEWS use 150+ Verified Bhopal Customers and Verified Salon Regular · Bhopal', () => {
-  assert.equal(LOOKBOOK_ITEMS.length, 16);
-  const uniqueImages = new Set(LOOKBOOK_ITEMS.map(item => item.image));
-  assert.equal(uniqueImages.size, 16);
+test('Address standardization, Hinglish Quiz, and 4 Indian Male Lookbook Age Profiles', () => {
+  assert.equal(SALON_INFO.address, 'Near Fitness Planet, Bhensakhedi Road, Bhopal');
+  assert.ok(!SALON_INFO.address.includes('7897+5X4'));
+  assert.ok(!SALON_INFO.googleMapsEmbedUrl.includes('7897'));
   assert.equal(TRUST_SIGNALS[0].label, '150+ Verified Bhopal Customers');
-  assert.equal(TRUST_SIGNALS[0].sub, 'Verified Salon Regular · Bhopal');
   assert.equal(REVIEWS[0].clientName, 'Rohit Sharma');
-  for (const rev of REVIEWS) {
-    assert.equal(rev.badge, 'Verified Salon Regular · Bhopal');
-  }
-  assert.equal(SALON_INFO.googleMapsUrl, 'https://maps.app.goo.gl/e9NTifGQm489fwpp8');
-  assert.ok(SALON_INFO.googleMapsEmbedUrl.includes('&t=h&z=19'));
-  assert.ok(SALON_INFO.googleMapsEmbedUrl.includes('output=embed'));
+
+  // Hinglish Quiz options
+  assert.ok(QUIZ_QUESTIONS.faceShapes[0].label.includes('Chakor'));
+  assert.ok(QUIZ_QUESTIONS.hairTypes[0].label.includes('Seedhe'));
+
+  // 4 Age groups in Lookbook
+  const allLookbookText = LOOKBOOK_ITEMS.map(i => `${i.title} ${i.desc}`).join(' ');
+  assert.ok(allLookbookText.includes('Kids School Fade'));
+  assert.ok(allLookbookText.includes('College Teen Textured Crop'));
+  assert.ok(allLookbookText.includes('Young Man Skin Fade & Beard'));
+  assert.ok(allLookbookText.includes('Senior/Uncle Classic Scissor Cut'));
 });

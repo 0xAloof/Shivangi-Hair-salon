@@ -218,7 +218,7 @@ export default function Footer({ onOpenWhatsApp }: FooterProps) {
           </div>
 
           <p className="text-center md:text-right">
-            7897+5X4, Bhensakhedi Road, near The Fitness Planet, Bhopal, MP 462030
+            Near Fitness Planet, Bhensakhedi Road, Bhopal
           </p>
         </div>
 

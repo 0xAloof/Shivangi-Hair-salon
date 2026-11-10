@@ -11,10 +11,10 @@ export const SALON_INFO = {
   instagramHandle: "@shivangihairsalon.in",
   instagramUrl: "https://www.instagram.com/shivangihairsalon.in/",
   facebookUrl: "https://www.facebook.com/people/Shivangi-Hair-Salon/61594677009353/?rdid=rYcbsxiBq3xAj4fr&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1GM1K42WCV%2F%3Futm_source%3Dig%26utm_medium%3Dsocial%26utm_content%3Dlink_in_bio",
-  address: "7897+5X4, Bhensakhedi Road, near The Fitness Planet, Bhopal, MP 462030",
-  plusCode: "7897+5X4 Bhopal",
+  address: "Near Fitness Planet, Bhensakhedi Road, Bhopal",
+  plusCode: "Near Fitness Planet, Bhensakhedi Road, Bhopal",
   googleMapsUrl: "https://maps.app.goo.gl/e9NTifGQm489fwpp8",
-  googleMapsEmbedUrl: "https://maps.google.com/maps?q=Shivangi+Hair+Salon,+7897%2B5X4,+Bhensakhedi+Road,+near+The+Fitness+Planet,+Bhopal,+MP+462030&t=h&z=19&ie=UTF8&iwloc=&output=embed",
+  googleMapsEmbedUrl: "https://maps.google.com/maps?q=Shivangi+Hair+Salon,+Near+Fitness+Planet,+Bhensakhedi+Road,+Bhopal&t=h&z=19&ie=UTF8&iwloc=&output=embed",
   schedule: {
     days: "Mon, Wed – Sun (Tuesday Closed)",
     hours: "8:30 AM – 9:30 PM",
@@ -175,24 +175,27 @@ export interface QuizOption {
   description: string;
 }
 
+/**
+ * 100% Hinglish Quiz Questions, Option Labels & Descriptions for "Find Your Look" Style Finder.
+ */
 export const QUIZ_QUESTIONS = {
   faceShapes: [
-    { id: 'square', label: 'Square / Strong Jaw', description: 'Broad forehead and a sharp, wide jawline' },
-    { id: 'oval', label: 'Oval / Balanced', description: 'Evenly balanced face length with a slightly rounded chin' },
-    { id: 'round', label: 'Round Face', description: 'Full cheeks with soft corners around the chin and jaw' },
-    { id: 'diamond', label: 'Sharp Cheekbones / Angular', description: 'Wide cheekbones with a narrower forehead and chin' },
+    { id: 'square', label: 'Chakor / Strong Jawline', description: 'Chauda matha aur sharp, strong jawline — faded sides ke saath killer lagta hai' },
+    { id: 'oval', label: 'Oval / Balanced Chehra', description: 'Sahi lambai aur halka gol chin — is face cut par har haircut suit karta hai' },
+    { id: 'round', label: 'Gol Chehra (Round Face)', description: 'Bhare hue gaal aur soft chin — side fade aur upar volume se chehra lamba lagta hai' },
+    { id: 'diamond', label: 'Sharp Cheekbones / Angular', description: 'Sharp cheekbones aur patla chin — medium taper aur textured top best jachta hai' },
   ],
   hairTypes: [
-    { id: 'straight', label: 'Straight & Silky', description: 'Sits flat easily — looks great with textured volume on top' },
-    { id: 'wavy', label: 'Wavy / Medium Thick', description: 'Natural wave that holds side parts, crops, and fades well' },
-    { id: 'coarse', label: 'Thick or Curly', description: 'Heavy volume — looks super clean with short faded sides' },
-    { id: 'receding', label: 'Thinning / High Forehead', description: 'Needs a smart crop or neat short cut that makes hair look fuller' },
+    { id: 'straight', label: 'Seedhe aur Silky Baal', description: 'Jaldi baith jaate hain — textured crop aur matte wax volume ke saath mast lagte hain' },
+    { id: 'wavy', label: 'Halke Wavy / Medium Thick', description: 'Natural wave jo side part, crop aur skin fade ko aasani se hold karta hai' },
+    { id: 'coarse', label: 'Ghane ya Curly Baal', description: 'Bhari volume — short faded sides ke saath ekdum saaf aur sharp dikhte hain' },
+    { id: 'receding', label: 'Halke Patle Baal / Broad Forehead', description: 'Smart short crop ya neat taper jisse baal ghane aur bhare-bhare dikhein' },
   ],
   vibes: [
-    { id: 'executive', label: 'Clean Office Look', description: 'Neat scissor cut and tidy sides that stay sharp all week' },
-    { id: 'streetwear', label: 'Trendy Skin Fade', description: 'Sharp drop fade on the sides with textured volume on top' },
-    { id: 'classic', label: 'Classic Gentleman', description: 'Clean side part with a well-shaped beard and razor line-up' },
-    { id: 'edgy', label: 'Bold Razor Line & Fade', description: 'High skin fade with a crisp razor line and sharp beard edges' },
+    { id: 'executive', label: 'Clean Office & Formal Look', description: 'Neat scissor cut aur saaf sides jo poore hafte bina mehnat ke sharp dikhein' },
+    { id: 'streetwear', label: 'Trendy Skin Fade & Crop', description: 'Sides mein sharp drop fade aur upar stylish textured volume' },
+    { id: 'classic', label: 'Classic Gentleman Look', description: 'Clean side part ke saath sharp beard aur fresh blade line-up' },
+    { id: 'edgy', label: 'Bold Razor Line & High Fade', description: 'High zero fade ke saath crisp razor parting aur sharp beard edges' },
   ]
 };
 
@@ -211,41 +214,41 @@ export function computeQuizRecommendation(
 ): RecommendationResult {
   if (vibe === 'streetwear') {
     return {
-      title: 'Textured Crop with Low Drop Skin Fade',
-      fadeType: 'Clean low-to-mid skin fade on the sides with a sharp neck line',
-      beardAdvice: 'Short neat stubble with a crisp razor line on the cheeks',
-      stylingTip: 'Rub a pinch of matte hair powder or clay on dry hair with your fingers.',
-      matchScore: '98% Style Match',
+      title: 'Textured Crop + Low Drop Skin Fade',
+      fadeType: 'Sides mein clean low-to-mid skin fade aur peeche sharp neck line-up',
+      beardAdvice: 'Halki neat beard ke saath gaalon par crisp fresh-blade razor line',
+      stylingTip: 'Sukhe baalon mein thoda sa matte hair powder ya clay ungliyon se lagayein.',
+      matchScore: '98% Perfect Match',
     };
   }
 
   if (vibe === 'executive') {
     return {
-      title: 'Smart Scissor Cut with Clean Low Taper',
-      fadeType: 'Neat scissor taper around the ears and neck — not too bare',
-      beardAdvice: 'Well-trimmed beard blended smoothly into the sideburns',
-      stylingTip: 'Use a light hair cream after towel-drying and comb neatly to one side.',
-      matchScore: '96% Style Match',
+      title: 'Smart Scissor Cut + Clean Low Taper',
+      fadeType: 'Kaan aur gardan ke paas neat scissor taper — bilkul natural aur decent',
+      beardAdvice: 'Sideburns se smoothly blend ki hui well-trimmed office beard',
+      stylingTip: 'Towel-dry baalon mein halki hair cream lagakar ek side neat comb karein.',
+      matchScore: '96% Perfect Match',
     };
   }
 
   if (vibe === 'edgy') {
     return {
-      title: 'High Skin Fade with Sharp Razor Parting',
-      fadeType: 'High zero fade with a clean straight-blade line on the side',
-      beardAdvice: 'Sharp angular beard or goatee with crisp neck and cheek edges',
-      stylingTip: 'Apply strong-hold matte clay to keep the top standing sharp all day.',
-      matchScore: '97% Style Match',
+      title: 'High Zero Skin Fade + Sharp Razor Line',
+      fadeType: 'High zero skin fade ke saath side mein crisp single-use blade parting',
+      beardAdvice: 'Sharp angular beard ya goatee jiske edges ekdum razor-sharp hon',
+      stylingTip: 'Top volume ko din bhar set rakhne ke liye strong-hold matte clay use karein.',
+      matchScore: '97% Perfect Match',
     };
   }
 
   // default / classic
   return {
-    title: 'Classic Side Part with Smooth Taper Fade',
-    fadeType: 'Medium taper fade that keeps natural fullness on the sides',
-    beardAdvice: 'Natural full beard with a hot towel straight-razor neck clean-up',
-    stylingTip: 'Blow-dry lightly and finish with a medium-hold styling paste.',
-    matchScore: '99% Style Match',
+    title: 'Classic Side Part + Smooth Taper Fade',
+    fadeType: 'Medium taper fade jo sides mein natural fullness aur royal look banaye rakhe',
+    beardAdvice: 'Full beard ke saath garam towel steam aur fresh blade neck clean-up',
+    stylingTip: 'Halka blow-dry karke medium-hold styling paste se clean finish dein.',
+    matchScore: '99% Perfect Match',
   };
 }
 
@@ -300,101 +303,102 @@ export interface LookbookItem {
 }
 
 /**
- * 16 Gallery Items — Strictly 4 items per category (Skin Fade, Beard Detailing, Hot Towel Shave, Salon).
- * Every single item has a 100% unique image. NEVER uses /barber.jpg or /logo.jpg.
+ * 16 Gallery Items — Strictly 4 items per category featuring realistic Indian male client profiles
+ * across all 4 age groups: Kids School Fade, College Teen Textured Crop, Young Man Skin Fade & Beard,
+ * and Senior/Uncle Classic Scissor Cut.
  */
 export const LOOKBOOK_ITEMS: LookbookItem[] = [
-  // 1. Skin Fade (4 distinct images)
+  // 1. Skin Fade (4 distinct Indian male age-group profiles)
   {
     id: "fade-1",
-    title: "Textured Crop & Skin Fade",
+    title: "College Teen Textured Crop",
     category: "Skin Fade",
-    desc: "Clean side fade with natural volume on top.",
+    desc: "College Teen Textured Crop: Trendy messy top volume with a clean low skin fade for Bhopal college students.",
     locationTag: "Bhopal Salon",
     image: "/crop_fade.jpg",
     imageClassName: "object-cover object-center",
   },
   {
     id: "fade-2",
-    title: "High-Contrast Zero Taper",
+    title: "Young Man Skin Fade & Beard",
     category: "Skin Fade",
-    desc: "Sharp temple fade blended smoothly with scissor work.",
+    desc: "Young Man Skin Fade & Beard: Sharp zero temple fade blended smoothly into a crisp beard line-up.",
     locationTag: "Bhopal Salon",
     image: "/gallery/fade_zero_taper.jpg",
     imageClassName: "object-cover object-center",
   },
   {
     id: "fade-3",
-    title: "Low Drop Fade & Line-Up",
+    title: "Kids School Fade & Neat Side Part",
     category: "Skin Fade",
-    desc: "Smooth back-and-side fade shaped around your head.",
+    desc: "Kids School Fade: Smart, school-approved neat taper fade and easy-comb top for young Indian boys.",
     locationTag: "Bhopal Salon",
     image: "/gallery/fade_low_drop.jpg",
     imageClassName: "object-cover object-center",
   },
   {
     id: "fade-4",
-    title: "Classic Side-Part & Taper Cut",
+    title: "Senior / Uncle Classic Scissor Cut",
     category: "Skin Fade",
-    desc: "Smart everyday look with clean neck and sideburn edges.",
+    desc: "Senior/Uncle Classic Scissor Cut: Dignified full-scissor haircut with neat sideburns and clean neck edges.",
     locationTag: "Bhopal Salon",
     image: "/gallery/fade_classic_sidepart.jpg",
     imageClassName: "object-cover object-center",
   },
 
-  // 2. Beard Detailing (4 distinct images)
+  // 2. Beard Detailing (4 distinct Indian male profiles)
   {
     id: "beard-1",
-    title: "Sharp Razor Beard Line-Up",
+    title: "Young Man Sharp Beard Line-Up",
     category: "Beard Detailing",
-    desc: "Crisp cheek and neck lines with a fresh straight blade.",
+    desc: "Young Man Skin Fade & Beard: Crisp cheek and neck lines using a 100% fresh sealed blade.",
     locationTag: "Bhopal Salon",
     image: "/beard_sculpt.jpg",
     imageClassName: "object-cover object-center",
   },
   {
     id: "beard-2",
-    title: "Full Beard Shape & Fade",
+    title: "College Teen Stubble & Jawline Trim",
     category: "Beard Detailing",
-    desc: "Smooth blend from sideburns into a well-groomed beard.",
+    desc: "College Teen Textured Crop & Stubble: Light faded stubble that makes the jawline look sharp and clean.",
     locationTag: "Bhopal Salon",
     image: "/gallery/beard_full_fade.jpg",
     imageClassName: "object-cover object-center",
   },
   {
     id: "beard-3",
-    title: "Clean Jawline & Mustache Trim",
+    title: "Senior / Uncle Mustache & Beard Trim",
     category: "Beard Detailing",
-    desc: "Balanced beard length that makes your jawline look sharper.",
+    desc: "Senior/Uncle Classic Scissor Cut & Beard: Balanced mustache and beard shaping for a neat, respected look.",
     locationTag: "Bhopal Salon",
     image: "/gallery/beard_jawline_trim.jpg",
     imageClassName: "object-cover object-center",
   },
   {
     id: "beard-4",
-    title: "Beard Wash, Oil & Styling",
+    title: "Groom & Wedding Royal Beard Styling",
     category: "Beard Detailing",
-    desc: "Softening beard care followed by neat trimmer detailing.",
+    desc: "Nourishing beard oil massage, warm steam prep, and precision trimmer detailing for special occasions.",
     locationTag: "Bhopal Salon",
     image: "/gallery/beard_oil_styling.jpg",
     imageClassName: "object-cover object-center",
   },
 
-  // 3. Hot Towel Shave (4 distinct images)
+  // 3. Hot Towel Shave (4 distinct Indian male profiles)
   {
     id: "shave-1",
-    title: "Hot Towel Straight Razor Shave",
+    title: "Senior / Uncle Hot Towel Clean Shave",
     category: "Hot Towel Shave",
-    desc: "Warm steam towel prep followed by a clean & comfortable shave.",
+    desc: "Senior/Uncle Classic Clean Shave: Warm steam towel prep followed by a clean & comfortable shave.",
     locationTag: "Bhopal Salon",
     image: "/razor_shave.jpg",
     imageClassName: "object-cover object-center",
   },
   {
     id: "shave-2",
-    title: "Double-Towel Refresh Ritual",
+    title: "Young Man Double-Towel Facial Shave",
     category: "Hot Towel Shave",
-    desc: "Hot towel pore cleaning finished with a cool soothing towel.",
+    desc: "Hot towel pore cleaning finished with a soothing cool towel press for office professionals.",
     locationTag: "Bhopal Salon",
     image: "/gallery/shave_double_towel.jpg",
     imageClassName: "object-cover object-center",
@@ -403,16 +407,16 @@ export const LOOKBOOK_ITEMS: LookbookItem[] = [
     id: "shave-3",
     title: "Close Single-Use Blade Shave",
     category: "Hot Towel Shave",
-    desc: "Rich foam lather and a 100% fresh sealed blade for baby-smooth skin.",
+    desc: "Rich foam lather and a 100% fresh sealed blade unpacked in front of your chair.",
     locationTag: "Bhopal Salon",
     image: "/gallery/shave_feather_blade.jpg",
     imageClassName: "object-cover object-center",
   },
   {
     id: "shave-4",
-    title: "Face Steam & Cooling Aftershave Care",
+    title: "College Teen Detan Steam & Neck Clean-Up",
     category: "Hot Towel Shave",
-    desc: "Relaxing steam therapy with cooling post-shave balm.",
+    desc: "Relaxing face steam therapy with cooling post-shave aloe vera balm for Bhopal youth.",
     locationTag: "Bhopal Salon",
     image: "/gallery/shave_face_steam.jpg",
     imageClassName: "object-cover object-center",
@@ -423,7 +427,7 @@ export const LOOKBOOK_ITEMS: LookbookItem[] = [
     id: "salon-1",
     title: "Main Salon Floor & Barber Chairs",
     category: "Salon",
-    desc: "Comfortable black hydraulic grooming chairs at Shivangi Hair Salon.",
+    desc: "Comfortable black hydraulic grooming chairs for kids, college teens, young men, and seniors in Bhopal.",
     locationTag: "Bhopal Salon",
     image: "/interior_luxury.jpg",
     imageClassName: "object-cover object-[center_15%] scale-[1.12]",
@@ -433,7 +437,7 @@ export const LOOKBOOK_ITEMS: LookbookItem[] = [
     id: "salon-2",
     title: "Mirror Stations & Grooming Setup",
     category: "Salon",
-    desc: "Bright mirror stations stocked with top hair and beard care products.",
+    desc: "Bright mirror stations stocked with authentic hair, beard, and skin care products.",
     locationTag: "Bhopal Salon",
     image: "/gallery/salon_mirror_stations.jpg",
     imageClassName: "object-cover object-center",
@@ -443,7 +447,7 @@ export const LOOKBOOK_ITEMS: LookbookItem[] = [
     id: "salon-3",
     title: "UV Tool Sanitizer & Clean Setup",
     category: "Salon",
-    desc: "UV cabinet and cleaner used after every single customer.",
+    desc: "Professional UV sanitizer cabinet used after every single customer.",
     locationTag: "Bhopal Salon",
     image: "/gallery/salon_uv_sanitizer.jpg",
     imageClassName: "object-cover object-center",
@@ -453,7 +457,7 @@ export const LOOKBOOK_ITEMS: LookbookItem[] = [
     id: "salon-4",
     title: "Pro Clippers, Scissors & Fresh Blades",
     category: "Salon",
-    desc: "High-precision trimmers, scissors, and sealed single-use blades.",
+    desc: "High-precision trimmers, scissors, and 100% fresh single-use blades.",
     locationTag: "Bhopal Salon",
     image: "/gallery/salon_pro_tools.jpg",
     imageClassName: "object-cover object-center",

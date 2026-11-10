@@ -1,4 +1,15 @@
 {
+  "headers": [
+    {
+      "source": "/robots.txt",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/plain; charset=utf-8"
+        }
+      ]
+    }
+  ],
   "rewrites": [
     {
       "source": "/((?!api|_next|assets|gallery|videos|robots\\.txt|favicon\\.ico|.*\\..*).*)",

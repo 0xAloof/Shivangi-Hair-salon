@@ -177,7 +177,16 @@ export function getSalonStatusIST(now: Date = new Date()): {
 }
 
 /**
- * Formats a clean, professional booking message for WhatsApp with Starts from ₹100 · Negotiable pricing.
+ * Builds the standardized Hinglish pre-filled WhatsApp CTA message across the entire app.
+ */
+export function buildHinglishWhatsAppMessage(
+  serviceName: string = 'Haircut & Grooming'
+): string {
+  return `Namaste Bhaiya! Mujhe Shivangi Hair Salon (Near Fitness Planet, Bhensakhedi Road, Bhopal) mein chair book karni hai. Selected Service: ${serviceName} (Starts from ₹100 · Negotiable). Kya aaj slot khali hai?`;
+}
+
+/**
+ * Formats a clean, natural Hinglish booking message for WhatsApp with Starts from ₹100 · Negotiable pricing.
  */
 export function formatWhatsAppBookingMessage(
   data: BookingFormData,
@@ -188,28 +197,27 @@ export function formatWhatsAppBookingMessage(
     allServices
   );
 
-  const serviceNames = selectedItems
+  const selectedNamesInline =
+    selectedItems.map(s => s.name).join(' + ') || 'Haircut & Grooming';
+
+  const serviceLines = selectedItems
     .map(s => `• ${s.name} (~${s.durationMinutes}m) — Starts from ₹100 · Negotiable`)
     .join('\n');
 
   return [
-    `*APPOINTMENT RESERVATION - SHIVANGI HAIR SALON*`,
-    `--------------------------------------`,
+    buildHinglishWhatsAppMessage(selectedNamesInline),
+    ``,
     `*Client Name:* ${data.fullName.trim()}`,
     `*Contact:* ${data.phone.trim()}`,
     `*Preferred Date:* ${data.date}`,
     `*Preferred Time Slot:* ${data.timeSlot}`,
-    ``,
     `*Selected Services:*`,
-    serviceNames || '• Haircut & Grooming (Starts from ₹100 · Negotiable)',
-    ``,
+    serviceLines || '• Haircut & Grooming (Starts from ₹100 · Negotiable)',
     `*Estimated Duration:* ~${totalDurationMinutes} minutes`,
     `*Pricing:* Starts from ₹100 · Negotiable based on style & hair length`,
     data.notes ? `*Notes/Preferences:* ${data.notes.trim()}` : ``,
-    ``,
-    `*Salon Location:* Near The Fitness Planet, Bhensakhedi Road, Bhopal`,
-    `Kindly confirm chair availability.`
-  ].filter(line => line !== null && line !== undefined).join('\n');
+    `*Salon Location:* Near Fitness Planet, Bhensakhedi Road, Bhopal`,
+  ].filter(line => line !== null && line !== undefined && line !== '').join('\n');
 }
 
 /**

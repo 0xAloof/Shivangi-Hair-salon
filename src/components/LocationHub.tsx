@@ -93,10 +93,10 @@ export default function LocationHub({ onOpenWhatsApp }: LocationHubProps) {
                   {SALON_INFO.address}
                 </p>
                 <p className="text-xs text-[#57534E] dark:text-[#A1A1AA]">
-                  Landmark: Right beside The Fitness Planet gym, Bhensakhedi Road.
+                  Landmark: Right beside The Fitness Planet gym, Bhensakhedi Road, Bhopal.
                 </p>
                 <div className="text-xs text-[#57534E] dark:text-[#A1A1AA] font-mono pt-1">
-                  Google Maps Code: <span className="font-bold text-[#141413] dark:text-[#F4F1EA]">{SALON_INFO.plusCode}</span>
+                  Location: <span className="font-bold text-[#141413] dark:text-[#F4F1EA]">Near Fitness Planet, Bhensakhedi Road, Bhopal</span>
                 </div>
               </div>
 
@@ -244,7 +244,7 @@ export default function LocationHub({ onOpenWhatsApp }: LocationHubProps) {
                   </span>
                   <MapPin className="w-3.5 h-3.5 text-[#C5A059] shrink-0" />
                   <span className="text-[10px] sm:text-[11px] font-mono font-bold uppercase tracking-wider text-[#F4F1EA]">
-                    3D SATELLITE PIN · 7897+5X4 BHOPAL
+                    NEAR FITNESS PLANET, BHENSAKHEDI ROAD, BHOPAL
                   </span>
                 </div>
 
@@ -268,7 +268,7 @@ export default function LocationHub({ onOpenWhatsApp }: LocationHubProps) {
                         Shivangi Hair Salon · Bhopal
                       </h4>
                       <p className="text-[11px] sm:text-xs text-[#57534E] dark:text-[#A1A1AA]">
-                        7897+5X4, Bhensakhedi Road, near The Fitness Planet, MP 462030
+                        Near Fitness Planet, Bhensakhedi Road, Bhopal
                       </p>
                     </div>
                   </div>
